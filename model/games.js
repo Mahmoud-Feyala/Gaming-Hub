@@ -36,7 +36,8 @@ module.exports = class Game {
   }
 
   save() {
-    this.id = Math.random;
+    // 1. تصليح الـ ID عشان يشتغل صح
+    this.id = Math.random().toString();
 
     getGameFromFile((games) => {
       games.push(this);
@@ -50,5 +51,13 @@ module.exports = class Game {
 
   static fetchAll(cb) {
     getGameFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getGameFromFile((games) => {
+      
+      const game = games.find((g) => g.id === id);
+      cb(game);
+    });
   }
 };

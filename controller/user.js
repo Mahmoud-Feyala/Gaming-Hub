@@ -25,10 +25,12 @@ exports.getRegesterPage = (req, res, next) => {
 };
 
 exports.getGameDetailsPage = (req, res, next) => {
-  id = req.params.gameId;
-  res.render("user/game-details.ejs", {
-    pageTitle: "Create Account — Gaming Hub",
-    game: game,
+  let gameId = req.params.gameId;
+  Game.findById(gameId, (game) => {
+    res.render("user/game-details.ejs", {
+      pageTitle: "Create Account — Gaming Hub",
+      game:game
+    });
   });
 };
 exports.getHelpCenterPage = (req, res, next) => {
