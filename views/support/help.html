@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help Center — Gaming Hub</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-5">★</div>
+  <div class="shape shape-6">★</div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar"> 
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo">
+      <div class="logo-icon">
+        <img src="/assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo" />
+      </div>
+      <div class="logo-text">Gaming<span>Hub</span></div>
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="/" class="nav-link active">Home</a></li>
+      <li><a href="/games" class="nav-link">Games</a></li>
+      <li><a href="/Library" class="nav-link">My Library</a></li>
+      <li><a href="/admin/admin-dashboard" class="nav-link">Admin</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="/login" class="btn btn-outline-white btn-sm">Log In</a>
+      <a href="/register" class="btn btn-cyan btn-sm">Sign Up →</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-top:72px">
+
+  <!-- HERO -->
+  <div class="help-hero">
+    <div style="position:relative;z-index:1">
+      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:16px">Support</div>
+      <h1 style="font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:var(--white);letter-spacing:-0.03em;line-height:1;margin-bottom:16px">
+        Help <span style="color:var(--cyan)">Center</span>
+      </h1>
+      <p style="font-family:var(--font-body);font-size:1.1rem;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto;line-height:1.7">
+        Find answers to common questions, or reach out to our team directly.
+      </p>
+      <div class="help-search-wrap">
+        <span class="help-search-icon">🔍</span>
+        <input type="text" placeholder="Search for answers... e.g. how to add a review" id="help-search" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+
+    <!-- Quick Links -->
+    <div class="grid-4" style="margin-bottom:64px">
+      <a href="/contact" class="card" style="padding:28px;text-align:center;text-decoration:none;background:var(--cyan)">
+        <div style="font-size:2rem;margin-bottom:12px">💬</div>
+        <div style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--black)">Live Chat</div>
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:rgba(17,17,17,0.6);margin-top:4px">Avg. 2 min reply</div>
+      </a>
+      <a href="/contact" class="card" style="padding:28px;text-align:center;text-decoration:none">
+        <div style="font-size:2rem;margin-bottom:12px">📧</div>
+        <div style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--black)">Email Us</div>
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:4px">support@pixelvault.com</div>
+      </a>
+      <a href="#faq" class="card" style="padding:28px;text-align:center;text-decoration:none;background:var(--yellow)">
+        <div style="font-size:2rem;margin-bottom:12px">❓</div>
+        <div style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--black)">Browse FAQ</div>
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:rgba(17,17,17,0.6);margin-top:4px">40+ answers</div>
+      </a>
+      <a href="#" class="card" style="padding:28px;text-align:center;text-decoration:none;background:var(--black)">
+        <div style="font-size:2rem;margin-bottom:12px">🎮</div>
+        <div style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--white)">Community</div>
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:4px">Join Discord</div>
+      </a>
+    </div>
+
+    <!-- FAQ Categories -->
+    <div id="faq">
+      <div style="text-align:center;margin-bottom:48px">
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:rgba(17,17,17,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px">— FAQ</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(500px,1fr));gap:28px" id="faq-grid">
+
+        <!-- Account -->
+        <div class="faq-category">
+          <div class="faq-category-header">
+            <div class="faq-category-icon">👤</div>
+            <div>
+              <div class="faq-category-title">Account & Profile</div>
+              <div class="faq-category-count">6 articles</div>
+            </div>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How do I create an account? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Click the <strong>Sign Up</strong> button in the top-right corner of any page. Fill in your name, email, and a secure password. You can also sign up instantly using your Google or Discord account. No credit card required — it's completely free!
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How do I change my username or avatar? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Go to your <strong>Profile Settings</strong> from the top-right menu. You can update your display name, username handle, avatar image, and bio at any time. Changes are saved instantly.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                I forgot my password. How do I reset it? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                On the Login page, click <strong>"Forgot password?"</strong> below the password field. Enter your email address and we'll send you a secure reset link. The link expires after 30 minutes for your security.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                Can I delete my account? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Yes. Go to <strong>Settings → Account → Delete Account</strong>. This will permanently remove your profile, library, and all reviews. This action cannot be undone, so please make sure before proceeding.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="faq-category">
+          <div class="faq-category-header">
+            <div class="faq-category-icon" style="background:var(--yellow)">⭐</div>
+            <div>
+              <div class="faq-category-title">Reviews & Ratings</div>
+              <div class="faq-category-count">8 articles</div>
+            </div>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How do I write a game review? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Navigate to any game's detail page and scroll down to the <strong>"Write Your Review"</strong> section. Select your star rating, write your thoughts, then click <strong>Post Review</strong>. You must be logged in to submit.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                Can I edit or delete a review I posted? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Yes! Go to your profile and click <strong>My Reviews</strong>. Next to each review you'll find an Edit and Delete option. You can update your text and rating at any time.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                Why was my review removed? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Reviews may be removed if they violate our community guidelines — including spam, offensive language, or off-topic content. You'll receive an email notification explaining the reason. You can appeal by contacting support.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How is a game's overall rating calculated? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                A game's overall rating is the weighted average of all approved user reviews. Reviews from verified buyers are given slightly more weight. Ratings update in real-time as new reviews are submitted.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Library -->
+        <div class="faq-category">
+          <div class="faq-category-header">
+            <div class="faq-category-icon" style="background:var(--orange)">📚</div>
+            <div>
+              <div class="faq-category-title">My Library</div>
+              <div class="faq-category-count">5 articles</div>
+            </div>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How do I add a game to my library? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                On any game card or detail page, click the <strong>"+ Add to Library"</strong> button. Choose a status (Playing, Completed, or Wishlist) and it will appear in your personal <strong>My Library</strong> page.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                What is the difference between Wishlist and Library? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Your <strong>Library</strong> is for games you own or are actively tracking (Playing / Completed). Your <strong>Wishlist</strong> is for games you want to play in the future. Both are part of your personal collection.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                Can I make my library private? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Yes. In <strong>Settings → Privacy</strong>, you can set your library to Public, Friends Only, or Private. By default, libraries are public so others can discover your tastes.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical -->
+        <div class="faq-category">
+          <div class="faq-category-header">
+            <div class="faq-category-icon" style="background:#9333EA">🔧</div>
+            <div>
+              <div class="faq-category-title">Technical Issues</div>
+              <div class="faq-category-count">7 articles</div>
+            </div>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                The site is not loading properly. What should I do? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Try clearing your browser cache and cookies, then reload. If issues persist, try a different browser or disable browser extensions. You can also check our <strong>Status Page</strong> for any ongoing maintenance.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                I'm not receiving verification emails. <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Check your spam or junk folder first. Make sure you entered the correct email address during registration. If you still don't see it, go to <strong>Settings → Resend Verification</strong> or contact our support team.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                How do I report a bug? <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-answer">
+                Use our <a href="contact.html" style="color:var(--cyan-dark);font-weight:700">Contact Us</a> form and select <strong>"Bug Report"</strong> as the category. Please include your browser, operating system, and a detailed description of the issue. Screenshots are very helpful!
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Still need help CTA -->
+    <div class="contact-cta" style="margin-top:64px">
+      <div style="position:relative;z-index:1">
+        <div style="font-size:3rem;margin-bottom:16px"></div>
+        <h2 style="font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--white);letter-spacing:-0.03em;margin-bottom:12px">Still Need Help?</h2>
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:rgba(255,255,255,0.55);margin-bottom:36px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7">Our support team is online Monday–Friday, 9am–6pm UTC. We typically respond within 2 hours.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="/contact" class="btn btn-cyan btn-lg">Contact Support →</a>
+          <a href="#" class="btn btn-outline-white btn-lg">Join Discord</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="navbar-logo" style="margin-bottom: 16px; display: flex">
+          <div class="logo-icon">
+            <img src="../assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo" />
+          </div>
+          <div class="logo-text">Gaming<span>Hub</span></div>
+        </a>
+        <p class="footer-brand-desc">
+          The definitive gaming review platform. Rate, review, and discover
+          your next favourite game with the community.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📘</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Platform</div>
+        <ul class="footer-links">
+          <li><a href="/games">Browse Games</a></li>
+          <li><a href="/Library">My Library</a></li>
+          <li><a href="game-details.html">Game Reviews</a></li>
+          <li><a href="#">Leaderboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <ul class="footer-links">
+          <li><a href="/help">Help Center</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">
+        © 2026 Gaming Hub. All rights reserved.
+      </div>
+      <div class="footer-bottom-text">
+        Made with ❤️ for gamers everywhere
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/app.js"></script>
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('open'));
+    
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  
+  document.getElementById('help-search').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

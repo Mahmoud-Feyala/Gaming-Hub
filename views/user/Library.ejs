@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-5">★</div>
+</div>
+
+<%- include('../includes/navbar.ejs') %>
+
+<main class="page-wrapper">
+  <div class="container">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      
+      <div style="display: flex; align-items: center; gap: 12px; background: var(--black); color: var(--white); padding: 12px 24px; border-radius: var(--radius-sm); border: 2px solid var(--black); box-shadow: var(--shadow-sm);">
+        
+        <span style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">All Library Games</span>
+      </div>
+
+      <button   id="add-to-library-btn" class="btn btn-primary" href="/">+ Add Game</button>
+    </div>
+
+    <div class="grid-4" id="library-grid" style="margin-bottom:80px; min-height: 40vh;"></div>
+
+  </div>
+</main>
+
+<%- include('../includes/footer.ejs') %>
+
+<%- include('../includes/end.ejs') %>

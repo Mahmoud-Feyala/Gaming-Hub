@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — GamingHub</title>
+  <link rel="stylesheet" href="/css/style.css" />
+
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+  <div class="shape shape-5">★</div>
+  <div class="shape shape-6">★</div>
+</div>
+
+<nav class="navbar"> 
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo">
+      <div class="logo-icon">
+        <img src="/assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo" />
+      </div>
+      <div class="logo-text">Gaming<span>Hub</span></div>
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="/" class="nav-link active">Home</a></li>
+      <li><a href="/games" class="nav-link">Games</a></li>
+      <li><a href="/Library" class="nav-link">My Library</a></li>
+      <li><a href="/admin/admin-dashboard" class="nav-link">Admin</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="/login" class="btn btn-outline-white btn-sm">Log In</a>
+      <a href="/register" class="btn btn-cyan btn-sm">Sign Up →</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-top:72px">
+
+  <!-- Hero -->
+  <div style="background:var(--black);padding:60px 0 56px;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(255,193,7,0.1),transparent 55%),radial-gradient(circle at 20% 30%,rgba(18,198,216,0.12),transparent 50%);pointer-events:none"></div>
+    <div class="container" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--yellow);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px">Support</div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:var(--white);letter-spacing:-0.03em;line-height:1;margin-bottom:16px">Contact <span style="color:var(--yellow)">Us</span></h1>
+        <p style="font-family:var(--font-body);font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:480px;line-height:1.7;margin:0">
+          Got a question, bug report, or just want to say hi? We're here and we actually read every message.
+        </p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px">
+        <div style="background:rgba(255,193,7,0.1);border:2px solid rgba(255,193,7,0.3);border-radius:var(--radius-md);padding:16px 20px">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Average Response</div>
+          <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--yellow)">2 hrs</div>
+        </div>
+        <div style="background:rgba(18,198,216,0.08);border:2px solid rgba(18,198,216,0.2);border-radius:var(--radius-md);padding:16px 20px">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Support Hours</div>
+          <div style="font-family:var(--font-display);font-size:1rem;font-weight:900;color:var(--cyan)">Mon–Fri 9–6 UTC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="contact-grid">
+
+      <!-- Form -->
+      <div>
+        <div class="contact-form-card">
+
+          <!-- Success State (hidden initially) -->
+          <div class="success-state" id="success-state">
+            <div class="success-icon">✅</div>
+            <h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--black);letter-spacing:-0.02em;margin-bottom:12px">Message Sent!</h2>
+            <p style="font-family:var(--font-body);font-size:1.05rem;color:var(--text-muted);line-height:1.7;margin-bottom:32px;max-width:360px;margin-left:auto;margin-right:auto">
+              We've received your message and will get back to you within 2 business hours. Check your email for a confirmation.
+            </p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+              <a href="/" class="btn btn-primary">Back to Home</a>
+              <button class="btn btn-outline" onclick="resetForm()">Send Another Message</button>
+            </div>
+          </div>
+
+          <!-- Form State -->
+          <div id="form-state">
+            <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--black);letter-spacing:-0.02em;margin-bottom:6px">Send a Message</h2>
+            <p style="font-family:var(--font-body);font-size:1rem;color:var(--text-muted);margin-bottom:36px;font-weight:500">Fill in the form below and we'll reply to your email.</p>
+
+            <!-- Category Selector -->
+            <div style="margin-bottom:32px">
+              <div class="form-label" style="margin-bottom:14px;display:block">What's this about?</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="category-grid">
+                <button class="category-btn selected" onclick="selectCategory(this,'General Question')" type="button">
+                  <span class="cat-icon">💬</span>
+                  <div><div class="cat-label">General</div><div class="cat-desc">Questions & feedback</div></div>
+                </button>
+                <button class="category-btn" onclick="selectCategory(this,'Bug Report')" type="button">
+                  <span class="cat-icon">🐛</span>
+                  <div><div class="cat-label">Bug Report</div><div class="cat-desc">Something's broken</div></div>
+                </button>
+                <button class="category-btn" onclick="selectCategory(this,'Account Issue')" type="button">
+                  <span class="cat-icon">👤</span>
+                  <div><div class="cat-label">Account</div><div class="cat-desc">Login, profile, settings</div></div>
+                </button>
+                <button class="category-btn" onclick="selectCategory(this,'Review Appeal')" type="button">
+                  <span class="cat-icon">⭐</span>
+                  <div><div class="cat-label">Review Appeal</div><div class="cat-desc">Removed or flagged</div></div>
+                </button>
+                <button class="category-btn" onclick="selectCategory(this,'Partnership / Press')" type="button">
+                  <span class="cat-icon">🤝</span>
+                  <div><div class="cat-label">Partnership</div><div class="cat-desc">Business inquiries</div></div>
+                </button>
+                <button class="category-btn" onclick="selectCategory(this,'Other')" type="button">
+                  <span class="cat-icon">📬</span>
+                  <div><div class="cat-label">Other</div><div class="cat-desc">Anything else</div></div>
+                </button>
+              </div>
+            </div>
+
+            <form id="contact-form">
+              <input type="hidden" name="category" id="category-input" value="General Question" />
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input class="form-input" type="text" name="firstname" placeholder="Alex" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input class="form-input" type="text" name="lastname" placeholder="Gamer" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input class="form-input" type="email" name="email" placeholder="you@example.com" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <input class="form-input" type="text" name="subject" id="subject-input" placeholder="Brief description of your issue" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Message</label>
+                <textarea class="form-textarea" name="message" placeholder="Describe your issue or question in detail. The more info you provide, the faster we can help!" style="min-height:160px" required></textarea>
+              </div>
+
+              <!-- File Attachment -->
+              <div class="form-group">
+                <label class="form-label">Attachment (optional)</label>
+                <div style="border:2px dashed rgba(17,17,17,0.2);border-radius:var(--radius-md);padding:24px;text-align:center;cursor:pointer;transition:var(--transition);background:rgba(255,255,255,0.5)" onclick="document.getElementById('file-input').click()" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='rgba(17,17,17,0.2)'">
+                  <div style="font-size:1.8rem;margin-bottom:8px">📎</div>
+                  <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--black)">Click to attach a file</div>
+                  <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:4px">PNG, JPG, PDF up to 10MB</div>
+                  <input type="file" id="file-input" accept=".png,.jpg,.jpeg,.pdf" style="display:none" onchange="showFileName(this)" />
+                </div>
+                <div id="file-name" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan-dark);margin-top:8px;display:none"></div>
+              </div>
+
+              <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:28px">
+                <input type="checkbox" id="gdpr" required style="width:18px;height:18px;accent-color:var(--cyan);cursor:pointer;margin-top:2px;flex-shrink:0" />
+                <label for="gdpr" style="font-family:var(--font-body);font-size:0.88rem;color:var(--text-muted);cursor:pointer;font-weight:500;line-height:1.5">
+                  I agree to the processing of my data as described in the <a href="privacy.html" style="color:var(--black);font-weight:700">Privacy Policy</a>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send Message →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Sidebar -->
+      <aside>
+        <div class="contact-info-card">
+          <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--white);margin-bottom:4px">Get in Touch</div>
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray);margin-bottom:28px">Multiple ways to reach us</div>
+
+          <div class="contact-channel">
+            <div class="contact-channel-icon">📧</div>
+            <div>
+              <div class="contact-channel-title">Email Support</div>
+              <div class="contact-channel-detail">support@pixelvault.com</div>
+              <div class="contact-channel-note">Replies within 2 business hours</div>
+            </div>
+          </div>
+
+          <div class="contact-channel">
+            <div class="contact-channel-icon" style="background:rgba(88,101,242,0.15);border-color:rgba(88,101,242,0.3)">💬</div>
+            <div>
+              <div class="contact-channel-title">Discord Community</div>
+              <div class="contact-channel-detail">discord.gg/pixelvault</div>
+              <div class="contact-channel-note">42,000+ members, always active</div>
+            </div>
+          </div>
+
+          <div class="contact-channel">
+            <div class="contact-channel-icon" style="background:rgba(29,161,242,0.1);border-color:rgba(29,161,242,0.2)">𝕏</div>
+            <div>
+              <div class="contact-channel-title">Twitter / X</div>
+              <div class="contact-channel-detail">@PixelVaultApp</div>
+              <div class="contact-channel-note">For news and quick replies</div>
+            </div>
+          </div>
+
+          <div class="contact-channel">
+            <div class="contact-channel-icon">❓</div>
+            <div>
+              <div class="contact-channel-title">Help Center</div>
+              <div class="contact-channel-detail">help.pixelvault.com</div>
+              <div class="contact-channel-note">40+ articles, instant answers</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="margin-top:24px;background:var(--bg-card);border:2px solid var(--black);border-radius:var(--radius-xl);padding:28px;box-shadow:var(--shadow-md)">
+          <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px">Before You Write</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="/help" style="display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 16px;background:rgba(18,198,216,0.06);border:2px solid rgba(18,198,216,0.2);border-radius:var(--radius-md);transition:var(--transition)" onmouseover="this.style.background='rgba(18,198,216,0.12)'" onmouseout="this.style.background='rgba(18,198,216,0.06)'">
+              <span style="font-size:1.1rem">❓</span>
+              <div>
+                <div style="font-family:var(--font-display);font-size:0.78rem;font-weight:700;color:var(--black)">Help Center</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray)">FAQ and guides</div>
+              </div>
+            </a>
+            <a href="/privacy" style="display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 16px;background:rgba(17,17,17,0.04);border:2px solid rgba(17,17,17,0.1);border-radius:var(--radius-md);transition:var(--transition)" onmouseover="this.style.background='rgba(17,17,17,0.08)'" onmouseout="this.style.background='rgba(17,17,17,0.04)'">
+              <span style="font-size:1.1rem">🔒</span>
+              <div>
+                <div style="font-family:var(--font-display);font-size:0.78rem;font-weight:700;color:var(--black)">Privacy Policy</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray)">How we use your data</div>
+              </div>
+            </a>
+            <a href="/terms" style="display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 16px;background:rgba(17,17,17,0.04);border:2px solid rgba(17,17,17,0.1);border-radius:var(--radius-md);transition:var(--transition)" onmouseover="this.style.background='rgba(17,17,17,0.08)'" onmouseout="this.style.background='rgba(17,17,17,0.04)'">
+              <span style="font-size:1.1rem">📋</span>
+              <div>
+                <div style="font-family:var(--font-display);font-size:0.78rem;font-weight:700;color:var(--black)">Terms of Use</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray)">Platform rules</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="navbar-logo" style="margin-bottom: 16px; display: flex">
+          <div class="logo-icon">
+            <img src="../assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo" />
+          </div>
+          <div class="logo-text">Gaming<span>Hub</span></div>
+        </a>
+        <p class="footer-brand-desc">
+          The definitive gaming review platform. Rate, review, and discover
+          your next favourite game with the community.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📘</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Platform</div>
+        <ul class="footer-links">
+          <li><a href="/games">Browse Games</a></li>
+          <li><a href="/Library">My Library</a></li>
+          <li><a href="game-details.html">Game Reviews</a></li>
+          <li><a href="#">Leaderboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <ul class="footer-links">
+          <li><a href="/help">Help Center</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">
+        © 2026 Gaming Hub. All rights reserved.
+      </div>
+      <div class="footer-bottom-text">
+        Made with ❤️ for gamers everywhere
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/app.js"></script>
+<script>
+  function selectCategory(btn, value) {
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('category-input').value = value;
+    document.getElementById('subject-input').placeholder = value + ' — brief description...';
+  }
+
+  function showFileName(input) {
+    const el = document.getElementById('file-name');
+    if (input.files && input.files[0]) {
+      el.textContent = '📎 ' + input.files[0].name;
+      el.style.display = 'block';
+    }
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('form-state').style.display = 'none';
+      const s = document.getElementById('success-state');
+      s.style.display = 'block';
+    }, 1400);
+  });
+
+  function resetForm() {
+    document.getElementById('success-state').style.display = 'none';
+    document.getElementById('form-state').style.display = 'block';
+    document.getElementById('contact-form').reset();
+    const btn = document.querySelector('#contact-form [type="submit"]');
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }
+</script>
+</body>
+</html>

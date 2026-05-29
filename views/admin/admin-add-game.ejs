@@ -1,0 +1,231 @@
+```ejs <%- include('../includes/head.ejs') %> <%-
+include('../includes/admin-navbar.ejs') %>
+
+<div class="admin-layout" style="padding-top: 72px">
+  <aside class="admin-sidebar">
+    <div
+      style="padding: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08)"
+    >
+      <div
+        style="
+          font-family: var(--font-display);
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: var(--white);
+        "
+      >
+        Admin Panel
+      </div>
+
+      <div
+        style="
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          color: var(--gray);
+          margin-top: 4px;
+        "
+      >
+        GamingHub v1.0
+      </div>
+    </div>
+
+    <div class="admin-sidebar-title">Overview</div>
+
+    <a href="/admin/admin-dashboard" class="admin-nav-item">
+      <span class="admin-nav-icon"></span>
+      Dashboard
+    </a>
+
+    <div class="admin-sidebar-title">Content</div>
+
+    <a href="/admin/admin-games" class="admin-nav-item">
+      <span class="admin-nav-icon"></span>
+      All Games
+    </a>
+
+    <a href="/admin/admin-addGames" class="admin-nav-item active">
+      <span class="admin-nav-icon"></span>
+      Add Game
+    </a>
+
+    <div
+      style="
+        position: absolute;
+        bottom: 24px;
+        left: 0;
+        right: 0;
+        padding: 0 16px;
+      "
+    >
+      <a href="/" class="btn btn-outline-white btn-sm" style="width: 100%">
+        ← Back to Site
+      </a>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-panel">
+      <div class="admin-page-title">Add New Game</div>
+
+      <div class="admin-page-subtitle">
+        Fill in the details to add a game to the catalog
+      </div>
+
+      <div class="add-game-form">
+        <form id="add-game-form" action="/admin/add-game" method="POST">
+          <!-- Basic Info -->
+
+          <div class="form-divider">Basic Info</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"> Game Title * </label>
+
+              <input
+                class="form-input"
+                type="text"
+                name="title"
+                placeholder="e.g. Neon Drift 2"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"> Genre * </label>
+
+              <select class="form-select" name="genre" required>
+                <option value="">Select genre...</option>
+
+                <option value="Action">Action</option>
+
+                <option value="RPG">RPG</option>
+
+                <option value="Racing">Racing</option>
+
+                <option value="Strategy">Strategy</option>
+
+                <option value="Horror">Horror</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"> Developer * </label>
+
+              <input
+                class="form-input"
+                type="text"
+                name="developer"
+                placeholder="e.g. VoltStudios"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"> Platform * </label>
+
+              <select class="form-select" name="platform" required>
+                <option value="PC">PC</option>
+
+                <option value="PS5">PS5</option>
+
+                <option value="Xbox">Xbox</option>
+
+                <option value="Switch">Nintendo Switch</option>
+
+                <option value="Mobile">Mobile</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"> Release Year * </label>
+
+              <input
+                class="form-input"
+                type="number"
+                name="year"
+                placeholder="2024"
+                min="1980"
+                max="2030"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"> Badge </label>
+
+              <select class="form-select" name="badge">
+                <option value="">None</option>
+
+                <option value="new">New</option>
+
+                <option value="featured">Featured</option>
+
+                <option value="trending">Trending</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Media & Details -->
+
+          <div class="form-divider">Media & Details</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"> Image URL * </label>
+
+              <input
+                class="form-input"
+                type="text"
+                name="imageUrl"
+                placeholder="e.g. /images/neon.jpg"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"> Tags (Comma Separated) * </label>
+
+              <input
+                class="form-input"
+                type="text"
+                name="tags"
+                placeholder="e.g. Multiplayer, Fast-Paced"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"> Description * </label>
+
+            <textarea
+              class="form-textarea"
+              name="description"
+              placeholder="Write a compelling game description..."
+              style="min-height: 140px"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Buttons -->
+
+          <div style="display: flex; gap: 12px; margin-top: 24px">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Add Game to Catalog →
+            </button>
+
+            <button type="reset" class="btn btn-outline btn-lg">
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<%- include('../includes/end.ejs') %> ```

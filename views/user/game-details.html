@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Details — PixelVault</title>
+  <link rel="stylesheet" href="../../public/css/style.css" />
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-5">★</div>
+</div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+<a href="index.html" class="navbar-logo">
+  <div class="logo-icon"><img src="../assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo"></div>
+  <div class="logo-text">Gaming<span>Hub</span></div>
+</a>
+    <ul class="navbar-nav">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="games.html" class="nav-link">Games</a></li>
+      <li><a href="library.html" class="nav-link">My Library</a></li>
+      <li><a href="admin/admin.html" class="nav-link">Admin</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="login.html" class="btn btn-outline-white btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-cyan btn-sm">Sign Up →</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="page-wrapper">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div style="display:flex;align-items:center;gap:8px;padding:24px 0;font-family:var(--font-mono);font-size:0.72rem;color:rgba(17,17,17,0.5);text-transform:uppercase;letter-spacing:0.08em">
+      <a href="index.html" style="color:rgba(17,17,17,0.5);text-decoration:none;transition:var(--transition)" onmouseover="this.style.color='var(--black)'" onmouseout="this.style.color='rgba(17,17,17,0.5)'">Home</a>
+      <span>/</span>
+      <a href="games.html" style="color:rgba(17,17,17,0.5);text-decoration:none;transition:var(--transition)" onmouseover="this.style.color='var(--black)'" onmouseout="this.style.color='rgba(17,17,17,0.5)'">Games</a>
+      <span>/</span>
+      <span id="game-title" style="color:var(--black)">Loading...</span>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="game-details-layout">
+
+      <!-- Left: Main Content -->
+      <div>
+        <!-- Banner -->
+        <div class="game-banner" id="game-banner">
+          <span id="banner-emoji" style="position:relative;z-index:1">🎮</span>
+        </div>
+
+        <!-- Game Header -->
+        <div class="game-info-header">
+          <div class="game-detail-genre" id="game-genre">Genre</div>
+          <h1 class="game-detail-title" id="game-title-main">Loading...</h1>
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+            <div id="game-stars"></div>
+            <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--black)" id="rating-big">4.9</span>
+            <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--gray)" id="reviews-count">389 reviews</span>
+            <button onclick="Controller.showToast && View.showToast('Added to library! 🎮','success')" class="btn btn-cyan btn-sm" style="margin-left:auto" onclick="View.showToast('Added to library! 🎮','success')">+ Add to Library</button>
+          </div>
+
+          <p class="game-description" id="game-desc">Loading game description...</p>
+
+          <!-- Tags row -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px">
+            <span class="tag tag-cyan">Open World</span>
+            <span class="tag tag-outline">Story-Rich</span>
+            <span class="tag tag-outline">Single Player</span>
+            <span class="tag tag-yellow">RPG</span>
+          </div>
+        </div>
+
+        <!-- Rating Distribution -->
+        <div class="rating-distribution">
+          <div style="display:flex;align-items:center;gap:24px;margin-bottom:8px">
+            <div>
+              <div class="rating-big" id="rating-dist-big">4.9</div>
+              <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray);margin-top:4px">OUT OF 5.0</div>
+              <div style="margin-top:8px">
+                <div class="stars">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+              </div>
+            </div>
+            <div style="flex:1">
+              <div class="rating-bars">
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">5</div>
+                  <div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:72%"></div></div>
+                  <div class="rating-bar-count">280</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">4</div>
+                  <div class="progress-bar" style="flex:1"><div class="progress-fill yellow" style="width:18%"></div></div>
+                  <div class="rating-bar-count">70</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">3</div>
+                  <div class="progress-bar" style="flex:1"><div class="progress-fill orange" style="width:6%"></div></div>
+                  <div class="rating-bar-count">24</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">2</div>
+                  <div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:3%;background:#FF4444"></div></div>
+                  <div class="rating-bar-count">10</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">1</div>
+                  <div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:1%;background:#FF4444"></div></div>
+                  <div class="rating-bar-count">5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+          <!-- Add Review Form -->
+          <div class="add-review-card">
+            <div class="add-review-title">⌨️ Write Your Review</div>
+            <form id="add-review-form">
+              <input type="hidden" name="rating" value="5" />
+              <div class="form-group">
+                <label class="form-label">Your Rating</label>
+                <div class="interactive-stars">
+                  <span class="star filled" data-val="1">★</span>
+                  <span class="star filled" data-val="2">★</span>
+                  <span class="star filled" data-val="3">★</span>
+                  <span class="star filled" data-val="4">★</span>
+                  <span class="star filled" data-val="5">★</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Your Review</label>
+                <textarea class="form-textarea" name="review-text" placeholder="Share your experience with this game... What did you love? What could be better?" style="min-height:140px"></textarea>
+              </div>
+              <button type="submit" class="btn btn-cyan">Post Review →</button>
+            </form>
+          </div>
+
+          <!-- Reviews List -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+            <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;color:var(--black)">Player Reviews</h3>
+            <select class="form-select" style="width:auto;padding:8px 32px 8px 14px;font-size:0.8rem">
+              <option>Most Recent</option>
+              <option>Highest Rated</option>
+              <option>Most Helpful</option>
+            </select>
+          </div>
+
+          <div id="reviews-list" style="display:flex;flex-direction:column;gap:16px"></div>
+        </div>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <aside>
+        <div class="game-sidebar-card">
+          <div class="game-sidebar-cover">
+            <span style="font-size:72px;position:relative;z-index:1" id="sidebar-emoji">🎮</span>
+          </div>
+          <div class="game-sidebar-body">
+            <div style="margin-bottom:20px">
+              <button class="btn btn-primary" style="width:100%;margin-bottom:10px" onclick="View.showToast('Added to library! 🎮','success')">+ Add to Library</button>
+              <button class="btn btn-outline" style="width:100%" onclick="View.showToast('Added to wishlist! ⭐','info')">♡ Wishlist</button>
+            </div>
+
+            <div style="font-family:var(--font-display);font-size:0.7rem;font-weight:700;color:rgba(17,17,17,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px">Game Info</div>
+
+            <div class="game-info-row">
+              <span class="game-info-key">Developer</span>
+              <span class="game-info-value" id="game-dev">—</span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Platform</span>
+              <span class="game-info-value" id="game-platform">—</span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Release</span>
+              <span class="game-info-value" id="game-year">—</span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Rating</span>
+              <span class="game-info-value" style="color:var(--yellow)">⭐ <span id="game-info-rating">4.9</span></span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Reviews</span>
+              <span class="game-info-value" id="reviews-count-side">389</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Similar Games -->
+        <div style="margin-top:24px">
+          <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px">Similar Games</div>
+          <div style="display:flex;flex-direction:column;gap:12px" id="similar-games">
+            <!-- Populated by JS fallback -->
+            <a href="game-details.html?id=1" class="card" style="padding:0;flex-direction:row;display:flex;overflow:hidden;text-decoration:none">
+              <div style="width:72px;height:72px;background:linear-gradient(135deg,#0D0D1E,#12C6D8);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;border-right:2px solid var(--black)">🏎️</div>
+              <div style="padding:12px 14px">
+                <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--black)">Neon Drift</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:3px">Racing · 4.7 ⭐</div>
+              </div>
+            </a>
+            <a href="game-details.html?id=5" class="card" style="padding:0;flex-direction:row;display:flex;overflow:hidden;text-decoration:none">
+              <div style="width:72px;height:72px;background:linear-gradient(135deg,#0D1A1A,#D8C82F);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;border-right:2px solid var(--black)">⚡</div>
+              <div style="padding:12px 14px">
+                <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--black)">CyberPulse</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:3px">Action · 4.5 ⭐</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2025 PixelVault. All rights reserved.</div>
+      <a href="games.html" style="color:var(--cyan);font-family:var(--font-mono);font-size:0.75rem">← Back to Games</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  // Sync title elements
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const t = document.getElementById('game-title')?.textContent;
+      const t2 = document.getElementById('game-title-main');
+      if (t2) t2.textContent = t;
+      const rating = document.getElementById('rating-big')?.textContent;
+      document.getElementById('rating-dist-big')?.setAttribute('style','');
+      document.getElementById('rating-dist-big') && (document.getElementById('rating-dist-big').textContent = rating);
+      document.getElementById('game-info-rating') && (document.getElementById('game-info-rating').textContent = rating);
+      document.getElementById('sidebar-emoji') && (document.getElementById('sidebar-emoji').textContent = document.getElementById('banner-emoji')?.textContent || '🎮');
+      const rc = document.getElementById('reviews-count')?.textContent?.replace(' reviews','');
+      document.getElementById('reviews-count-side') && (document.getElementById('reviews-count-side').textContent = rc);
+    }, 100);
+  });
+</script>
+</body>
+</html>

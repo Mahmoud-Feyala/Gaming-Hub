@@ -1,0 +1,156 @@
+
+<%- include('../includes/head.ejs') %>
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+  <div class="shape shape-5">★</div>
+  <div class="shape shape-6">★</div>
+  <div class="shape shape-7">★</div>
+</div>
+
+<%- include('../includes/navbar.ejs') %>
+
+<main class="page-wrapper">
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="hero-eyebrow"> The Ultimate Gaming Hub</div>
+          <h1 class="hero-title">
+            Rate, Review <br />
+            <span class="highlight">Discover</span><br />
+            <span class="accent">Epic Games</span>
+          </h1>
+          <p class="hero-desc">
+            Gaming Hub is the definitive platform for gamers to discover
+            incredible games, write honest reviews, and build their personal
+            gaming legacy.
+          </p>
+          <div class="hero-actions">
+            <a href="/games" class="btn btn-primary btn-lg">Browse Games →</a>
+            <a href="/register" class="btn btn-outline btn-lg">Join Free</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">12K+</div>
+              <div class="hero-stat-label">Games Listed</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">89K+</div>
+              <div class="hero-stat-label">Reviews Written</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">42K+</div>
+              <div class="hero-stat-label">Active Players</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card-main">
+            <div class="hero-card-placeholder">
+              <img src="https://assets.xboxservices.com/assets/36/b5/36b52fa8-e71b-4435-888a-cecb98d3876a.jpg?n=153142244433_GLP-Page-Hero-0_1083x1222_02.jpg" alt="Valorant">
+            </div>
+            <div class="hero-card-overlay"></div>
+            <div class="hero-card-content">
+              <div class="hero-game-genre"> Game of the Month</div>
+              <div class="hero-game-title">Valorant</div>
+              <div style="display: flex; align-items: center; gap: 12px">
+                <div class="stars">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+                <span style="font-family: var(--font-display); font-size: 0.85rem; color: var(--white);">4.9 / 5.0</span>
+                <span style="font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255, 255, 255, 0.5);">(389 reviews)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-float-cards">
+            <div class="hero-mini-card">
+              <div class="hero-mini-card-title"> Trending Now</div>
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(17, 17, 17, 0.6)">New Agent: Mix</div>
+            </div>
+            <div class="hero-mini-card">
+              <div class="hero-mini-card-title"> New Release</div>
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(17, 17, 17, 0.6)">Big Updates</div>
+            </div>
+          </div>
+
+          <div style="position: absolute; bottom: -20px; left: -20px; display: flex; gap: 10px">
+            <div style="width: 48px; height: 48px; background: var(--yellow); border: 2px solid var(--black); border-radius: 50%; animation: float1 5s ease-in-out infinite"></div>
+            <div style="width: 32px; height: 32px; background: var(--cyan); border: 2px solid var(--black); border-radius: 50%; animation: float2 7s ease-in-out infinite 1s"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: rgba(17, 17, 17, 0.5); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px">— Browse</div>
+      <h2 class="section-title" style="margin-bottom: 40px">Explore by Genre</h2>
+
+      <div class="grid-4">
+        <a href="/games" class="card" style="background: var(--black); text-align: center; padding: 40px 24px; text-decoration: none; cursor: pointer;">
+          <div class="genre-icon">
+            <img src="../assets/icons/icon-rpg.png" alt="RPG" />
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white);">RPG</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray); margin-top: 4px;">128 games</div>
+        </a>
+
+        <a href="/games" class="card" style="text-align: center; padding: 40px 24px; text-decoration: none; cursor: pointer;">
+          <div class="genre-icon">
+            <img src="../assets/icons/icon-racing.png" alt="Racing" />
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--black);">Racing</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray); margin-top: 4px;">64 games</div>
+        </a>
+
+        <a href="/games" class="card" style="background: var(--yellow); text-align: center; padding: 40px 24px; text-decoration: none; cursor: pointer;">
+          <div class="genre-icon">
+            <img src="../assets/icons/action-game.png" alt="Action" />
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--black);">Action</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: rgba(17, 17, 17, 0.6); margin-top: 4px;">247 games</div>
+        </a>
+
+        <a href="/games" class="card" style="background: var(--cyan); text-align: center; padding: 40px 24px; text-decoration: none; cursor: pointer;">
+          <div class="genre-icon">
+            <img src="../assets/icons/icon-strategy.png" alt="Strategy" />
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--black);">Strategy</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: rgba(17, 17, 17, 0.6); margin-top: 4px;">93 games</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="container">
+      <div style="background: var(--black); border: 2px solid var(--black); border-radius: var(--radius-xl); padding: 64px; box-shadow: var(--shadow-xl); text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(18, 198, 216, 0.15), transparent 60%), radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.1), transparent 60%); pointer-events: none;"></div>
+        <div style="position: relative; z-index: 1">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;">Join the Community</div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; color: var(--white); letter-spacing: -0.03em; margin-bottom: 20px; line-height: 1;">Your Gaming Legacy<br />Starts Here</h2>
+          <p style="font-family: var(--font-body); font-size: 1.1rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7;">Join thousands of gamers discovering hidden gems, sharing unforgettable moments, and building their ultimate game libraries.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="/register" class="btn btn-cyan btn-lg">Create Free Account →</a>
+            <a href="/games" class="btn btn-outline-white btn-lg">Browse Games</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../includes/footer.ejs') %>
+
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,82 @@
+<%- include('../includes/head.ejs') %>
+
+<%- include('../includes/admin-navbar.ejs') %>
+
+<div class="admin-layout" style="padding-top:72px">
+  
+  <aside class="admin-sidebar">
+    <div style="padding:24px;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--white)">Admin Panel</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--gray);margin-top:4px">GamingHub v1.0</div>
+    </div>
+
+    <div class="admin-sidebar-title">Overview</div>
+    <a href="/admin/admin-dashboard" class="admin-nav-item">
+      <span class="admin-nav-icon"></span> Dashboard
+    </a>
+
+    <div class="admin-sidebar-title">Content</div>
+    <a href="/admin/admin-games" class="admin-nav-item active">
+      <span class="admin-nav-icon"></span> All Games
+    </a>
+    <a href="/admin/admin-addGames"class="admin-nav-item">
+      <span class="admin-nav-icon"></span> Add Game
+    </a>
+
+    <div style="position:absolute;bottom:24px;left:0;right:0;padding:0 16px">
+      <a href="/" class="btn btn-outline-white btn-sm" style="width:100%">← Back to Site</a>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div class="admin-page-title">All Games</div>
+        <a href="/admin/admin-addGames" class="btn btn-cyan btn-sm">+ Add New Game</a>
+      </div>
+      <div class="admin-page-subtitle">Manage the game catalog</div>
+
+      <div class="admin-table-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Game</th>
+              <th>Genre</th>
+              <th>Platform</th>
+              <th>Year</th>
+              <th>Rating</th>
+              <th>Badge</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <% if (game && game.length > 0) { %>
+              <% game.forEach(g => { %>
+                <tr>
+                  <td><%= g.title %></td>
+                  <td><%= g.genre %></td>
+                  <td><%= g.platform %></td>
+                  <td><%= g.year %></td>
+                  <td>-</td>
+                  <td><%= g.badge %></td>
+                  <td>
+                    <a href="#" class="btn btn-cyan btn-sm">Edit</a>
+                    <form action="#" method="POST" style="display:inline;">
+                      <button type="submit" class="btn btn-sm" style="color: red; background: none; border: none; cursor: pointer;">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="7" style="text-align: center; padding: 20px; color: var(--gray);">No games available in the catalog.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<%- include('../includes/end.ejs') %>
