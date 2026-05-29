@@ -1,8 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 let gamearr = [];
-const p = path.join(__dirname, "../", "data", "games.json");    
-module.exports =class Game {
+const p = path.join(__dirname, "../", "data", "games.json");
+
+const getGameFromFile = (cb) => {
+  fs.readFile(p, (err, filecontent) => {
+    if (!err && filecontent.length > 0) {
+      return cb(JSON.parse(filecontent));
+    }
+    cb([]);
+  });
+};
+
+module.exports = class Game {
   constructor(
     title,
     genre,
@@ -26,11 +36,9 @@ module.exports =class Game {
   }
 
   save() {
-    fs.readFile(p, (err, fileContent) => {
-      let games = [];
-      if (!err && fileContent.length > 0) {
-        games = JSON.parse(fileContent);
-      }
+    this.id = Math.random;
+
+    getGameFromFile((games) => {
       games.push(this);
       fs.writeFile(p, JSON.stringify(games), (err) => {
         if (err) {
