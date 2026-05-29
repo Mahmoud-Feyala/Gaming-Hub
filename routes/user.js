@@ -10,4 +10,5 @@ router.get("/help",userController.getHelpCenterPage)
 router.get("/privacy",userController.getprivacyPage)
 router.get("/terms",userController.getTermsPage)
 router.get("/contact",userController.getContactPage)
+router.get("/game-details/:gameId")
 module.exports = router;

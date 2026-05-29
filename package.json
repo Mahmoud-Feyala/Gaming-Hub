@@ -2,6 +2,15 @@
   "name": "project",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/Mahmoud-Feyala/Project#readme",
+  "bugs": {
+    "url": "https://github.com/Mahmoud-Feyala/Project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahmoud-Feyala/Project.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",
@@ -11,21 +20,12 @@
     "start": "nodemon app.js",
     "start-server": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mahmoud-Feyala/Project.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/Mahmoud-Feyala/Project/issues"
-  },
-  "homepage": "https://github.com/Mahmoud-Feyala/Project#readme",
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  },
   "dependencies": {
     "body-parser": "^2.2.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
