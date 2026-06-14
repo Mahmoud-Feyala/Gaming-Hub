@@ -75,6 +75,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 /* =============================================
    404 ERROR PAGE STYLES
    ============================================= */
@@ -1357,80 +1358,6 @@ img { max-width: 100%; display: block; }
 .faq-question.open .faq-arrow { transform: rotate(180deg); color: var(--cyan); }
 .faq-answer { display: none; padding: 0 32px 20px; font-family: var(--font-body); font-size: 0.97rem; line-height: 1.8; color: #444; font-weight: 500; }
 .faq-answer.open { display: block; animation: slide-up 0.3s ease; }
-/* =============================================
-   404 ERROR PAGE STYLES
-   ============================================= */
-
-/* Override body background for this page only */
-.error-body {
-    background-color: var(--black) !important;
-}
-
-.error-page {
-    min-height: calc(100vh - 72px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: var(--black);
-    position: relative;
-    overflow: hidden;
-    padding: 40px;
-    margin: 0;
-}
-
-.error-shapes {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.error-code {
-    font-family: var(--font-display);
-    font-size: clamp(6rem, 15vw, 12rem);
-    font-weight: 900;
-    color: var(--cyan);
-    margin: 0;
-    line-height: 1;
-    /* Neo-brutalist 3D shadow effect */
-    text-shadow: 8px 8px 0px var(--pink), 16px 16px 0px rgba(255, 188, 204, 0.2); 
-    letter-spacing: 5px;
-    z-index: 1;
-}
-
-.error-message {
-    font-family: var(--font-mono);
-    font-size: 1.2rem;
-    margin: 24px 0 48px;
-    color: var(--gray-light);
-    z-index: 1;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.btn-home {
-    padding: 16px 36px;
-    background: var(--yellow);
-    color: var(--black);
-    text-decoration: none;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 800;
-    border: 3px solid var(--black);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-lg), var(--shadow-yellow);
-    transition: var(--transition-bounce);
-    text-transform: uppercase;
-    z-index: 1;
-}
-
-.btn-home:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: var(--shadow-xl), 0 0 30px var(--yellow-glow);
-    background: var(--white);
-}
 
 /* ── Slider ── */
 .hero-card-placeholder {
@@ -1748,6 +1675,8 @@ img { max-width: 100%; display: block; }
 .game-card-badge--featured { background: var(--yellow); color: var(--black); }
 .game-card-badge--trending  { background: #e8334a; color: #ffffff; }
 .game-card-badge--new       { background: var(--cyan); color: var(--black); }
+
+
 /* =============================================
    PAGE: CONTACT
    ============================================= */
@@ -2004,6 +1933,7 @@ img { max-width: 100%; display: block; }
   .score-numbers         { font-size: 1.8rem; }
   .countdown-clock       { gap: 6px; }
 }
+
 /* الحاوية اللي شايلة الصورة */
 .card-image-container {
   width: 100%;

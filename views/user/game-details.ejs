@@ -26,13 +26,26 @@
         <div>
           
           <!-- Trailer / Banner Section -->
-          <% if (game.trailerUrl) { %>
+          <% if (game.trailerUrl) { 
+               // Normalize common YouTube formats into an embed URL
+               let trailer = game.trailerUrl.toString();
+               // Convert watch?v= URLs to /embed/VIDEOID
+               if (trailer.includes('watch?v=')) {
+                 trailer = trailer.replace('watch?v=', 'embed/');
+               }
+               // Convert short youtu.be/VIDEOID to youtube embed path
+               if (trailer.includes('youtu.be/')) {
+                 trailer = trailer.replace('youtu.be/', 'www.youtube.com/embed/');
+               }
+               // Strip any existing query string
+               trailer = trailer.split('?')[0];
+          %>
             <!-- Video Trailer Container (16:9 Aspect Ratio) -->
             <div class="game-banner video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 3px solid var(--black); background: var(--black); margin-bottom: 24px;">
               <iframe 
-                src="<%= game.trailerUrl %>?autoplay=0&mute=0&controls=1&showinfo=0&rel=0" 
+                src="<%= trailer %>?rel=0&controls=1" 
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
                 allowfullscreen>
               </iframe>
             </div>
@@ -235,7 +248,7 @@
     </div>
   </footer>
 
-  <script src="/assets/js/app.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 
 </html>

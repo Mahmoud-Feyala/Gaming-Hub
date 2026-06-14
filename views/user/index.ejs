@@ -1,5 +1,8 @@
 <%- include('../includes/head.ejs') %>
 
+<!-- مكتبة الأيقونات الاحترافية Phosphor Icons -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
 <div class="bg-shapes">
   <div class="shape shape-1"></div>
   <div class="shape shape-2"></div>
@@ -106,23 +109,38 @@
       <div class="section-eyebrow">— Browse</div>
       <h2 class="section-title">Explore by Genre</h2>
       <div class="grid-4">
+        <!-- RPG Card -->
         <a href="/games" class="card genre-card genre-card--dark">
-          <div class="genre-icon"><img src="../assets/icons/icon-rpg.png" alt="RPG" /></div>
+          <div class="genre-icon">
+            <i class="ph-bold ph-sword"></i>
+          </div>
           <div class="genre-name genre-name--light">RPG</div>
           <div class="genre-count">128 games</div>
         </a>
-        <a href="/games" class="card genre-card">
-          <div class="genre-icon"><img src="../assets/icons/icon-racing.png" alt="Racing" /></div>
+
+        <!-- Racing Card -->
+        <a href="/games" class="card genre-card" style="background: var(--pink);">
+          <div class="genre-icon">
+            <i class="ph-bold ph-flag-checkered"></i>
+          </div>
           <div class="genre-name">Racing</div>
           <div class="genre-count">64 games</div>
         </a>
+
+        <!-- Action Card -->
         <a href="/games" class="card genre-card genre-card--yellow">
-          <div class="genre-icon"><img src="../assets/icons/action-game.png" alt="Action" /></div>
+          <div class="genre-icon">
+            <i class="ph-bold ph-crosshair"></i>
+          </div>
           <div class="genre-name">Action</div>
           <div class="genre-count genre-count--dark">247 games</div>
         </a>
+
+        <!-- Strategy Card -->
         <a href="/games" class="card genre-card genre-card--cyan">
-          <div class="genre-icon"><img src="../assets/icons/icon-strategy.png" alt="Strategy" /></div>
+          <div class="genre-icon">
+            <i class="ph-bold ph-castle-turret"></i>
+          </div>
           <div class="genre-name">Strategy</div>
           <div class="genre-count genre-count--dark">93 games</div>
         </a>
@@ -186,10 +204,32 @@
 
 <%- include('../includes/footer.ejs') %>
 
-<!-- Back to Top -->
+
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-<link rel="stylesheet" href="/css/home.css" />
-<script src="/js/home.js" defer></script>
+<link rel="stylesheet" href="/css/style.css" />
+<script src="/js/app.js" defer></script>
+
+
+<style>
+  .genre-icon { 
+    margin-bottom: 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  .genre-icon i { 
+    font-size: 72px; 
+    color: var(--black); 
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+    filter: drop-shadow(3px 3px 0px rgba(17,17,17,0.15)); 
+  }
+  .genre-card--dark .genre-icon i {
+    color: var(--cyan);
+  }
+  .card:hover .genre-icon i { 
+    transform: scale(1.15) translateY(-6px); 
+  }
+</style>
 
 <%- include('../includes/end.ejs') %>

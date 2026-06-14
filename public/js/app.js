@@ -193,6 +193,8 @@ const App = {
     const gamesCount = document.getElementById('games-count');
     let activeFilter = 'all';
     let activeQuery = '';
+    const batchSize = 20;
+    let shownCount = batchSize;
 
     const updateGamesCount = (visibleCount) => {
       if (gamesCount) {
@@ -208,6 +210,7 @@ const App = {
       let visibleCount = 0;
 
       cards.forEach(card => {
+        const idx = parseInt(card.dataset.index || '0', 10);
         const title = (card.dataset.title || '').toLowerCase();
         const genre = (card.dataset.genre || '').toLowerCase();
         const developer = (card.dataset.developer || '').toLowerCase();
@@ -223,9 +226,23 @@ const App = {
 
         const shouldShow = matchesQuery && matchesFilter;
 
-        card.style.display = shouldShow ? '' : 'none';
-
-        if (shouldShow) visibleCount += 1;
+        if (!shouldShow) {
+          card.style.display = 'none';
+        } else {
+          // If there is an active query or filter other than 'all', show all matching results
+          if (query || activeFilter !== 'all') {
+            card.style.display = '';
+            visibleCount += 1;
+          } else {
+            // Enforce pagination when no filter/search is active
+            if (idx < shownCount) {
+              card.style.display = '';
+              visibleCount += 1;
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        }
       });
 
       updateGamesCount(visibleCount);
@@ -271,6 +288,18 @@ const App = {
     });
 
     applySearchFilter();
+
+    // Expose pagination control to other App methods
+    App.gamesPagination = {
+      increase() {
+        const total = document.querySelectorAll('.game-card').length;
+        shownCount = Math.min(total, shownCount + batchSize);
+        applySearchFilter();
+      },
+      isAllShown() {
+        return shownCount >= document.querySelectorAll('.game-card').length;
+      }
+    };
   },
 
   // ============================================
@@ -326,6 +355,32 @@ const App = {
   },
 
   initGames() {
+    // Pagination: Load more button handling
+    const loadBtn = document.getElementById('loadMoreBtn');
+
+    if (loadBtn) {
+      loadBtn.addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true;
+        const prevText = btn.textContent;
+        btn.textContent = 'Loading...';
+
+        setTimeout(() => {
+          if (App.gamesPagination) {
+            App.gamesPagination.increase();
+          }
+
+          // hide button if all shown
+          if (App.gamesPagination && App.gamesPagination.isAllShown()) {
+            btn.style.display = 'none';
+          } else {
+            btn.disabled = false;
+            btn.textContent = prevText;
+          }
+        }, 400);
+      });
+    }
+
     console.log('Games page loaded');
   },
 

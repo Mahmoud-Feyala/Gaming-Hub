@@ -21,6 +21,7 @@ module.exports = class Game {
     year,
     badge,
     imageUrl,
+    trailerUrl,
     tags,
     description
   ) {
@@ -31,12 +32,13 @@ module.exports = class Game {
     this.year = year;
     this.badge = badge;
     this.imageUrl = imageUrl;
+    this.trailerUrl = trailerUrl;
     this.tags = tags;
     this.description = description;
   }
 
   save() {
-    // 1. تصليح الـ ID عشان يشتغل صح
+    
     this.id = Math.random().toString();
 
     getGameFromFile((games) => {

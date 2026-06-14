@@ -27,6 +27,7 @@ exports.postAdminAddGames = (req, res, next) => {
   const year = req.body.year;
   const badge = req.body.badge;
   const imageUrl = req.body.imageUrl;
+  const trailerUrl = req.body.trailerUrl;
   const tags = req.body.tags;
   const description = req.body.description;
 
@@ -38,6 +39,7 @@ exports.postAdminAddGames = (req, res, next) => {
     year,
     badge,
     imageUrl,
+    trailerUrl,
     tags,
     description,
   );

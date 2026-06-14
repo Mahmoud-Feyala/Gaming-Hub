@@ -5,6 +5,4 @@ exports.postAddToLibrary = (req, res) => {
   const imageUrl = req.body.imageUrl;
   
   Library.addGame(gameId,imageUrl);
-
-  res.redirect("/library");
 };
