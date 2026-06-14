@@ -1,9 +1,11 @@
 const router = require("express").Router();
 const userController = require("../controller/user");
+const libraryController = require("../controller/library")
 router.get("/", userController.getHomePage);
 router.get("/games", userController.getGamesPage);
 router.get("/Library", userController.getLibraryPage);
 router.get("/game-details/:gameId", userController.getGameDetailsPage);
+router.post("/add-to-library", libraryController.postAddToLibrary);
 router.get("/login", userController.getLoginPage);
 router.get("/register", userController.getRegesterPage);
 router.get("/help", userController.getHelpCenterPage);

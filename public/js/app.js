@@ -337,6 +337,40 @@ const App = {
 
     console.log('Game Details ID:', gameId);
 
+    const addLibraryForm = document.getElementById('add-to-library-form');
+    const libraryStorageKey = 'gamingHubLibraryIds';
+
+    const getStoredLibraryIds = () => {
+      const stored = localStorage.getItem(libraryStorageKey);
+      if (!stored) return [];
+      try {
+        const parsed = JSON.parse(stored);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    };
+
+    const saveStoredLibraryIds = (ids) => {
+      localStorage.setItem(libraryStorageKey, JSON.stringify(ids));
+    };
+
+    window.handleAddToLibraryClick = (e, formGameId) => {
+      const storedIds = getStoredLibraryIds();
+      if (storedIds.includes(formGameId)) {
+        e.preventDefault();
+        View.showToast('This game is already in your library.', 'info');
+        return;
+      }
+
+      storedIds.push(formGameId);
+      saveStoredLibraryIds(storedIds);
+
+      e.preventDefault();
+      View.showToast('Game added to your library!', 'success');
+      setTimeout(() => addLibraryForm?.submit(), 250);
+    };
+
     const reviewForm =
       document.getElementById('add-review-form');
 
@@ -573,6 +607,50 @@ const App = {
     }
   }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Slider + Dots ── */
+  const slides = document.querySelectorAll('.slider-image');
+  const dotsContainer = document.getElementById('sliderDots');
+
+  if (slides.length && dotsContainer) {
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.slider-dot');
+    let current = 0;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    setInterval(() => goTo((current + 1) % slides.length), 4000);
+  }
+
+  /* ── Back to Top ── */
+  const backBtn = document.getElementById('backToTop');
+
+  if (backBtn) {
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    backBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+});
 
 // ============================================
 // BOOT

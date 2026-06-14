@@ -51,37 +51,37 @@
 
     <div class="grid-4" id="games-grid" style="margin-bottom:64px">
       <% if (game && game.length > 0) { %>
-        <% game.forEach(g => { %>
-          <div class="game-card" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>" style="background: var(--black, #111); color: #fff; border: 2px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
-            <div style="position: relative;">
-              <img src="<%= g.imageUrl || 'https://via.placeholder.com/300x200' %>" alt="<%= g.title %>" style="width: 100%; height: 200px; object-fit: cover; border-bottom: 2px solid #000;">
-              <% if (g.badge) { %>
-                <span style="position: absolute; top: 8px; right: 8px; background: #ff6b6b; color: #fff; padding: 4px 8px; font-size: 0.7rem; font-family: var(--font-mono); border-radius: 4px; border: 1px solid #000; text-transform: uppercase;"><%= g.badge %></span>
-              <% } %>
-            </div>
-            <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px;"><%= g.platform %> • <%= g.year %></div>
-              <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 4px 0;"><%= g.title %></h3>
-              <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 12px;"><%= g.genre %> | <%= g.developer %></div>
-              
-              <p style="font-size: 0.85rem; line-height: 1.4; color: #ddd; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1;"><%= g.description %></p>
-              
-              <a href="/game-details/<%=g.id%>"  class="btn btn-cyan" style="width: 100%; text-align: center; margin-top: auto;">View Game</a>
-              
-            </div>
-          </div>
-        <% }) %>
-      <% } else { %>
-        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px;">
-          <p style="font-family: var(--font-mono); color: rgba(17,17,17,0.6); margin: 0;">No games found. Check back later!</p>
+      <% game.forEach(g => { %>
+      <div class="game-card" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>" style="background: var(--black, #111); color: #fff; border: 2px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
+        <div class="card-image-container" style="border-bottom: 2px solid #000; position: relative; overflow: hidden;">
+          <img src="<%= g.imageUrl || 'https://via.placeholder.com/600x900' %>" alt="<%= g.title %>" style="width: 100%; display: block;" />
+          <% if (g.badge) { %>
+            <span style="position: absolute; top: 8px; right: 8px; background: #ff6b6b; color: #fff; padding: 4px 8px; font-size: 0.7rem; font-family: var(--font-mono); border-radius: 4px; border: 1px solid #000; text-transform: uppercase; z-index: 2;"><%= g.badge %></span>
+          <% } %>
         </div>
+        <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px;"><%= g.platform %> • <%= g.year %></div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 4px 0;"><%= g.title %></h3>
+          <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 12px;"><%= g.genre %> | <%= g.developer %></div>
+
+          <p style="font-size: 0.85rem; line-height: 1.4; color: #ddd; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1;"><%= g.description %></p>
+
+          <a href="/game-details/<%= g.id %>" class="btn btn-cyan" style="width: 100%; text-align: center; margin-top: auto;">View Game</a>
+
+        </div>
+      </div>
+      <% }) %>
+      <% } else { %>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px;">
+        <p style="font-family: var(--font-mono); color: rgba(17,17,17,0.6); margin: 0;">No games found. Check back later!</p>
+      </div>
       <% } %>
     </div>
 
     <% if (game && game.length > 0) { %>
-      <div style="text-align:center;padding-bottom:80px">
-        <button class="btn btn-outline btn-lg" onclick="this.textContent='Loading...';setTimeout(()=>this.textContent='Load More Games →',1500)">Load More Games →</button>
-      </div>
+    <div style="text-align:center;padding-bottom:80px">
+      <button class="btn btn-outline btn-lg" onclick="this.textContent='Loading...';setTimeout(()=>this.textContent='Load More Games →',1500)">Load More Games →</button>
+    </div>
     <% } %>
 
   </div>

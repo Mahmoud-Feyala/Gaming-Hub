@@ -1,4 +1,4 @@
-```ejs <%- include('../includes/head.ejs') %> <%-
+<%- include('../includes/head.ejs') %> <%-
 include('../includes/admin-navbar.ejs') %>
 
 <div class="admin-layout" style="padding-top: 72px">
@@ -187,6 +187,19 @@ include('../includes/admin-navbar.ejs') %>
             </div>
 
             <div class="form-group">
+              <label class="form-label"> Trailer URL (YouTube Embed) </label>
+
+              <input
+                class="form-input"
+                type="text"
+                name="trailerUrl"
+                placeholder="e.g. https://www.youtube.com/embed/VIDEO_ID"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1">
               <label class="form-label"> Tags (Comma Separated) * </label>
 
               <input
@@ -228,4 +241,4 @@ include('../includes/admin-navbar.ejs') %>
   </main>
 </div>
 
-<%- include('../includes/end.ejs') %> ```
+<%- include('../includes/end.ejs') %>
