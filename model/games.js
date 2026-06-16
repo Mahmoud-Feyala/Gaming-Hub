@@ -64,8 +64,10 @@ module.exports = class Game {
     getGameFromFile((games) => {
       const updatedGames = games.filter((g) => g.id !== id);
       fs.writeFile(p, JSON.stringify(updatedGames), (err) => {
-        if (err) {
-          console.error("Failed to save game:", err);
+        if (!err) {
+          // Use dynamic require to avoid circular dependency
+          const Library = require("./library");
+          Library.deleteGame(id);
         }
       });
     });

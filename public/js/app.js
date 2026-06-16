@@ -160,6 +160,33 @@ const App = {
   // ============================================
   // MOBILE NAV
   // ============================================
+  // ============================================
+  // THEME TOGGLER
+  setupThemeToggle() {
+    const themeButton = document.querySelector('.theme-toggle');
+    const savedTheme = localStorage.getItem('site-theme');
+    const theme = savedTheme || 'dark';
+
+    const applyTheme = (value) => {
+      document.documentElement.dataset.theme = value;
+      if (themeButton) {
+        themeButton.textContent = value === 'dark' ? 'Light Mode' : 'Dark Mode';
+        themeButton.setAttribute('aria-label', value === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      }
+      localStorage.setItem('site-theme', value);
+    };
+
+    applyTheme(theme);
+
+    if (themeButton) {
+      themeButton.addEventListener('click', () => {
+        applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+      });
+    }
+  },
+
+  // ============================================
+  // MOBILE NAV
   setupMobileNav() {
 
     const hamburger = document.querySelector('.hamburger');
@@ -688,4 +715,3 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 });
-

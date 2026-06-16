@@ -64,6 +64,11 @@ exports.getGameDetailsPage = (req, res, next) => {
   });
 };
 
+exports.postDeleteFromLibrary = (req, res, next) => {
+  const gameId = req.body.gameId;
+  Library.deleteGame(gameId);
+  res.redirect("/library");
+};
 exports.getHelpCenterPage = (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "views", "support", "help.html"));
 };

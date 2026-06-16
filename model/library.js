@@ -48,7 +48,24 @@ module.exports = class Library {
       });
     });
   }
-   static getLibrary(cb) {
+
+  static deleteGame(id) {
+    fs.readFile(p, (err, fileContent) => {
+      if (err) {
+        return;
+      }
+      const updatedLib = JSON.parse(fileContent);
+      updatedLib.games = updatedLib.games.filter((g) => g.gameId !== id);
+      updatedLib.totalGames = updatedLib.games.length;
+      fs.writeFile(p, JSON.stringify(updatedLib), (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    });
+  }
+
+  static getLibrary(cb) {
     fs.readFile(p, (err, fileContent) => {
       const library = JSON.parse(fileContent);
       if (err) {
@@ -59,3 +76,5 @@ module.exports = class Library {
     });
   }
 };
+
+

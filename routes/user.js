@@ -5,6 +5,7 @@ router.get("/games", userController.getGamesPage);
 router.get("/Library", userController.getLibraryPage);
 router.get("/game-details/:gameId", userController.getGameDetailsPage);
 router.post("/add-to-library", userController.postAddToLibrary);
+router.post('/delete-from-library', userController.postDeleteFromLibrary);
 router.get("/login", userController.getLoginPage);
 router.get("/register", userController.getRegesterPage);
 router.get("/help", userController.getHelpCenterPage);
