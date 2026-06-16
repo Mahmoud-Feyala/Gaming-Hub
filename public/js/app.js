@@ -77,6 +77,7 @@ const App = {
   init() {
     this.setupMobileNav();
     this.setupActiveNav();
+    this.setupThemeToggle();
     this.setupStarInteractions();
     this.setupSearchFilter();
     this.dispatch();
@@ -393,34 +394,8 @@ const App = {
     console.log('Game Details ID:', gameId);
 
     const addLibraryForm = document.getElementById('add-to-library-form');
-    const libraryStorageKey = 'gamingHubLibraryIds';
-
-    const getStoredLibraryIds = () => {
-      const stored = localStorage.getItem(libraryStorageKey);
-      if (!stored) return [];
-      try {
-        const parsed = JSON.parse(stored);
-        return Array.isArray(parsed) ? parsed : [];
-      } catch {
-        return [];
-      }
-    };
-
-    const saveStoredLibraryIds = (ids) => {
-      localStorage.setItem(libraryStorageKey, JSON.stringify(ids));
-    };
 
     window.handleAddToLibraryClick = (e, formGameId) => {
-      const storedIds = getStoredLibraryIds();
-      if (storedIds.includes(formGameId)) {
-        e.preventDefault();
-        View.showToast('This game is already in your library.', 'info');
-        return;
-      }
-
-      storedIds.push(formGameId);
-      saveStoredLibraryIds(storedIds);
-
       e.preventDefault();
       View.showToast('Game added to your library!', 'success');
       setTimeout(() => addLibraryForm?.submit(), 250);
@@ -713,3 +688,4 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 });
+

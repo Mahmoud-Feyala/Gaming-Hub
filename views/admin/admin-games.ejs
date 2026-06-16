@@ -32,7 +32,7 @@
     <div class="admin-panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div class="admin-page-title">All Games</div>
-        <a href="/admin/admin-addGames" class="btn btn-cyan btn-sm">+ Add New Game</a>
+        <a href="/admin/admin-addGames" class="btn btn-primary btn-sm">+ Add New Game</a>
       </div>
       <div class="admin-page-subtitle">Manage the game catalog</div>
 
@@ -59,10 +59,11 @@
                   <td><%= g.year %></td>
                   <td>-</td>
                   <td><%= g.badge %></td>
-                  <td>
-                    <a href="#" class="btn btn-cyan btn-sm">Edit</a>
-                    <form action="#" method="POST" style="display:inline;">
-                      <button type="submit" class="btn btn-sm" style="color: red; background: none; border: none; cursor: pointer;">Delete</button>
+                  <td class="admin-action-buttons">
+                    <a href="/admin/admin-editGames/<%= g.id %>?edit=true" class="btn btn-cyan btn-sm">Edit</a>
+                    <form action="/admin/admin-deleteGame" method="POST">
+                      <input type="hidden" name="gameId" value="<%= g.id %>">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                   </td>
                 </tr>

@@ -1,43 +1,24 @@
-<%- include('../includes/head.ejs') %> <%-
-include('../includes/admin-navbar.ejs') %>
+<%- include('../includes/head.ejs') %> 
+<%- include('../includes/admin-navbar.ejs') %>
 
 <div class="admin-layout" style="padding-top: 72px">
   <aside class="admin-sidebar">
-    <div
-      style="padding: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08)"
-    >
-      <div
-        style="
-          font-family: var(--font-display);
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: var(--white);
-        "
-      >
+    <div style="padding: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08)">
+      <div style="font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; color: var(--white);">
         Admin Panel
       </div>
-
-      <div
-        style="
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--gray);
-          margin-top: 4px;
-        "
-      >
+      <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--gray); margin-top: 4px;">
         GamingHub v1.0
       </div>
     </div>
 
     <div class="admin-sidebar-title">Overview</div>
-
     <a href="/admin/admin-dashboard" class="admin-nav-item">
       <span class="admin-nav-icon"></span>
       Dashboard
     </a>
 
     <div class="admin-sidebar-title">Content</div>
-
     <a href="/admin/admin-games" class="admin-nav-item">
       <span class="admin-nav-icon"></span>
       All Games
@@ -45,18 +26,10 @@ include('../includes/admin-navbar.ejs') %>
 
     <a href="/admin/admin-addGames" class="admin-nav-item active">
       <span class="admin-nav-icon"></span>
-      Add Game
+      <% if (editing) { %>Edit Game<% } else { %>Add Game<% } %>
     </a>
 
-    <div
-      style="
-        position: absolute;
-        bottom: 24px;
-        left: 0;
-        right: 0;
-        padding: 0 16px;
-      "
-    >
+    <div style="position: absolute; bottom: 24px; left: 0; right: 0; padding: 0 16px;">
       <a href="/" class="btn btn-outline-white btn-sm" style="width: 100%">
         ← Back to Site
       </a>
@@ -65,46 +38,39 @@ include('../includes/admin-navbar.ejs') %>
 
   <main class="admin-content">
     <div class="admin-panel">
-      <div class="admin-page-title">Add New Game</div>
-
+      <div class="admin-page-title"><% if (editing) { %>Edit Game<% } else { %>Add New Game<% } %></div>
       <div class="admin-page-subtitle">
-        Fill in the details to add a game to the catalog
+        <% if (editing) { %>Update the details of this game in the catalog<% } else { %>Fill in the details to add a game to the catalog<% } %>
       </div>
 
       <div class="add-game-form">
-        <form id="add-game-form" action="/admin/add-game" method="POST">
-          <!-- Basic Info -->
-
+        <form id="add-game-form" action="/admin/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>" method="POST">
+          
           <div class="form-divider">Basic Info</div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Game Title * </label>
-
-              <input
-                class="form-input"
-                type="text"
-                name="title"
-                placeholder="e.g. Neon Drift 2"
-                required
-              />
+              <input class="form-input" type="text" name="title" value="<% if (editing) { %><%= game.title %><% } %>" placeholder="e.g. Neon Drift 2" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Genre * </label>
-
               <select class="form-select" name="genre" required>
                 <option value="">Select genre...</option>
-
-                <option value="Action">Action</option>
-
-                <option value="RPG">RPG</option>
-
-                <option value="Racing">Racing</option>
-
-                <option value="Strategy">Strategy</option>
-
-                <option value="Horror">Horror</option>
+                <option value="Action" <% if (editing && game.genre === 'Action') { %>selected<% } %>>Action</option>
+                <option value="Adventure" <% if (editing && game.genre === 'Adventure') { %>selected<% } %>>Adventure</option>
+                <option value="Shooter" <% if (editing && game.genre === 'Shooter') { %>selected<% } %>>Shooter</option>
+                <option value="RPG" <% if (editing && game.genre === 'RPG') { %>selected<% } %>>RPG</option>
+                <option value="Racing" <% if (editing && game.genre === 'Racing') { %>selected<% } %>>Racing</option>
+                <option value="Sports" <% if (editing && game.genre === 'Sports') { %>selected<% } %>>Sports</option>
+                <option value="Strategy" <% if (editing && game.genre === 'Strategy') { %>selected<% } %>>Strategy</option>
+                <option value="Simulation" <% if (editing && game.genre === 'Simulation') { %>selected<% } %>>Simulation</option>
+                <option value="Fighting" <% if (editing && game.genre === 'Fighting') { %>selected<% } %>>Fighting</option>
+                <option value="Horror" <% if (editing && game.genre === 'Horror') { %>selected<% } %>>Horror</option>
+                <option value="Survival" <% if (editing && game.genre === 'Survival') { %>selected<% } %>>Survival</option>
+                <option value="Indie" <% if (editing && game.genre === 'Indie') { %>selected<% } %>>Indie</option>
+                <option value="Puzzle" <% if (editing && game.genre === 'Puzzle') { %>selected<% } %>>Puzzle</option>
               </select>
             </div>
           </div>
@@ -112,29 +78,17 @@ include('../includes/admin-navbar.ejs') %>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Developer * </label>
-
-              <input
-                class="form-input"
-                type="text"
-                name="developer"
-                placeholder="e.g. VoltStudios"
-                required
-              />
+              <input class="form-input" type="text" name="developer" value="<% if (editing) { %><%= game.developer %><% } %>" placeholder="e.g. VoltStudios" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Platform * </label>
-
               <select class="form-select" name="platform" required>
-                <option value="PC">PC</option>
-
-                <option value="PS5">PS5</option>
-
-                <option value="Xbox">Xbox</option>
-
-                <option value="Switch">Nintendo Switch</option>
-
-                <option value="Mobile">Mobile</option>
+                <option value="PC" <% if (editing && game.platform === 'PC') { %>selected<% } %>>PC</option>
+                <option value="PS5" <% if (editing && game.platform === 'PS5') { %>selected<% } %>>PS5</option>
+                <option value="Xbox" <% if (editing && game.platform === 'Xbox') { %>selected<% } %>>Xbox</option>
+                <option value="Switch" <% if (editing && game.platform === 'Switch') { %>selected<% } %>>Nintendo Switch</option>
+                <option value="Mobile" <% if (editing && game.platform === 'Mobile') { %>selected<% } %>>Mobile</option>
               </select>
             </div>
           </div>
@@ -142,95 +96,59 @@ include('../includes/admin-navbar.ejs') %>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Release Year * </label>
-
-              <input
-                class="form-input"
-                type="number"
-                name="year"
-                placeholder="2024"
-                min="1980"
-                max="2030"
-                required
-              />
+              <input class="form-input" type="number" name="year" value="<% if (editing) { %><%= game.year %><% } %>" placeholder="2024" min="1980" max="2030" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Badge </label>
-
               <select class="form-select" name="badge">
-                <option value="">None</option>
-
-                <option value="new">New</option>
-
-                <option value="featured">Featured</option>
-
-                <option value="trending">Trending</option>
+                <option value="" <% if (editing && (!game.badge || game.badge === '')) { %>selected<% } %>>None</option>
+                <option value="new" <% if (editing && game.badge === 'new') { %>selected<% } %>>New</option>
+                <option value="featured" <% if (editing && game.badge === 'featured') { %>selected<% } %>>Featured</option>
+                <option value="trending" <% if (editing && game.badge === 'trending') { %>selected<% } %>>Trending</option>
+                <option value="early-access" <% if (editing && game.badge === 'early-access') { %>selected<% } %>>Early Access</option>
+                <option value="top-rated" <% if (editing && game.badge === 'top-rated') { %>selected<% } %>>Top Rated</option>
+                <option value="sale" <% if (editing && game.badge === 'sale') { %>selected<% } %>>On Sale</option>
+                <option value="staff-pick" <% if (editing && game.badge === 'staff-pick') { %>selected<% } %>>Staff Pick</option>
+                <option value="coming-soon" <% if (editing && game.badge === 'coming-soon') { %>selected<% } %>>Coming Soon</option>
               </select>
             </div>
           </div>
-
-          <!-- Media & Details -->
 
           <div class="form-divider">Media & Details</div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Image URL * </label>
-
-              <input
-                class="form-input"
-                type="text"
-                name="imageUrl"
-                placeholder="e.g. /images/neon.jpg"
-                required
-              />
+              <input class="form-input" type="text" name="imageUrl" value="<% if (editing) { %><%= game.imageUrl %><% } %>" placeholder="e.g. /images/neon.jpg" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Trailer URL (YouTube Embed) </label>
-
-              <input
-                class="form-input"
-                type="text"
-                name="trailerUrl"
-                placeholder="e.g. https://www.youtube.com/embed/VIDEO_ID"
-              />
+              <input class="form-input" type="text" name="trailerUrl" value="<% if (editing) { %><%= game.trailerUrl %><% } %>" placeholder="e.g. https://www.youtube.com/embed/VIDEO_ID" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group" style="flex: 1">
               <label class="form-label"> Tags (Comma Separated) * </label>
-
-              <input
-                class="form-input"
-                type="text"
-                name="tags"
-                placeholder="e.g. Multiplayer, Fast-Paced"
-                required
-              />
+              <input class="form-input" type="text" name="tags" value="<% if (editing) { %><%= game.tags %><% } %>" placeholder="e.g. Multiplayer, Fast-Paced" required />
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label"> Description * </label>
-
-            <textarea
-              class="form-textarea"
-              name="description"
-              placeholder="Write a compelling game description..."
-              style="min-height: 140px"
-              required
-            ></textarea>
+            <textarea class="form-textarea" name="description" placeholder="Write a compelling game description..." style="min-height: 140px" required><% if (editing) { %><%= game.description %><% } %></textarea>
           </div>
 
-          <!-- Buttons -->
+          <% if (editing) { %>
+            <input type="hidden" value="<%= game.id %>" name="gameId">
+          <% } %>
 
           <div style="display: flex; gap: 12px; margin-top: 24px">
             <button type="submit" class="btn btn-primary btn-lg">
-              Add Game to Catalog →
+              <% if (editing) { %>Update Game Details →<% } else { %>Add Game to Catalog →<% } %>
             </button>
-
             <button type="reset" class="btn btn-outline btn-lg">
               Reset Form
             </button>

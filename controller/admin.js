@@ -6,17 +6,35 @@ exports.getAdminDash = (req, res, next) => {
   });
 };
 
-exports.getAdminGames = (erq, res, next) => {
+exports.getAdminGames = (req, res, next) => {
   Game.fetchAll((game) => {
     res.render("admin/admin-games", {
       pageTitle: "All Games — Admin Panel",
-       game:game
+      game: game,
     });
   });
 };
-exports.getAdminAddGames = (erq, res, next) => {
+exports.getAdminAddGames = (req, res, next) => {
   res.render("admin/admin-add-game", {
     pageTitle: "Add Game — Admin Panel",
+    editing: false,
+  });
+};
+exports.getAdminEditGames = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect("/");
+  }
+  const gameId = req.params.gameId;
+  Game.findById(gameId, (game) => {
+    if (!game) {
+      return req.redirect("/");
+    }
+    res.render("admin/admin-add-game", {
+      pageTitle: "Edit Game — Admin Panel",
+      editing: editMode,
+      game: game,
+    });
   });
 };
 exports.postAdminAddGames = (req, res, next) => {
@@ -32,6 +50,7 @@ exports.postAdminAddGames = (req, res, next) => {
   const description = req.body.description;
 
   const game = new Game(
+    null,
     title,
     genre,
     developer,
@@ -41,8 +60,45 @@ exports.postAdminAddGames = (req, res, next) => {
     imageUrl,
     trailerUrl,
     tags,
-    description,
+    description
   );
   game.save();
+  res.redirect("/admin/admin-games");
+};
+exports.postAdminEditGames = (req, res, next) => {
+  const gameId = req.body.gameId;
+  const updatedtitle = req.body.title;
+  const updatedgenre = req.body.genre;
+  const updateddeveloper = req.body.developer;
+  const updatedplatform = req.body.platform;
+  const updatedyear = req.body.year;
+  const updatedbadge = req.body.badge;
+  const updatedimageUrl = req.body.imageUrl;
+  const updatedtrailerUrl = req.body.trailerUrl;
+  const updatedtags = req.body.tags;
+  const updateddescription = req.body.description;
+
+  const updatedgame = new Game(
+    gameId,
+    updatedtitle,
+    updatedgenre,
+    updateddeveloper,
+    updatedplatform,
+    updatedyear,
+    updatedbadge,
+    updatedimageUrl,
+    updatedtrailerUrl,
+    updatedtags,
+    updateddescription
+  );
+  updatedgame.save();
+  res.redirect("/admin/admin-games");
+};
+
+exports.postAdminDeleteGames = (req, res, next) => {
+  const gameId = req.body.gameId;
+
+  Game.delGame(gameId);
+
   res.redirect("/admin/admin-games");
 };

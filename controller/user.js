@@ -1,5 +1,6 @@
 const path = require("path");
 const Game = require("../model/games");
+const Library = require("../model/library");
 
 exports.getHomePage = (req, res, next) => {
   Game.fetchAll((games) => {
@@ -24,7 +25,19 @@ exports.getGamesPage = (req, res, next) => {
 };
 
 exports.getLibraryPage = (req, res, next) => {
-  res.render("user/Library.ejs", { pageTitle: "My Library — Gaming Hub" });
+  Library.getLibrary((library) => {
+    res.render("user/Library.ejs", {
+      pageTitle: "My Library — Gaming Hub",
+      games: library.games,
+      totalGames: library.totalGames,
+    });
+  });
+};
+
+exports.postAddToLibrary = (req, res) => {
+  const gameId = req.body.gameId;
+  Library.addGame(gameId);
+  res.redirect(`/library`);
 };
 
 exports.getLoginPage = (req, res, next) => {
@@ -38,8 +51,14 @@ exports.getRegesterPage = (req, res, next) => {
 exports.getGameDetailsPage = (req, res, next) => {
   const gameId = req.params.gameId;
   Game.findById(gameId, (game) => {
+    if (!game) {
+      return res.status(404).render("404", {
+        pageTitle: "Game Not Found — Gaming Hub",
+      });
+    }
+
     res.render("user/game-details.ejs", {
-      pageTitle: game ? `${game.title} — Gaming Hub` : "Game not found — Gaming Hub",
+      pageTitle: `${game.title} — Gaming Hub`,
       game,
     });
   });

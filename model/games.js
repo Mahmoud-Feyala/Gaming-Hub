@@ -14,6 +14,7 @@ const getGameFromFile = (cb) => {
 
 module.exports = class Game {
   constructor(
+    id,
     title,
     genre,
     developer,
@@ -25,6 +26,7 @@ module.exports = class Game {
     tags,
     description
   ) {
+    this.id = id;
     this.title = title;
     this.genre = genre;
     this.developer = developer;
@@ -38,12 +40,30 @@ module.exports = class Game {
   }
 
   save() {
-    
-    this.id = Math.random().toString();
-
     getGameFromFile((games) => {
-      games.push(this);
-      fs.writeFile(p, JSON.stringify(games), (err) => {
+      if (this.id) {
+        const exsistingGameIndex = games.findIndex((g) => g.id === this.id);
+        const updatedGames = [...games];
+        updatedGames[exsistingGameIndex] = this;
+        fs.writeFile(p, JSON.stringify(updatedGames), (err) => {
+          console.log(err);
+        });
+      } else {
+        this.id = Math.random().toString();
+        games.push(this);
+        fs.writeFile(p, JSON.stringify(games), (err) => {
+          if (err) {
+            console.error("Failed to save game:", err);
+          }
+        });
+      }
+    });
+  }
+
+  static delGame(id) {
+    getGameFromFile((games) => {
+      const updatedGames = games.filter((g) => g.id !== id);
+      fs.writeFile(p, JSON.stringify(updatedGames), (err) => {
         if (err) {
           console.error("Failed to save game:", err);
         }
@@ -57,7 +77,6 @@ module.exports = class Game {
 
   static findById(id, cb) {
     getGameFromFile((games) => {
-      
       const game = games.find((g) => g.id === id);
       cb(game);
     });

@@ -51,8 +51,8 @@
 
     <div class="grid-4" id="games-grid" style="margin-bottom:64px">
       <% if (game && game.length > 0) { %>
-      <% game.forEach((g, idx) => { %>
-      <div class="game-card" data-index="<%= idx %>" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>" style="background: var(--black, #111); color: #fff; border: 2px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); display: flex; flex-direction: column; <% if (idx >= 20) { %>display: none;<% } %>">
+      <% game.forEach(g => { %>
+      <div class="game-card" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>" style="background: var(--black, #111); color: #fff; border: 2px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
         <div class="card-image-container" style="border-bottom: 2px solid #000; position: relative; overflow: hidden;">
           <img src="<%= g.imageUrl || 'https://via.placeholder.com/600x900' %>" alt="<%= g.title %>" style="width: 100%; display: block;" />
           <% if (g.badge) { %>
@@ -79,9 +79,9 @@
     </div>
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-    <% if (game && game.length > 20) { %>
+    <% if (game && game.length > 0) { %>
     <div style="text-align:center;padding-bottom:80px">
-      <button id="loadMoreBtn" class="btn btn-outline btn-lg" data-batch-size="20">Load More Games →</button>
+      <button class="btn btn-outline btn-lg" onclick="this.textContent='Loading...';setTimeout(()=>this.textContent='Load More Games →',1500)">Load More Games →</button>
     </div>
     <% } %>
 
