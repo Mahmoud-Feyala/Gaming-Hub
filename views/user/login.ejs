@@ -1,34 +1,39 @@
 <%- include('../includes/head.ejs') %>
 
-<nav class="navbar">
-  <div class="navbar-inner">
-    <a href="/" class="navbar-logo">
-      <div class="logo-icon">
-        <img src="/assets/images/DUR7PaeXUAM_Tuz.png" alt="Gaming Hub Logo" />
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <a href="/" class="navbar-logo">
+          <div class="logo-icon">
+            <img
+              src="/assets/images/DUR7PaeXUAM_Tuz.png"
+              alt="Gaming Hub Logo"
+            />
+          </div>
+          <div class="logo-text">Gaming<span>Hub</span></div>
+        </a>
+        <ul class="navbar-nav">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/games" class="nav-link">Games</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <a href="/register" class="btn btn-outline-white btn-sm">Sign Up</a>
+        </div>
       </div>
-    </a>
-    <ul class="navbar-nav">
-      <li><a href="/" class="nav-link">Home</a></li>
-      <li><a href="/games" class="nav-link">Games</a></li>
-    </ul>
-    <div class="navbar-actions">
-      <a href="/register" class="btn btn-cyan btn-sm">Create Account →</a>
-    </div>
-  </div>
-</nav>
-
-<div class="auth-layout">
-  <!-- Left Panel -->
-  <div class="auth-left">
-    <div class="auth-left-content">
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:20px">Welcome Back</div>
-      <h1 class="auth-headline">Back in<br>the <span>Game</span></h1>
-      <p class="auth-subtext">Log in to access your personal library, post reviews, and connect with a community of passionate gamers.</p>
-
-
-
-      <!-- Decorative floating dots -->
-      <div style="position:absolute;bottom:60px;right:60px;display:flex;gap:12px;opacity:0.4">
+    </nav>
+    
+    <div class="auth-layout">
+      <!-- Left Panel -->
+      <div class="auth-left">
+        <div class="auth-left-content">
+          <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:20px">Welcome Back</div>
+          <h1 class="auth-headline">Back in<br>the <span>Game</span></h1>
+          <p class="auth-subtext">Log in to access your personal library, post reviews, and connect with a community of passionate gamers.</p>
+          
+          
+          
+          
+          <!-- Decorative floating dots -->
+          <div style="position:absolute;bottom:60px;right:60px;display:flex;gap:12px;opacity:0.4">
         <div style="width:56px;height:56px;background:var(--yellow);border:2px solid var(--white);border-radius:50%;animation:float1 5s ease-in-out infinite"></div>
         <div style="width:36px;height:36px;background:var(--cyan);border:2px solid var(--white);border-radius:50%;animation:float2 7s ease-in-out infinite 1s"></div>
       </div>
@@ -81,7 +86,7 @@
       </form>
 
       <div class="auth-switch-text">
-        Don't have an account? <a href="register.html">Sign up free</a>
+        Don't have an account? <a href="/register">Sign up free</a>
       </div>
     </div>
   </div>

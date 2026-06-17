@@ -76,5 +76,3 @@ module.exports = class Library {
     });
   }
 };
-
-
