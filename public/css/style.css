@@ -2001,3 +2001,136 @@ img { max-width: 100%; display: block; }
 .card-image-container:hover img {
   transform: scale(1.05); /* زووم خفيف بيدي شكل احترافي */
 }
+/* =============================================
+   AUTH BACKGROUND SHAPES (GAMER THEME)
+   ============================================= */
+.auth-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  /* إضافة تأثير النقط (Halftone) في الخلفية زي الصورة */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+  background-size: 24px 24px;
+  /* مسح النقط من النص عشان الكلام يكون واضح */
+  mask-image: radial-gradient(circle at center, transparent 20%, black 100%);
+  -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 100%);
+}
+
+.auth-shape {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Cross (X) */
+.shape-cross {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 1.5rem;
+  transform: rotate(45deg);
+  animation: float2 6s ease-in-out infinite;
+}
+
+/* Hollow Circles */
+.shape-hollow-circle {
+  width: 18px;
+  height: 18px;
+  border: 3px solid;
+  border-radius: 50%;
+  animation: float1 5s ease-in-out infinite;
+}
+.shape-hollow-circle.pink { border-color: var(--pink); }
+.shape-hollow-circle.yellow { border-color: var(--yellow); animation-delay: 1s; }
+
+/* Action Lines (الخطوط المايلة) */
+.shape-action-line {
+  width: 100px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  transform: rotate(-45deg);
+  animation: float2 8s ease-in-out infinite;
+}
+.shape-action-line.pink { background: var(--pink); }
+.shape-action-line.cyan { background: var(--cyan); animation-delay: 2s; }
+
+/* SVG Icons (Crown, Gamepad, Lightning) */
+.shape-svg {
+  animation: float1 7s ease-in-out infinite;
+}
+.shape-svg path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shape-svg.yellow path { stroke: var(--yellow); }
+.shape-svg.cyan path { stroke: var(--cyan); }
+.shape-svg.white path { stroke: rgba(255, 255, 255, 0.6); }
+
+/* إيقاف تأثير الـ Gradient الدائري القديم عشان الـ Shapes تبان أفضل */
+.auth-left::before {
+  opacity: 0.5; /* تقليل سطوع الإضاءة القديمة */
+}
+/* =============================================
+   GLOBAL NEO-BRUTALIST SHAPES
+   ============================================= */
+
+/* تأثير النقط اللي في الخلفية (Halftone) */
+.halftone-overlay {
+  position: absolute;
+  inset: 0;
+  /* استخدمنا لون أسود شفاف عشان يبان على الخلفية السيان بتاعتك */
+  background-image: radial-gradient(rgba(17, 17, 17, 0.08) 2px, transparent 2px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, transparent 15%, black 100%);
+  -webkit-mask-image: radial-gradient(circle at center, transparent 15%, black 100%);
+  z-index: -1;
+}
+
+/* Cross (X) */
+.shape-cross {
+  color: rgba(17, 17, 17, 0.3); /* أسود شفاف يدي شكل عميق */
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 1.5rem;
+  transform: rotate(45deg);
+  animation: float2 6s ease-in-out infinite;
+}
+
+/* Hollow Circles */
+.shape-hollow-circle {
+  width: 18px;
+  height: 18px;
+  border: 3px solid;
+  border-radius: 50%;
+  animation: float1 5s ease-in-out infinite;
+}
+.shape-hollow-circle.pink { border-color: var(--pink); }
+.shape-hollow-circle.yellow { border-color: var(--yellow); animation-delay: 1s; }
+
+/* Action Lines (الخطوط المايلة) */
+.shape-action-line {
+  width: 80px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  transform: rotate(-45deg);
+  animation: float2 8s ease-in-out infinite;
+}
+.shape-action-line.pink { background: var(--pink); }
+.shape-action-line.cyan { background: var(--cyan); animation-delay: 2s; }
+
+/* SVG Icons (Crown, Gamepad, Lightning) */
+.shape-svg {
+  animation: float1 7s ease-in-out infinite;
+}
+.shape-svg path {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shape-svg.yellow path { stroke: var(--yellow); }
+.shape-svg.cyan path { stroke: var(--cyan); }
+.shape-svg.dark path { stroke: rgba(17, 17, 17, 0.4); } /* مناسبة للخلفيات الفاتحة */

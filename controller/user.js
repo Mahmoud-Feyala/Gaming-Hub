@@ -3,25 +3,33 @@ const Game = require("../model/games");
 const Library = require("../model/library");
 
 exports.getHomePage = (req, res, next) => {
-  Game.fetchAll((games) => {
-    const featuredGames = games
-      .filter((g) => g.badge === "featured" || g.badge === "trending")
-      .slice(0, 4);
+  Game.findAll()
+    .then((games) => {
+      const featuredGames = games
+        .filter((g) => g.badge === "featured" || g.badge === "trending")
+        .slice(0, 4);
 
-    res.render("user/index", {
-      pageTitle: "Gaming Hub — Gaming Review Platform",
-      featuredGames,
+      res.render("user/index", {
+        pageTitle: "Gaming Hub — Gaming Review Platform",
+        featuredGames,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.getGamesPage = (req, res, next) => {
-  Game.fetchAll((game) => {
-    res.render("user/games.ejs", {
-      pageTitle: "Games — Gaming Hub",
-      game: game,
+  Game.findAll()
+    .then((games) => {
+      res.render("user/games.ejs", {
+        pageTitle: "Games — Gaming Hub",
+        game: games,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.getLibraryPage = (req, res, next) => {
@@ -50,18 +58,16 @@ exports.getRegesterPage = (req, res, next) => {
 
 exports.getGameDetailsPage = (req, res, next) => {
   const gameId = req.params.gameId;
-  Game.findById(gameId, (game) => {
-    if (!game) {
-      return res.status(404).render("404", {
-        pageTitle: "Game Not Found — Gaming Hub",
+  Game.findByPk(gameId)
+    .then((game) => {
+      res.render("user/game-details.ejs", {
+        pageTitle: `${game.title} — Gaming Hub`,
+        game,
       });
-    }
-
-    res.render("user/game-details.ejs", {
-      pageTitle: `${game.title} — Gaming Hub`,
-      game,
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.postDeleteFromLibrary = (req, res, next) => {

@@ -1,86 +1,63 @@
-const fs = require("fs");
-const path = require("path");
-let gamearr = [];
-const p = path.join(__dirname, "../", "data", "games.json");
+const { Sequelize } = require("sequelize");
+const sequelize = require('../util/dataBase');
 
-const getGameFromFile = (cb) => {
-  fs.readFile(p, (err, filecontent) => {
-    if (!err && filecontent.length > 0) {
-      return cb(JSON.parse(filecontent));
-    }
-    cb([]);
-  });
-};
+const Game = sequelize.define("game", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
 
-module.exports = class Game {
-  constructor(
-    id,
-    title,
-    genre,
-    developer,
-    platform,
-    year,
-    badge,
-    imageUrl,
-    trailerUrl,
-    tags,
-    description
-  ) {
-    this.id = id;
-    this.title = title;
-    this.genre = genre;
-    this.developer = developer;
-    this.platform = platform;
-    this.year = year;
-    this.badge = badge;
-    this.imageUrl = imageUrl;
-    this.trailerUrl = trailerUrl;
-    this.tags = tags;
-    this.description = description;
-  }
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 
-  save() {
-    getGameFromFile((games) => {
-      if (this.id) {
-        const exsistingGameIndex = games.findIndex((g) => g.id === this.id);
-        const updatedGames = [...games];
-        updatedGames[exsistingGameIndex] = this;
-        fs.writeFile(p, JSON.stringify(updatedGames), (err) => {
-          console.log(err);
-        });
-      } else {
-        this.id = Math.random().toString();
-        games.push(this);
-        fs.writeFile(p, JSON.stringify(games), (err) => {
-          if (err) {
-            console.error("Failed to save game:", err);
-          }
-        });
-      }
-    });
-  }
+  genre: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 
-  static delGame(id) {
-    getGameFromFile((games) => {
-      const updatedGames = games.filter((g) => g.id !== id);
-      fs.writeFile(p, JSON.stringify(updatedGames), (err) => {
-        if (!err) {
-          // Use dynamic require to avoid circular dependency
-          const Library = require("./library");
-          Library.deleteGame(id);
-        }
-      });
-    });
-  }
+  developer: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 
-  static fetchAll(cb) {
-    getGameFromFile(cb);
-  }
+  platform: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 
-  static findById(id, cb) {
-    getGameFromFile((games) => {
-      const game = games.find((g) => g.id === id);
-      cb(game);
-    });
-  }
-};
+  year: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+
+  badge: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+
+  trailerUrl: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+
+  tags: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+  },
+
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+});
+
+module.exports = Game
