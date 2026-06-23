@@ -1,6 +1,8 @@
 const path = require("path");
-const Game = require("../model/games");
 const Library = require("../model/library");
+const Game = require("../model/games.js");
+const LibraryItem = require("../model/library-item.js");
+const User = require("../model/user.js");
 
 exports.getHomePage = (req, res, next) => {
   Game.findAll()
@@ -33,19 +35,53 @@ exports.getGamesPage = (req, res, next) => {
 };
 
 exports.getLibraryPage = (req, res, next) => {
-  Library.getLibrary((library) => {
-    res.render("user/Library.ejs", {
-      pageTitle: "My Library — Gaming Hub",
-      games: library.games,
-      totalGames: library.totalGames,
+  req.user
+    .getLibrary((library) => {
+      return library;
+    })
+    .then((library) => {
+      console.log(library);
+      return library.getGames();
+    })
+    .then((games) => {
+      console.log(games);
+      res.render("user/Library.ejs", {
+        pageTitle: "My Library — Gaming Hub",
+        games: games,
+        totalGames: games.length,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.postAddToLibrary = (req, res) => {
   const gameId = req.body.gameId;
-  Library.addGame(gameId);
-  res.redirect(`/library`);
+  let fetchedLib;
+  req.user
+    .getLibrary()
+    .then((library) => {
+      fetchedLib = library;
+      return library.getGames({ where: { id: gameId } });
+    })
+    .then((games) => {
+      let game;
+      if (games.lenght > 0) {
+        game = games[0];
+      }
+      if (game) {
+        console.log("its in the lib arl");
+      }
+      return Game.findByPk(gameId);
+    })
+    .then((game) => {
+      return fetchedLib.addGame(game);
+    })
+    .then(() => {
+      res.redirect(`/library`);
+    })
+    .catch();
 };
 
 exports.getLoginPage = (req, res, next) => {
@@ -72,8 +108,24 @@ exports.getGameDetailsPage = (req, res, next) => {
 
 exports.postDeleteFromLibrary = (req, res, next) => {
   const gameId = req.body.gameId;
-  Library.deleteGame(gameId);
-  res.redirect("/library");
+  console.log(gameId);
+  req.user
+    .getLibrary()
+    .then((library) => {
+      return library.getGames({ where: { id: gameId } });
+    })
+    .then((games) => {
+      console.log(games);
+      let game = games[0];
+
+      return game.libraryItem.destroy();
+    })
+    .then(() => {
+      res.redirect("/library");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 exports.getHelpCenterPage = (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "views", "support", "help.html"));

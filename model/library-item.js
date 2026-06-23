@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../util/dataBase");
 
-const Library = sequelize.define("library", {
+const LibraryItem = sequelize.define("libraryItem", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -10,4 +10,4 @@ const Library = sequelize.define("library", {
   },
 });
 
-module.exports = Library;
+module.exports = LibraryItem;

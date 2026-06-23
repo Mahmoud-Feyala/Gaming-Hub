@@ -7,7 +7,8 @@ exports.getAdminDash = (req, res, next) => {
 };
 
 exports.getAdminGames = (req, res, next) => {
-  Game.findAll()
+  req.user
+    .getGames()
     .then((games) => {
       res.render("admin/admin-games", {
         pageTitle: "All Games — Admin Panel",
@@ -54,25 +55,26 @@ exports.postAdminAddGames = (req, res, next) => {
   const trailerUrl = req.body.trailerUrl;
   const tags = req.body.tags;
   const description = req.body.description;
-  Game.create({
-    title: title,
-    genre: genre,
-    developer: developer,
-    platform: platform,
-    year: year,
-    badge: badge,
-    imageUrl: imageUrl,
-    trailerUrl: trailerUrl,
-    tags: tags,
-    description: description,
-  })
+  req.user
+    .createGame({
+      title: title,
+      genre: genre,
+      developer: developer,
+      platform: platform,
+      year: year,
+      badge: badge,
+      imageUrl: imageUrl,
+      trailerUrl: trailerUrl,
+      tags: tags,
+      description: description,
+    })
     .then((result) => {
       console.log(result);
+      res.redirect("/admin/admin-games");
     })
     .catch((err) => {
       console.log(err);
     });
-  res.redirect("/admin/admin-games");
 };
 exports.postAdminEditGames = (req, res, next) => {
   const gameId = req.body.gameId;
@@ -113,7 +115,14 @@ exports.postAdminEditGames = (req, res, next) => {
 exports.postAdminDeleteGames = (req, res, next) => {
   const gameId = req.body.gameId;
 
-  Game.delGame(gameId);
-
-  res.redirect("/admin/admin-games");
+  Game.findByPk(gameId)
+    .then((game) => {
+      return game.destroy();
+    })
+    .then((result) => {
+      res.redirect("/admin/admin-games");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

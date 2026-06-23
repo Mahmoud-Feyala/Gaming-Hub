@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-const sequelize = require('../util/dataBase');
+const sequelize = require("../util/dataBase");
 
 const Game = sequelize.define("game", {
   id: {
@@ -60,4 +60,4 @@ const Game = sequelize.define("game", {
   },
 });
 
-module.exports = Game
+module.exports = Game;
