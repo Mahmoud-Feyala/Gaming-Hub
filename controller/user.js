@@ -5,11 +5,11 @@ const LibraryItem = require("../model/library-item.js");
 const User = require("../model/user.js");
 
 exports.getHomePage = (req, res, next) => {
-  Game.findAll()
+  Game.fetchAll()
     .then((games) => {
       const featuredGames = games
         .filter((g) => g.badge === "featured" || g.badge === "trending")
-        .slice(0, 4);
+        .slice(4, 8);
 
       res.render("user/index", {
         pageTitle: "Gaming Hub — Gaming Review Platform",
@@ -22,7 +22,7 @@ exports.getHomePage = (req, res, next) => {
 };
 
 exports.getGamesPage = (req, res, next) => {
-  Game.findAll()
+  Game.fetchAll()
     .then((games) => {
       res.render("user/games.ejs", {
         pageTitle: "Games — Gaming Hub",
@@ -94,7 +94,7 @@ exports.getRegesterPage = (req, res, next) => {
 
 exports.getGameDetailsPage = (req, res, next) => {
   const gameId = req.params.gameId;
-  Game.findByPk(gameId)
+  Game.findById(gameId)
     .then((game) => {
       res.render("user/game-details.ejs", {
         pageTitle: `${game.title} — Gaming Hub`,

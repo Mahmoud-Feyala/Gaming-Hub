@@ -2134,3 +2134,62 @@ img { max-width: 100%; display: block; }
 .shape-svg.yellow path { stroke: var(--yellow); }
 .shape-svg.cyan path { stroke: var(--cyan); }
 .shape-svg.dark path { stroke: rgba(17, 17, 17, 0.4); } /* مناسبة للخلفيات الفاتحة */
+
+/* ==========================================================================
+   Neo-brutalism UI/UX Polish Enhancements
+   ========================================================================== */
+
+/* 1. توحيد سُمك الحدود لـ 3px لشكل أشرس وأكثر تناسقاً */
+.game-card, .card, .form-input, .btn, .admin-table-card, .form-textarea, .form-select {
+    border-width: 3px !important;
+}
+
+/* 2. تأثير الضغط الحقيقي (Active State) للأزرار والـ Tags */
+.btn:active, .filter-tag:active, .category-btn:active, .social-btn:active {
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+    transition: all 0.1s ease;
+}
+
+/* 3. تحسين أداء الأنيميشن في الأشكال الخلفية لمنع الـ Lag */
+.shape, .auth-shape, .bubble {
+    will-change: transform;
+}
+
+/* 4. كلاسات الفلترة السلسة (Smooth Filtering) لصفحة الألعاب */
+.game-card {
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    transform-origin: center;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.2) !important;
+}
+
+.game-card.hide-card {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute; /* لمنع ترك مساحة فارغة في الـ Grid */
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* 5. تحسين مساحات الموبايل (Mobile Responsiveness) */
+@media (max-width: 768px) {
+    .game-card {
+        box-shadow: 3px 3px 0px rgba(0,0,0,0.2) !important;
+    }
+    .page-hero-title {
+        font-size: 2.5rem !important;
+    }
+    .grid-4 {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 16px;
+    }
+}
+
+/* 6. قفل السكرول عند فتح الـ Modals */
+body.modal-open {
+    overflow: hidden;
+}

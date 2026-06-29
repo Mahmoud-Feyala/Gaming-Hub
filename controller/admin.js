@@ -1,5 +1,8 @@
 const path = require("path");
-const Game = require("../model/games");
+// const Library = require("../model/library");
+const Game = require("../model/games.js");
+// const LibraryItem = require("../model/library-item.js");
+// const User = require("../model/user.js");
 exports.getAdminDash = (req, res, next) => {
   res.render("admin/admin-dashboard", {
     pageTitle: "Admin Dashboard — Gaming Hub",
@@ -7,8 +10,7 @@ exports.getAdminDash = (req, res, next) => {
 };
 
 exports.getAdminGames = (req, res, next) => {
-  req.user
-    .getGames()
+  Game.fetchAll()
     .then((games) => {
       res.render("admin/admin-games", {
         pageTitle: "All Games — Admin Panel",
@@ -32,7 +34,7 @@ exports.getAdminEditGames = (req, res, next) => {
     return res.redirect("/");
   }
   const gameId = req.params.gameId;
-  Game.findByPk(gameId)
+  Game.findById(gameId)
     .then((game) => {
       res.render("admin/admin-add-game", {
         pageTitle: "Edit Game — Admin Panel",
@@ -55,21 +57,23 @@ exports.postAdminAddGames = (req, res, next) => {
   const trailerUrl = req.body.trailerUrl;
   const tags = req.body.tags;
   const description = req.body.description;
-  req.user
-    .createGame({
-      title: title,
-      genre: genre,
-      developer: developer,
-      platform: platform,
-      year: year,
-      badge: badge,
-      imageUrl: imageUrl,
-      trailerUrl: trailerUrl,
-      tags: tags,
-      description: description,
-    })
+  const game = new Game(
+    title,
+    genre,
+    developer,
+    platform,
+    year,
+    badge,
+    imageUrl,
+    trailerUrl,
+    tags,
+    description
+  );
+
+  game
+    .save()
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       res.redirect("/admin/admin-games");
     })
     .catch((err) => {
@@ -88,21 +92,21 @@ exports.postAdminEditGames = (req, res, next) => {
   const updatedtrailerUrl = req.body.trailerUrl;
   const updatedtags = req.body.tags;
   const updateddescription = req.body.description;
-  Game.findByPk(gameId)
-    .then((game) => {
-      game.id = gameId;
-      game.title = updatedtitle;
-      game.genre = updatedgenre;
-      game.developer = updateddeveloper;
-      game.platform = updatedplatform;
-      game.year = updatedyear;
-      game.badge = updatedbadge;
-      game.imageUrl = updatedimageUrl;
-      game.trailerUrl = updatedtrailerUrl;
-      game.tags = updatedtags;
-      game.description = updateddescription;
-      return game.save();
-    })
+  const game = new Game(
+    updatedtitle,
+    updatedgenre,
+    updateddeveloper,
+    updatedplatform,
+    updatedyear,
+    updatedbadge,
+    updatedimageUrl,
+    updatedtrailerUrl,
+    updatedtags,
+    updateddescription,
+    gameId
+  );
+  game
+    .save()
     .then((result) => {
       console.log(`Update is Done <3`);
       res.redirect("/admin/admin-games");
@@ -115,10 +119,7 @@ exports.postAdminEditGames = (req, res, next) => {
 exports.postAdminDeleteGames = (req, res, next) => {
   const gameId = req.body.gameId;
 
-  Game.findByPk(gameId)
-    .then((game) => {
-      return game.destroy();
-    })
+  Game.deleteById(gameId)
     .then((result) => {
       res.redirect("/admin/admin-games");
     })
