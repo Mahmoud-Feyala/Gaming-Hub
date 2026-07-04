@@ -1,16 +1,33 @@
 const path = require("path");
-// const Library = require("../model/library");
-const Game = require("../model/games.js");
-// const LibraryItem = require("../model/library-item.js");
-// const User = require("../model/user.js");
+const Game = require("../model/games");
+const Review = require("../model/reviews");
 exports.getAdminDash = (req, res, next) => {
   res.render("admin/admin-dashboard", {
     pageTitle: "Admin Dashboard — Gaming Hub",
   });
 };
 
+exports.getAdminReviews = (req, res, next) => {
+Review.find()
+  .populate("game", "title")
+  .populate("user", "name")
+  .sort({ createdAt: -1 })
+  .then((reviews) => {
+    console.log(reviews);
+    res.render("admin/admin-reviews", {
+      pageTitle: "Reviews Management",
+      reviews,
+    });
+  });
+};
+
+exports.postDeleteReview = (req, res, next) => {
+  Review.findByIdAndDelete(req.body.reviewId)
+    .then(() => res.redirect("/admin/reviews"))
+    .catch(console.log);
+};
 exports.getAdminGames = (req, res, next) => {
-  Game.fetchAll()
+  Game.find({ user: req.user._id })
     .then((games) => {
       res.render("admin/admin-games", {
         pageTitle: "All Games — Admin Panel",
@@ -57,7 +74,8 @@ exports.postAdminAddGames = (req, res, next) => {
   const trailerUrl = req.body.trailerUrl;
   const tags = req.body.tags;
   const description = req.body.description;
-  const game = new Game(
+
+  const game = new Game({
     title,
     genre,
     developer,
@@ -67,13 +85,13 @@ exports.postAdminAddGames = (req, res, next) => {
     imageUrl,
     trailerUrl,
     tags,
-    description
-  );
+    description,
+    user: req.user._id,
+  });
 
   game
     .save()
-    .then((result) => {
-      // console.log(result);
+    .then(() => {
       res.redirect("/admin/admin-games");
     })
     .catch((err) => {
@@ -82,33 +100,31 @@ exports.postAdminAddGames = (req, res, next) => {
 };
 exports.postAdminEditGames = (req, res, next) => {
   const gameId = req.body.gameId;
-  const updatedtitle = req.body.title;
-  const updatedgenre = req.body.genre;
-  const updateddeveloper = req.body.developer;
-  const updatedplatform = req.body.platform;
-  const updatedyear = req.body.year;
-  const updatedbadge = req.body.badge;
-  const updatedimageUrl = req.body.imageUrl;
-  const updatedtrailerUrl = req.body.trailerUrl;
-  const updatedtags = req.body.tags;
-  const updateddescription = req.body.description;
-  const game = new Game(
-    updatedtitle,
-    updatedgenre,
-    updateddeveloper,
-    updatedplatform,
-    updatedyear,
-    updatedbadge,
-    updatedimageUrl,
-    updatedtrailerUrl,
-    updatedtags,
-    updateddescription,
-    gameId
-  );
-  game
-    .save()
-    .then((result) => {
-      console.log(`Update is Done <3`);
+  const updatedTitle = req.body.title;
+  const updatedGenre = req.body.genre;
+  const updatedDeveloper = req.body.developer;
+  const updatedPlatform = req.body.platform;
+  const updatedYear = req.body.year;
+  const updatedBadge = req.body.badge;
+  const updatedImageUrl = req.body.imageUrl;
+  const updatedTrailerUrl = req.body.trailerUrl;
+  const updatedTags = req.body.tags;
+  const updatedDescription = req.body.description;
+
+  Game.findByIdAndUpdate(gameId, {
+    title: updatedTitle,
+    genre: updatedGenre,
+    developer: updatedDeveloper,
+    platform: updatedPlatform,
+    year: updatedYear,
+    badge: updatedBadge,
+    imageUrl: updatedImageUrl,
+    trailerUrl: updatedTrailerUrl,
+    tags: updatedTags,
+    description: updatedDescription,
+  })
+    .then(() => {
+      console.log("Update is Done <3");
       res.redirect("/admin/admin-games");
     })
     .catch((err) => {
@@ -119,7 +135,7 @@ exports.postAdminEditGames = (req, res, next) => {
 exports.postAdminDeleteGames = (req, res, next) => {
   const gameId = req.body.gameId;
 
-  Game.deleteById(gameId)
+  Game.findByIdAndDelete(gameId)
     .then((result) => {
       res.redirect("/admin/admin-games");
     })

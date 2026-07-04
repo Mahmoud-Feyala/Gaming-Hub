@@ -295,9 +295,9 @@ const App = {
     const reviewForm = document.getElementById('add-review-form');
     if (reviewForm) {
       reviewForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const text = reviewForm.querySelector('[name="review-text"]')?.value;
-        if (!text.trim()) {
+        const text = reviewForm.querySelector('[name="review"]')?.value;
+        if (!text?.trim()) {
+          e.preventDefault();
           View.showToast('Please write your review!', 'error');
           return;
         }

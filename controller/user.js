@@ -1,16 +1,63 @@
 const path = require("path");
-const Library = require("../model/library");
+// const Library = require("../model/library");
 const Game = require("../model/games.js");
-const LibraryItem = require("../model/library-item.js");
-const User = require("../model/user.js");
+// const LibraryItem = require("../model/library-item.js");
+// const User = require("../model/user.js");
+const Review = require("../model/reviews");
+
+exports.postReview = (req, res, next) => {
+  const gameId = req.body.gameId;
+  const rating = Number(req.body.rating || 5);
+  const reviewText = req.body.review;
+
+  const review = new Review({
+    game: gameId,
+    user: req.user._id,
+    rating,
+    review: reviewText,
+  });
+
+  review
+    .save()
+    .then(() => {
+      res.redirect("/game-details/" + gameId);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.getGameDetailsPage = (req, res, next) => {
+  const gameId = req.params.gameId;
+
+  Game.findById(gameId)
+    .then((game) => {
+      return Review.find({ game: gameId })
+        .populate("user", "name")
+        .sort({ createdAt: -1 })
+        .then((reviews) => {
+          res.render("user/game-details", {
+            pageTitle: `${game.title} — Gaming Hub`,
+            game,
+            reviews,
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 exports.getHomePage = (req, res, next) => {
-  Game.fetchAll()
+  Game.find()
     .then((games) => {
       const featuredGames = games
         .filter((g) => g.badge === "featured" || g.badge === "trending")
-        .slice(4, 8);
+        .slice(10, 14);
 
+      console.log(featuredGames.length);
+      console.log(featuredGames);
+      console.log(games.map((g) => g.badge));
       res.render("user/index", {
         pageTitle: "Gaming Hub — Gaming Review Platform",
         featuredGames,
@@ -22,7 +69,7 @@ exports.getHomePage = (req, res, next) => {
 };
 
 exports.getGamesPage = (req, res, next) => {
-  Game.fetchAll()
+  Game.find()
     .then((games) => {
       res.render("user/games.ejs", {
         pageTitle: "Games — Gaming Hub",
@@ -35,16 +82,13 @@ exports.getGamesPage = (req, res, next) => {
 };
 
 exports.getLibraryPage = (req, res, next) => {
-  req.user
-    .getLibrary((library) => {
-      return library;
-    })
-    .then((library) => {
-      console.log(library);
-      return library.getGames();
-    })
-    .then((games) => {
-      console.log(games);
+  /** @type {InstanceType<typeof import("../model/user")>} */
+  const user = req.user;
+  user
+    .populate("library.gameId")
+    .then((user) => {
+      const games = user.library.map((item) => item.gameId);
+
       res.render("user/Library.ejs", {
         pageTitle: "My Library — Gaming Hub",
         games: games,
@@ -56,32 +100,15 @@ exports.getLibraryPage = (req, res, next) => {
     });
 };
 
-exports.postAddToLibrary = (req, res) => {
-  const gameId = req.body.gameId;
-  let fetchedLib;
-  req.user
-    .getLibrary()
-    .then((library) => {
-      fetchedLib = library;
-      return library.getGames({ where: { id: gameId } });
-    })
-    .then((games) => {
-      let game;
-      if (games.lenght > 0) {
-        game = games[0];
-      }
-      if (game) {
-        console.log("its in the lib arl");
-      }
-      return Game.findByPk(gameId);
-    })
-    .then((game) => {
-      return fetchedLib.addGame(game);
-    })
+exports.postAddToLibrary = (req, res, next) => {
+  /** @type {InstanceType<typeof import("../model/user.js")>} */
+  const user = req.user;
+  user
+    .addToLibrary(req.body.gameId)
     .then(() => {
-      res.redirect(`/library`);
+      res.redirect("/library");
     })
-    .catch();
+    .catch(next);
 };
 
 exports.getLoginPage = (req, res, next) => {
@@ -92,35 +119,12 @@ exports.getRegesterPage = (req, res, next) => {
   res.render("user/register.ejs", { pageTitle: "Create Account — Gaming Hub" });
 };
 
-exports.getGameDetailsPage = (req, res, next) => {
-  const gameId = req.params.gameId;
-  Game.findById(gameId)
-    .then((game) => {
-      res.render("user/game-details.ejs", {
-        pageTitle: `${game.title} — Gaming Hub`,
-        game,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 exports.postDeleteFromLibrary = (req, res, next) => {
   const gameId = req.body.gameId;
-  console.log(gameId);
   req.user
-    .getLibrary()
-    .then((library) => {
-      return library.getGames({ where: { id: gameId } });
-    })
-    .then((games) => {
-      console.log(games);
-      let game = games[0];
-
-      return game.libraryItem.destroy();
-    })
-    .then(() => {
+    .removeFromLibrary(gameId)
+    .then((result) => {
+      console.log("Game Has Been Removed");
       res.redirect("/library");
     })
     .catch((err) => {

@@ -3,7 +3,7 @@
 <%- include('../includes/admin-navbar.ejs') %>
 
 <div class="admin-layout" style="padding-top:72px">
-  
+
   <aside class="admin-sidebar">
     <div style="padding:24px;border-bottom:1px solid rgba(255,255,255,0.08)">
       <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--white)">Admin Panel</div>
@@ -21,6 +21,9 @@
     </a>
     <a href="/admin/admin-addGames" class="admin-nav-item">
       <span class="admin-nav-icon"></span> Add Game
+    </a>
+    <a href="/admin/reviews" class="admin-nav-item">
+      <span class="admin-nav-icon"></span> Reviews
     </a>
 
     <div style="position:absolute;bottom:24px;left:0;right:0;padding:0 16px">
@@ -43,7 +46,7 @@
           <div class="stat-icon">👥</div>
           <div class="stat-value">1</div>
           <div class="stat-label">Active Users</div>
-          
+
         </div>
         <div class="stat-card" style="background:var(--yellow);border-color:var(--black)">
           <div class="stat-icon">⭐</div>
@@ -52,15 +55,31 @@
         </div>
       </div>
 
+
       <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--black);margin-bottom:20px">Recently Added</h3>
       <div class="admin-table-card">
         <table class="admin-table">
           <thead>
-            <tr><th>Game</th><th>Genre</th><th>Year</th><th>Status</th></tr>
+            <tr>
+              <th>Game</th>
+              <th>Genre</th>
+              <th>Year</th>
+              <th>Status</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><span class="admin-table-cover">🗡️</span>Phantom Realm</td><td>RPG</td><td>2024</td><td><span class="tag tag-cyan">trending</span></td></tr>
-            <tr><td><span class="admin-table-cover">🏎️</span>Neon Drift</td><td>Racing</td><td>2024</td><td><span class="tag tag-yellow">featured</span></td></tr>
+            <tr>
+              <td><span class="admin-table-cover">🗡️</span>Phantom Realm</td>
+              <td>RPG</td>
+              <td>2024</td>
+              <td><span class="tag tag-cyan">trending</span></td>
+            </tr>
+            <tr>
+              <td><span class="admin-table-cover">🏎️</span>Neon Drift</td>
+              <td>Racing</td>
+              <td>2024</td>
+              <td><span class="tag tag-yellow">featured</span></td>
+            </tr>
           </tbody>
         </table>
       </div>

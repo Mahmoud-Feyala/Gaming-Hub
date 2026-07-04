@@ -2174,6 +2174,252 @@ img { max-width: 100%; display: block; }
     pointer-events: none;
     visibility: hidden;
 }
+/* ============================================
+   REVIEW CARDS — Public game page (dark theme)
+   ============================================ */
+.reviews-section .review-card {
+  background: #111;
+  color: #fff;
+  border: 3px solid var(--black);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 8px 8px 0 var(--black);
+  transition: var(--transition);
+}
+
+.reviews-section .review-card:hover {
+  transform: translate(-2px, -4px);
+  box-shadow: 10px 12px 0 var(--black);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.review-user {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.review-date {
+  color: #888;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.review-stars {
+  color: #FFD54A;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+/* dim the empty stars instead of just repeating filled ones */
+.review-stars .star-empty {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.review-text {
+  margin-top: 16px;
+  line-height: 1.8;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+/* Empty state when a game has no reviews yet */
+.reviews-empty {
+  text-align: center;
+  padding: 48px 24px;
+  border: 3px dashed rgba(17, 17, 17, 0.2);
+  border-radius: 18px;
+  color: var(--gray);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   ADMIN DASHBOARD
+   ============================================ */
+.admin-page {
+  width: 90%;
+  max-width: 1300px;
+  margin: 40px auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-family: var(--font-mono);
+  color: var(--gray);
+}
+
+.page-header h1 {
+  margin: 10px 0;
+  font-size: 3rem;
+  font-family: var(--font-display);
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-card {
+  background: #FFE566;
+  border: 3px solid var(--black);
+  border-radius: 18px;
+  padding: 20px 30px;
+  box-shadow: 8px 8px 0 var(--black);
+  text-align: center;
+}
+
+.stat-card h2 {
+  margin-top: 10px;
+  font-size: 2rem;
+  font-family: var(--font-display);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 25px;
+}
+
+.admin-page .review-card {
+  background: #F6AFC5;
+  border: 3px solid var(--black);
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 8px 8px 0 var(--black);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-page .review-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 8px 14px 0 var(--black);
+}
+
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  gap: 12px;
+}
+
+.review-top h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-family: var(--font-display);
+}
+
+.review-top p {
+  margin-top: 6px;
+  color: #333;
+  font-size: 0.85rem;
+}
+
+.rating {
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: #FFE566;
+  border: 2px solid var(--black);
+  border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.admin-page .review-text {
+  line-height: 1.7;
+  margin: 20px 0 24px;
+  color: var(--black);
+  flex: 1;
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.delete-btn {
+  border: 2px solid var(--black);
+  cursor: pointer;
+  background: #ff4d4d;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.delete-btn:hover {
+  background: #d63031;
+  transform: translateY(-2px);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+.delete-btn:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 2px;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 100px;
+  color: var(--black);
+}
+
+.empty-state h2 {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stats {
+    width: 100%;
+  }
+  .stat-card {
+    flex: 1;
+  }
+}
 
 /* 5. تحسين مساحات الموبايل (Mobile Responsiveness) */
 @media (max-width: 768px) {
