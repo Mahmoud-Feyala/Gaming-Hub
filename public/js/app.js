@@ -345,21 +345,16 @@ const App = {
     }
   },
 
-  initLogin() {
-    const form = document.getElementById('login-form');
-    if (!form) return;
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('[type="submit"]');
-      btn.textContent = 'Logging in...';
-      btn.disabled = true;
-      setTimeout(() => {
-        View.showToast('Backend connection required', 'info');
-        btn.disabled = false;
-        btn.textContent = 'Login to Account →';
-      }, 1000);
-    });
-  },
+initLogin() {
+  const form = document.getElementById("login-form");
+  if (!form) return;
+
+  form.addEventListener("submit", () => {
+    const btn = form.querySelector('[type="submit"]');
+    btn.textContent = "Logging in...";
+    btn.disabled = true;
+  });
+},
 
   initRegister() {
     const form = document.getElementById('register-form');

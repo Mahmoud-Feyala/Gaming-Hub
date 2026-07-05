@@ -26,7 +26,7 @@
         <div>
 
           <!-- Trailer / Banner Section -->
-          <% if (game.trailerUrl) { 
+          <% if (game.trailerUrl) {
                // Normalize common YouTube formats into an embed URL
                let trailer = game.trailerUrl.toString();
                // Convert watch?v= URLs to /embed/VIDEOID
@@ -142,6 +142,8 @@
           </div>
 
           <div class="reviews-section">
+
+            <% if (isAuth === true) { %>
             <div class="add-review-card">
               <div class="add-review-title">⌨️ Write Your Review</div>
               <form id="add-review-form" action="/reviews" method="POST">
@@ -165,6 +167,14 @@
                 <button type="submit" class="btn btn-cyan">Post Review →</button>
               </form>
             </div>
+            <% } else { %>
+            <div class="add-review-card" style="text-align:center;padding:32px 20px">
+              <p style="font-family:var(--font-mono);font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:20px">
+                Sign in to write a review for this game
+              </p>
+              <a href="/login?redirect=/games/<%= game._id %>" style="display:inline-block !important;background:#22D3EE !important;color:#000000 !important;font-family:monospace !important;font-weight:800 !important;font-size:0.9rem !important;padding:14px 32px !important;border-radius:8px !important;text-decoration:none !important;border:2px solid #000000 !important;min-width:180px;">Login to Review</a>
+            </div>
+            <% } %>
 
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
               <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;color:var(--black);margin:0">Player Reviews</h3>
@@ -240,6 +250,7 @@
             </div>
             <div class="game-sidebar-body">
               <div style="margin-bottom:20px">
+                <% if (isAuth === true) { %>
                 <form id="add-to-library-form" action="/add-to-library" method="POST" style="width:100%;margin-bottom:10px">
                   <input type="hidden" name="gameId" value="<%= game.id %>">
                   <input type="hidden" name="imageUrl" value="<%= game.imageUrl %>">
@@ -248,6 +259,7 @@
                     + Add to Library
                   </button>
                 </form>
+                <% } %>
                 <button class="btn btn-outline" style="width:100%" onclick="View.showToast('Added to wishlist! ⭐','info')">♡ Wishlist</button>
               </div>
 

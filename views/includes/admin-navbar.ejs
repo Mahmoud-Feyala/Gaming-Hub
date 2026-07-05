@@ -7,11 +7,19 @@
     <ul class="navbar-nav">
       <li><a href="/" class="nav-link">Home</a></li>
       <li><a href="/games" class="nav-link">Games</a></li>
+      <% if (isAuth === true) { %>
       <li><a href="/Library" class="nav-link">My Library</a></li>
       <li><a href="/admin/admin-dashboard" class="nav-link active">Admin</a></li>
+      <% } %>
     </ul>
     <div class="navbar-actions">
+      <% if (isAuth === false) { %>
+      <a href="/login" class="btn btn-outline-white btn-sm">Log In</a>
+      <a href="/register" class="btn btn-cyan btn-sm">Sign Up →</a>
+      <% } else { %>
       <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);border:2px solid var(--cyan);padding:4px 12px;border-radius:var(--radius-pill)">ADMIN</span>
+      <a href="/logout" class="btn btn-outline-white btn-sm">Log Out</a>
+      <% } %>
       <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>

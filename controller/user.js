@@ -40,6 +40,7 @@ exports.getGameDetailsPage = (req, res, next) => {
             pageTitle: `${game.title} — Gaming Hub`,
             game,
             reviews,
+            isAuth: req.session.isLoggedIn,
           });
         });
     })
@@ -51,16 +52,14 @@ exports.getGameDetailsPage = (req, res, next) => {
 exports.getHomePage = (req, res, next) => {
   Game.find()
     .then((games) => {
+      console.log("isLoggedIn =", req.session.isLoggedIn);
       const featuredGames = games
         .filter((g) => g.badge === "featured" || g.badge === "trending")
         .slice(10, 14);
-
-      console.log(featuredGames.length);
-      console.log(featuredGames);
-      console.log(games.map((g) => g.badge));
       res.render("user/index", {
         pageTitle: "Gaming Hub — Gaming Review Platform",
         featuredGames,
+        isAuth: req.session.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -74,6 +73,7 @@ exports.getGamesPage = (req, res, next) => {
       res.render("user/games.ejs", {
         pageTitle: "Games — Gaming Hub",
         game: games,
+        isAuth: req.session.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -93,6 +93,7 @@ exports.getLibraryPage = (req, res, next) => {
         pageTitle: "My Library — Gaming Hub",
         games: games,
         totalGames: games.length,
+        isAuth: req.session.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -112,11 +113,10 @@ exports.postAddToLibrary = (req, res, next) => {
 };
 
 exports.getLoginPage = (req, res, next) => {
-  res.render("user/login.ejs", { pageTitle: "Log In — Gaming Hub" });
-};
-
-exports.getRegesterPage = (req, res, next) => {
-  res.render("user/register.ejs", { pageTitle: "Create Account — Gaming Hub" });
+  res.render("user/login.ejs", {
+    pageTitle: "Log In — Gaming Hub",
+    isAuth: req.session.isLoggedIn,
+  });
 };
 
 exports.postDeleteFromLibrary = (req, res, next) => {

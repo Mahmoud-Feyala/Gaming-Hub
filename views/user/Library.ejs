@@ -19,7 +19,9 @@
         <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--primary); font-weight: 700;">(<%= totalGames %>)</span>
       </div>
 
+      <% if (isAuth === true) { %>
       <a href="/games" class="btn btn-primary btn-sm">+ Add Game</a>
+      <% } %>
     </div>
 
     <% if (games && games.length > 0) { %>
@@ -46,6 +48,7 @@
 
             <a href="/game-details/<%= game.id %>" class="btn btn-cyan" style="flex: 1; margin: 0; display: flex; align-items: center; justify-content: center; text-decoration: none; text-align: center;">View Game</a>
 
+            <% if (isAuth === true) { %>
             <form action="/delete-from-library" method="POST" style="margin: 0; display: flex;">
               <input type="hidden" name="gameId" value="<%= game.id %>">
               <button type="submit" style="width: 46px; margin: 0; padding: 0; background: #ff6b6b; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #000; border-radius: 4px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" title="Remove from Library">
@@ -57,6 +60,7 @@
                 </svg>
               </button>
             </form>
+            <% } %>
 
           </div>
         </div>

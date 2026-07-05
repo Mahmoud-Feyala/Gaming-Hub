@@ -13,9 +13,19 @@
         <ul class="navbar-nav">
           <li><a href="/" class="nav-link">Home</a></li>
           <li><a href="/games" class="nav-link">Games</a></li>
+          <% if (isAuth === true) { %>
+          <li><a href="/Library" class="nav-link">My Library</a></li>
+          <li><a href="/admin/admin-dashboard" class="nav-link">Admin</a></li>
+          <li><a href="/profile" class="nav-link">Profile</a></li>
+          <% } %>
         </ul>
         <div class="navbar-actions">
+          <% if (isAuth === false) { %>
           <a href="/login" class="btn btn-outline-white btn-sm">Log In</a>
+          <a href="/register" class="btn btn-cyan btn-sm">Sign Up</a>
+          <% } else { %>
+          <a href="/logout" class="btn btn-outline-white btn-sm">Log Out</a>
+          <% } %>
         </div>
       </div>
     </nav>

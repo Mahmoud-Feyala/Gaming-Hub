@@ -4,27 +4,31 @@ const Review = require("../model/reviews");
 exports.getAdminDash = (req, res, next) => {
   res.render("admin/admin-dashboard", {
     pageTitle: "Admin Dashboard — Gaming Hub",
+    isAuth: req.session.isLoggedIn,
   });
 };
 
 exports.getAdminReviews = (req, res, next) => {
-Review.find()
-  .populate("game", "title")
-  .populate("user", "name")
-  .sort({ createdAt: -1 })
-  .then((reviews) => {
-    console.log(reviews);
-    res.render("admin/admin-reviews", {
-      pageTitle: "Reviews Management",
-      reviews,
+  Review.find()
+    .populate("game", "title")
+    .populate("user", "name")
+    .sort({ createdAt: -1 })
+    .then((reviews) => {
+      // console.log(reviews);
+      res.render("admin/admin-reviews", {
+        pageTitle: "Reviews Management",
+        reviews,
+        isAuth: req.session.isLoggedIn,
+      });
     });
-  });
 };
 
 exports.postDeleteReview = (req, res, next) => {
   Review.findByIdAndDelete(req.body.reviewId)
     .then(() => res.redirect("/admin/reviews"))
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+    });
 };
 exports.getAdminGames = (req, res, next) => {
   Game.find({ user: req.user._id })
@@ -32,6 +36,7 @@ exports.getAdminGames = (req, res, next) => {
       res.render("admin/admin-games", {
         pageTitle: "All Games — Admin Panel",
         game: games,
+        isAuth: req.session.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -43,6 +48,7 @@ exports.getAdminAddGames = (req, res, next) => {
   res.render("admin/admin-add-game", {
     pageTitle: "Add Game — Admin Panel",
     editing: false,
+    isAuth: req.session.isLoggedIn,
   });
 };
 exports.getAdminEditGames = (req, res, next) => {
@@ -57,6 +63,7 @@ exports.getAdminEditGames = (req, res, next) => {
         pageTitle: "Edit Game — Admin Panel",
         editing: editMode,
         game: game,
+        isAuth: req.session.isLoggedIn,
       });
     })
     .catch((err) => {

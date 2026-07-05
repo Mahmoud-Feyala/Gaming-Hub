@@ -150,6 +150,7 @@
             <input type="hidden" value="<%= game._id %>" name="gameId">
           <% } %>
 
+          <% if (isAuth === true) { %>
           <div style="display: flex; gap: 12px; margin-top: 24px">
             <button type="submit" class="btn btn-primary btn-lg">
               <% if (editing) { %>Update Game Details →<% } else { %>Add Game to Catalog →<% } %>
@@ -158,6 +159,7 @@
               Reset Form
             </button>
           </div>
+          <% } %>
         </form>
       </div>
     </div>

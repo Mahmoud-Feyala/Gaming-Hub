@@ -35,7 +35,9 @@
     <div class="admin-panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div class="admin-page-title">All Games</div>
+        <% if (isAuth === true) { %>
         <a href="/admin/admin-addGames" class="btn btn-primary btn-sm">+ Add New Game</a>
+        <% } %>
       </div>
       <div class="admin-page-subtitle">Manage the game catalog</div>
 
@@ -63,11 +65,13 @@
                   <td>-</td>
                   <td><%= g.badge %></td>
                   <td class="admin-action-buttons">
+                    <% if (isAuth === true) { %>
                     <a href="/admin/admin-editGames/<%= g._id %>?edit=true" class="btn btn-cyan btn-sm">Edit</a>
                     <form action="/admin/admin-deleteGame" method="POST">
                       <input type="hidden" name="gameId" value="<%= g._id %>">
                       <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
+                    <% } %>
                   </td>
                 </tr>
               <% }) %>

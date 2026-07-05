@@ -1,6 +1,5 @@
 <%- include('../includes/head.ejs') %>
 
-<!-- مكتبة الأيقونات الاحترافية Phosphor Icons -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
 <div class="bg-shapes">
@@ -12,11 +11,9 @@
   <div class="shape shape-6">★</div>
   <div class="shape shape-7">★</div>
 </div>
-
 <%- include('../includes/navbar.ejs') %>
 
 <main class="page-wrapper">
-
   <!-- Hero -->
   <section class="hero">
     <div class="container">
@@ -35,8 +32,12 @@
             gaming legacy.
           </p>
           <div class="hero-actions">
+            <% if (isAuth === true) { %>
+            <a href="/games" class="btn btn-primary btn-lg" style="width:100%;text-align:center">Browse Games →</a>
+            <% } else { %>
             <a href="/games" class="btn btn-primary btn-lg">Browse Games →</a>
             <a href="/register" class="btn btn-outline btn-lg">Join Free</a>
+            <% } %>
           </div>
           <div class="hero-stats">
             <div class="hero-stat-item">
@@ -201,8 +202,12 @@
             and building their ultimate game libraries.
           </p>
           <div class="cta-actions">
+            <% if (isAuth === true) { %>
+            <a href="/games" class="btn btn-cyan btn-lg" style="width:100%;text-align:center">Browse Games →</a>
+            <% } else { %>
             <a href="/register" class="btn btn-cyan btn-lg">Create Free Account →</a>
             <a href="/games" class="btn btn-outline-white btn-lg">Browse Games</a>
+            <% } %>
           </div>
         </div>
       </div>

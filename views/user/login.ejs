@@ -14,9 +14,19 @@
         <ul class="navbar-nav">
           <li><a href="/" class="nav-link">Home</a></li>
           <li><a href="/games" class="nav-link">Games</a></li>
+          <% if (isAuth === true) { %>
+          <li><a href="/Library" class="nav-link">My Library</a></li>
+          <li><a href="/admin/admin-dashboard" class="nav-link">Admin</a></li>
+          <li><a href="/profile" class="nav-link">Profile</a></li>
+          <% } %>
         </ul>
         <div class="navbar-actions">
-          <a href="/register" class="btn btn-outline-white btn-sm">Sign Up</a>
+          <% if (isAuth === false) { %>
+          <a href="/login" class="btn btn-outline-white btn-sm">Log In</a>
+          <a href="/register" class="btn btn-cyan btn-sm">Sign Up</a>
+          <% } else { %>
+          <a href="/logout" class="btn btn-outline-white btn-sm">Log Out</a>
+          <% } %>
         </div>
       </div>
     </nav>
@@ -89,7 +99,7 @@
       </div>
 
       <!-- Login Form -->
-      <form id="login-form">
+      <form id="login-form" action="/login" method="POST">
         <div class="form-group">
           <label class="form-label">Email Address</label>
           <input class="form-input" type="email" name="email" placeholder="gamer@example.com" required autocomplete="email" />

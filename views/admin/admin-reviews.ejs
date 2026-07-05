@@ -61,10 +61,12 @@
 
                 <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
                   <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--gray)"><%= review.createdAt.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}) %></span>
+                  <% if (isAuth === true) { %>
                   <form action="/admin/delete-review" method="POST">
                     <input type="hidden" name="reviewId" value="<%= review._id %>">
                     <button class="btn btn-danger btn-sm" type="submit">Delete Review</button>
                   </form>
+                  <% } %>
                 </div>
               </article>
             <% }) %>
