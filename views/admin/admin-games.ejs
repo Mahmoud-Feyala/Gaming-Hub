@@ -3,7 +3,7 @@
 <%- include('../includes/admin-navbar.ejs') %>
 
 <div class="admin-layout" style="padding-top:72px">
-  
+
   <aside class="admin-sidebar">
     <div style="padding:24px;border-bottom:1px solid rgba(255,255,255,0.08)">
       <div style="font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--white)">Admin Panel</div>
@@ -19,7 +19,7 @@
     <a href="/admin/admin-games" class="admin-nav-item active">
       <span class="admin-nav-icon"></span> All Games
     </a>
-    <a href="/admin/admin-addGames"class="admin-nav-item">
+    <a href="/admin/admin-addGames" class="admin-nav-item">
       <span class="admin-nav-icon"></span> Add Game
     </a>
     <a href="/admin/reviews" class="admin-nav-item">
@@ -56,29 +56,30 @@
           </thead>
           <tbody id="admin-table-body">
             <% if (game && game.length > 0) { %>
-              <% game.forEach(g => { %>
-                <tr>
-                  <td><%= g.title %></td>
-                  <td><%= g.genre %></td>
-                  <td><%= g.platform %></td>
-                  <td><%= g.year %></td>
-                  <td>-</td>
-                  <td><%= g.badge %></td>
-                  <td class="admin-action-buttons">
-                    <% if (isAuth === true) { %>
-                    <a href="/admin/admin-editGames/<%= g._id %>?edit=true" class="btn btn-cyan btn-sm">Edit</a>
-                    <form action="/admin/admin-deleteGame" method="POST">
-                      <input type="hidden" name="gameId" value="<%= g._id %>">
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    <% } %>
-                  </td>
-                </tr>
-              <% }) %>
+            <% game.forEach(g => { %>
+            <tr>
+              <td><%= g.title %></td>
+              <td><%= g.genre %></td>
+              <td><%= g.platform %></td>
+              <td><%= g.year %></td>
+              <td>-</td>
+              <td><%= g.badge %></td>
+              <td class="admin-action-buttons">
+                <% if (isAuth === true) { %>
+                <a href="/admin/admin-editGames/<%= g._id %>?edit=true" class="btn btn-cyan btn-sm">Edit</a>
+                <form action="/admin/admin-deleteGame" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <input type="hidden" name="gameId" value="<%= g._id %>">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
             <% } else { %>
-              <tr>
-                <td colspan="7" style="text-align: center; padding: 20px; color: var(--gray);">No games available in the catalog.</td>
-              </tr>
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 20px; color: var(--gray);">No games available in the catalog.</td>
+            </tr>
             <% } %>
           </tbody>
         </table>

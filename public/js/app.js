@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // ============================================
 // VIEW — UI Components & Helpers
@@ -9,7 +9,7 @@ const View = {
     const full = Math.floor(rating);
     const half = rating % 1 >= 0.5;
 
-    let html = `<div class="stars${interactive ? ' interactive-stars' : ''}">`;
+    let html = `<div class="stars${interactive ? " interactive-stars" : ""}">`;
 
     for (let i = 1; i <= 5; i++) {
       if (i <= full) {
@@ -26,17 +26,17 @@ const View = {
   },
 
   // Toast Messages
-  showToast(message, type = 'info') {
+  showToast(message, type = "info") {
     const container =
-      document.querySelector('.toast-container') ||
+      document.querySelector(".toast-container") ||
       (() => {
-        const c = document.createElement('div');
-        c.className = 'toast-container';
+        const c = document.createElement("div");
+        c.className = "toast-container";
         document.body.appendChild(c);
         return c;
       })();
 
-    const toast = document.createElement('div');
+    const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
 
@@ -47,22 +47,21 @@ const View = {
 
   // Open Modal
   openModal(content) {
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
     overlay.innerHTML = `<div class="modal">${content}</div>`;
-    overlay.addEventListener('click', (e) => {
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) overlay.remove();
     });
     document.body.appendChild(overlay);
     return overlay;
-  }
+  },
 };
 
 // ============================================
 // APP — Frontend Routing & Event Listeners
 // ============================================
 const App = {
-
   init() {
     this.setupMobileNav();
     this.setupActiveNav();
@@ -74,117 +73,129 @@ const App = {
 
   dispatch() {
     const path = window.location.pathname.toLowerCase();
-    if (path === '/' || path === '/index.html') {
+    if (path === "/" || path === "/index.html") {
       this.initHome();
-    } else if (path.startsWith('/games')) {
+    } else if (path.startsWith("/games")) {
       this.initGames();
-    } else if (path.startsWith('/game-details')) {
+    } else if (path.startsWith("/game-details")) {
       this.initGameDetails();
-    } else if (path.startsWith('/library')) {
+    } else if (path.startsWith("/library")) {
       this.initLibrary();
-    } else if (path.startsWith('/admin-games')) {
+    } else if (path.startsWith("/admin-games")) {
       this.initAdminGames();
-    } else if (path.startsWith('/admin-add-game')) {
+    } else if (path.startsWith("/admin-add-game")) {
       this.initAdminAddGame();
-    } else if (path.startsWith('/admin')) {
+    } else if (path.startsWith("/admin")) {
       this.initAdminDashboard();
-    } else if (path.startsWith('/login')) {
+    } else if (path.startsWith("/login")) {
       this.initLogin();
-    } else if (path.startsWith('/register')) {
+    } else if (path.startsWith("/register")) {
       this.initRegister();
     }
   },
 
   setupActiveNav() {
     const currentPath = window.location.pathname.toLowerCase();
-    document.querySelectorAll('.nav-link').forEach(link => {
-      const linkPath = link.getAttribute('href').toLowerCase();
-      link.classList.remove('active');
-      if ((currentPath === '/' || currentPath === '/index.html') && linkPath === '/') {
-        link.classList.add('active');
-      } else if (currentPath.startsWith(linkPath) && linkPath !== '/') {
-        link.classList.add('active');
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      const linkPath = link.getAttribute("href").toLowerCase();
+      link.classList.remove("active");
+      if (
+        (currentPath === "/" || currentPath === "/index.html") &&
+        linkPath === "/"
+      ) {
+        link.classList.add("active");
+      } else if (currentPath.startsWith(linkPath) && linkPath !== "/") {
+        link.classList.add("active");
       }
     });
   },
 
   setupThemeToggle() {
-    const themeButton = document.querySelector('.theme-toggle');
-    const savedTheme = localStorage.getItem('site-theme');
-    const theme = savedTheme || 'dark';
+    const themeButton = document.querySelector(".theme-toggle");
+    const savedTheme = localStorage.getItem("site-theme");
+    const theme = savedTheme || "dark";
 
     const applyTheme = (value) => {
       document.documentElement.dataset.theme = value;
       if (themeButton) {
-        themeButton.textContent = value === 'dark' ? 'Light Mode' : 'Dark Mode';
-        themeButton.setAttribute('aria-label', value === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        themeButton.textContent = value === "dark" ? "Light Mode" : "Dark Mode";
+        themeButton.setAttribute(
+          "aria-label",
+          value === "dark" ? "Switch to light theme" : "Switch to dark theme"
+        );
       }
-      localStorage.setItem('site-theme', value);
+      localStorage.setItem("site-theme", value);
     };
 
     applyTheme(theme);
 
     if (themeButton) {
-      themeButton.addEventListener('click', () => {
-        applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+      themeButton.addEventListener("click", () => {
+        applyTheme(
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark"
+        );
       });
     }
   },
 
   setupMobileNav() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.navbar-nav');
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".navbar-nav");
     if (hamburger && mobileMenu) {
-      hamburger.addEventListener('click', () => {
-        mobileMenu.classList.toggle('mobile-open');
+      hamburger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("mobile-open");
       });
     }
   },
 
   setupSearchFilter() {
-    const searchInput = document.querySelector('.search-input');
-    const filterButtons = Array.from(document.querySelectorAll('.filter-tag'));
-    const gamesGrid = document.getElementById('games-grid');
-    const gamesCount = document.getElementById('games-count');
-    let activeFilter = 'all';
-    let activeQuery = '';
+    const searchInput = document.querySelector(".search-input");
+    const filterButtons = Array.from(document.querySelectorAll(".filter-tag"));
+    const gamesGrid = document.getElementById("games-grid");
+    const gamesCount = document.getElementById("games-count");
+    let activeFilter = "all";
+    let activeQuery = "";
     const batchSize = 20;
     let shownCount = batchSize;
 
     const updateGamesCount = (visibleCount) => {
       if (gamesCount) {
-        const total = document.querySelectorAll('.game-card').length;
+        const total = document.querySelectorAll(".game-card").length;
         gamesCount.textContent = `Showing ${visibleCount} of ${total} games`;
       }
     };
 
     const applySearchFilter = () => {
-      const cards = Array.from(document.querySelectorAll('.game-card'));
+      const cards = Array.from(document.querySelectorAll(".game-card"));
       const query = activeQuery.trim().toLowerCase();
       let visibleCount = 0;
 
-      cards.forEach(card => {
-        const idx = parseInt(card.dataset.index || '0', 10);
-        const title = (card.dataset.title || '').toLowerCase();
-        const genre = (card.dataset.genre || '').toLowerCase();
-        const developer = (card.dataset.developer || '').toLowerCase();
+      cards.forEach((card) => {
+        const idx = parseInt(card.dataset.index || "0", 10);
+        const title = (card.dataset.title || "").toLowerCase();
+        const genre = (card.dataset.genre || "").toLowerCase();
+        const developer = (card.dataset.developer || "").toLowerCase();
 
-        const matchesQuery = !query || title.includes(query) || genre.includes(query) || developer.includes(query);
-        const matchesFilter = activeFilter === 'all' || genre === activeFilter;
+        const matchesQuery =
+          !query ||
+          title.includes(query) ||
+          genre.includes(query) ||
+          developer.includes(query);
+        const matchesFilter = activeFilter === "all" || genre === activeFilter;
         const shouldShow = matchesQuery && matchesFilter;
 
         if (!shouldShow) {
-          card.style.display = 'none';
+          card.style.display = "none";
         } else {
-          if (query || activeFilter !== 'all') {
-            card.style.display = '';
+          if (query || activeFilter !== "all") {
+            card.style.display = "";
             visibleCount += 1;
           } else {
             if (idx < shownCount) {
-              card.style.display = '';
+              card.style.display = "";
               visibleCount += 1;
             } else {
-              card.style.display = 'none';
+              card.style.display = "none";
             }
           }
         }
@@ -193,13 +204,15 @@ const App = {
       updateGamesCount(visibleCount);
 
       if (gamesGrid) {
-        const emptyMessage = gamesGrid.querySelector('.no-results-message');
+        const emptyMessage = gamesGrid.querySelector(".no-results-message");
         if (visibleCount === 0) {
           if (!emptyMessage) {
-            const message = document.createElement('div');
-            message.className = 'no-results-message';
-            message.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px; font-family: var(--font-mono); color: rgba(17,17,17,0.6);';
-            message.textContent = 'No games found. Try a different search or filter.';
+            const message = document.createElement("div");
+            message.className = "no-results-message";
+            message.style.cssText =
+              "grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px; font-family: var(--font-mono); color: rgba(17,17,17,0.6);";
+            message.textContent =
+              "No games found. Try a different search or filter.";
             gamesGrid.appendChild(message);
           }
         } else if (emptyMessage) {
@@ -209,17 +222,17 @@ const App = {
     };
 
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener("input", (e) => {
         activeQuery = e.target.value;
         applySearchFilter();
       });
     }
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeFilter = btn.dataset.filter || 'all';
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter || "all";
         applySearchFilter();
       });
     });
@@ -228,31 +241,35 @@ const App = {
 
     App.gamesPagination = {
       increase() {
-        const total = document.querySelectorAll('.game-card').length;
+        const total = document.querySelectorAll(".game-card").length;
         shownCount = Math.min(total, shownCount + batchSize);
         applySearchFilter();
       },
       isAllShown() {
-        return shownCount >= document.querySelectorAll('.game-card').length;
-      }
+        return shownCount >= document.querySelectorAll(".game-card").length;
+      },
     };
   },
 
   setupStarInteractions() {
-    document.querySelectorAll('.interactive-stars').forEach(container => {
-      const stars = container.querySelectorAll('.star');
+    document.querySelectorAll(".interactive-stars").forEach((container) => {
+      const stars = container.querySelectorAll(".star");
       let selectedRating = 0;
 
       stars.forEach((star, index) => {
-        star.addEventListener('mouseover', () => {
-          stars.forEach((s, i) => s.classList.toggle('filled', i <= index));
+        star.addEventListener("mouseover", () => {
+          stars.forEach((s, i) => s.classList.toggle("filled", i <= index));
         });
-        star.addEventListener('mouseout', () => {
-          stars.forEach((s, i) => s.classList.toggle('filled', i < selectedRating));
+        star.addEventListener("mouseout", () => {
+          stars.forEach((s, i) =>
+            s.classList.toggle("filled", i < selectedRating)
+          );
         });
-        star.addEventListener('click', () => {
+        star.addEventListener("click", () => {
           selectedRating = index + 1;
-          const input = container.closest('form')?.querySelector('input[name="rating"]');
+          const input = container
+            .closest("form")
+            ?.querySelector('input[name="rating"]');
           if (input) input.value = selectedRating;
         });
       });
@@ -260,21 +277,21 @@ const App = {
   },
 
   initHome() {
-    console.log('Home page loaded');
+    console.log("Home page loaded");
   },
 
   initGames() {
-    const loadBtn = document.getElementById('loadMoreBtn');
+    const loadBtn = document.getElementById("loadMoreBtn");
     if (loadBtn) {
-      loadBtn.addEventListener('click', (e) => {
+      loadBtn.addEventListener("click", (e) => {
         const btn = e.currentTarget;
         btn.disabled = true;
         const prevText = btn.textContent;
-        btn.textContent = 'Loading...';
+        btn.textContent = "Loading...";
         setTimeout(() => {
           if (App.gamesPagination) App.gamesPagination.increase();
           if (App.gamesPagination && App.gamesPagination.isAllShown()) {
-            btn.style.display = 'none';
+            btn.style.display = "none";
           } else {
             btn.disabled = false;
             btn.textContent = prevText;
@@ -285,47 +302,49 @@ const App = {
   },
 
   initGameDetails() {
-    const addLibraryForm = document.getElementById('add-to-library-form');
+    const addLibraryForm = document.getElementById("add-to-library-form");
     window.handleAddToLibraryClick = (e, formGameId) => {
       e.preventDefault();
-      View.showToast('Game added to your library!', 'success');
+      View.showToast("Game added to your library!", "success");
       setTimeout(() => addLibraryForm?.submit(), 250);
     };
 
-    const reviewForm = document.getElementById('add-review-form');
+    const reviewForm = document.getElementById("add-review-form");
     if (reviewForm) {
-      reviewForm.addEventListener('submit', async (e) => {
+      reviewForm.addEventListener("submit", async (e) => {
         const text = reviewForm.querySelector('[name="review"]')?.value;
         if (!text?.trim()) {
           e.preventDefault();
-          View.showToast('Please write your review!', 'error');
+          View.showToast("Please write your review!", "error");
           return;
         }
-        View.showToast('Sending review to backend...', 'info');
+        View.showToast("Sending review to backend...", "info");
       });
     }
   },
 
   initLibrary() {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
       });
     });
   },
 
   initAdminDashboard() {
-    console.log('Admin Dashboard loaded');
+    console.log("Admin Dashboard loaded");
   },
 
   initAdminGames() {
-    const tableBody = document.getElementById('admin-table-body');
+    const tableBody = document.getElementById("admin-table-body");
     if (tableBody) {
-      tableBody.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-danger')) {
-          if (confirm('Are you sure you want to delete this game?')) {
-            View.showToast('Game deleted (Backend API needed)', 'error');
+      tableBody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-danger")) {
+          if (confirm("Are you sure you want to delete this game?")) {
+            View.showToast("Game deleted (Backend API needed)", "error");
           }
         }
       });
@@ -333,97 +352,95 @@ const App = {
   },
 
   initAdminAddGame() {
-    const addForm = document.getElementById('add-game-form');
+    const addForm = document.getElementById("add-game-form");
     if (addForm) {
-      addForm.addEventListener('submit', async (e) => {
+      addForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const formData = new FormData(addForm);
         const data = Object.fromEntries(formData.entries());
-        View.showToast('Preparing to send data to backend API...', 'info');
-        console.log('Game Data payload:', data);
+        View.showToast("Preparing to send data to backend API...", "info");
+        console.log("Game Data payload:", data);
       });
     }
   },
 
-initLogin() {
-  const form = document.getElementById("login-form");
-  if (!form) return;
+  initLogin() {
+    const form = document.getElementById("login-form");
+    if (!form) return;
 
-  form.addEventListener("submit", () => {
-    const btn = form.querySelector('[type="submit"]');
-    btn.textContent = "Logging in...";
-    btn.disabled = true;
-  });
-},
+    form.addEventListener("submit", () => {
+      const btn = form.querySelector('[type="submit"]');
+      btn.textContent = "Logging in...";
+      btn.disabled = true;
+    });
+  },
 
   initRegister() {
-    const form = document.getElementById('register-form');
+    const form = document.getElementById("register-form");
     if (!form) return;
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    form.addEventListener("submit", async (e) => {
       const pass = form.querySelector('[name="password"]')?.value;
       const confirm = form.querySelector('[name="confirm"]')?.value;
       if (pass !== confirm) {
-        View.showToast('Passwords do not match!', 'error');
+        View.showToast("Passwords do not match!", "error");
         return;
       }
       const btn = form.querySelector('[type="submit"]');
-      btn.textContent = 'Creating account...';
+      btn.textContent = "Creating account...";
       btn.disabled = true;
       setTimeout(() => {
-        View.showToast('Backend connection required', 'info');
+        View.showToast("Backend connection required", "info");
         btn.disabled = false;
-        btn.textContent = 'Create Free Account →';
+        btn.textContent = "Create Free Account →";
       }, 1000);
     });
 
     const passInput = form.querySelector('[name="password"]');
-    const strengthBar = document.getElementById('password-strength');
+    const strengthBar = document.getElementById("password-strength");
     if (passInput && strengthBar) {
-      passInput.addEventListener('input', (e) => {
+      passInput.addEventListener("input", (e) => {
         const val = e.target.value;
         let strength = 0;
         if (val.length >= 8) strength++;
         if (/[A-Z]/.test(val)) strength++;
         if (/[0-9]/.test(val)) strength++;
         if (/[^A-Za-z0-9]/.test(val)) strength++;
-        const colors = ['#FF4444', '#FF6B35', '#FFC107', '#22C55E'];
+        const colors = ["#FF4444", "#FF6B35", "#FFC107", "#22C55E"];
         strengthBar.style.width = `${strength * 25}%`;
-        strengthBar.style.background = colors[strength - 1] || '#ddd';
+        strengthBar.style.background = colors[strength - 1] || "#ddd";
       });
     }
-  }
+  },
 };
 
 // ============================================
 // HOME PAGE: SLIDER + BACK TO TOP
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   /* ── Hero Slider ── */
-  const slides = document.querySelectorAll('.slider-image');
-  const dotsContainer = document.getElementById('sliderDots');
-  const titleEl = document.getElementById('sliderGameTitle');
+  const slides = document.querySelectorAll(".slider-image");
+  const dotsContainer = document.getElementById("sliderDots");
+  const titleEl = document.getElementById("sliderGameTitle");
 
   if (slides.length && dotsContainer) {
     // Create dots
     slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Slide ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
+      const dot = document.createElement("button");
+      dot.className = "slider-dot" + (i === 0 ? " active" : "");
+      dot.setAttribute("aria-label", `Slide ${i + 1}`);
+      dot.addEventListener("click", () => goTo(i));
       dotsContainer.appendChild(dot);
     });
 
-    const dots = dotsContainer.querySelectorAll('.slider-dot');
+    const dots = dotsContainer.querySelectorAll(".slider-dot");
     let current = 0;
 
     function goTo(index) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
       current = index;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
       // Update title if element exists
       if (titleEl && slides[current].alt) {
         titleEl.textContent = slides[current].alt;
@@ -437,21 +454,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Back to Top ── */
-  const backBtn = document.getElementById('backToTop');
+  const backBtn = document.getElementById("backToTop");
   if (backBtn) {
-    window.addEventListener('scroll', () => {
-      backBtn.classList.toggle('visible', window.scrollY > 400);
+    window.addEventListener("scroll", () => {
+      backBtn.classList.toggle("visible", window.scrollY > 400);
     });
-    backBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    backBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
-
 });
 
 // ============================================
 // BOOT
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   App.init();
 });

@@ -11,7 +11,7 @@ exports.getAdminDash = (req, res, next) => {
 exports.getAdminReviews = (req, res, next) => {
   Review.find()
     .populate("game", "title")
-    .populate("user", "name")
+    .populate("user", "username")
     .sort({ createdAt: -1 })
     .then((reviews) => {
       // console.log(reviews);
@@ -31,7 +31,7 @@ exports.postDeleteReview = (req, res, next) => {
     });
 };
 exports.getAdminGames = (req, res, next) => {
-  Game.find({ user: req.user._id })
+  Game.find()
     .then((games) => {
       res.render("admin/admin-games", {
         pageTitle: "All Games — Admin Panel",

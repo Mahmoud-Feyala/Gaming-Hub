@@ -148,7 +148,7 @@
               <div class="add-review-title">⌨️ Write Your Review</div>
               <form id="add-review-form" action="/reviews" method="POST">
                 <input type="hidden" name="gameId" value="<%= game._id %>">
-
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <input type="hidden" name="rating" id="rating" value="5">
                 <div class="form-group">
                   <label class="form-label">Your Rating</label>
@@ -252,6 +252,7 @@
               <div style="margin-bottom:20px">
                 <% if (isAuth === true) { %>
                 <form id="add-to-library-form" action="/add-to-library" method="POST" style="width:100%;margin-bottom:10px">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <input type="hidden" name="gameId" value="<%= game.id %>">
                   <input type="hidden" name="imageUrl" value="<%= game.imageUrl %>">
 

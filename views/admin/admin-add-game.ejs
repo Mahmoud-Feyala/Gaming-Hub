@@ -1,4 +1,4 @@
-<%- include('../includes/head.ejs') %> 
+<%- include('../includes/head.ejs') %>
 <%- include('../includes/admin-navbar.ejs') %>
 
 <div class="admin-layout" style="padding-top: 72px">
@@ -50,7 +50,7 @@
 
       <div class="add-game-form">
         <form id="add-game-form" action="/admin/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>" method="POST">
-          
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <div class="form-divider">Basic Info</div>
 
           <div class="form-row">
@@ -147,7 +147,7 @@
           </div>
 
           <% if (editing) { %>
-            <input type="hidden" value="<%= game._id %>" name="gameId">
+          <input type="hidden" value="<%= game._id %>" name="gameId">
           <% } %>
 
           <% if (isAuth === true) { %>

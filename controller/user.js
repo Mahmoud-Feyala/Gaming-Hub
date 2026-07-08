@@ -56,11 +56,20 @@ exports.getHomePage = (req, res, next) => {
       const featuredGames = games
         .filter((g) => g.badge === "featured" || g.badge === "trending")
         .slice(10, 14);
-      res.render("user/index", {
-        pageTitle: "Gaming Hub — Gaming Review Platform",
-        featuredGames,
-        isAuth: req.session.isLoggedIn,
-      });
+
+      Review.find()
+        .populate("user", "name")
+        .populate("game", "title")
+        .sort({ createdAt: -1 })
+        .limit(3)
+        .then((reviews) => {
+          res.render("user/index", {
+            pageTitle: "Gaming Hub — Gaming Review Platform",
+            featuredGames,
+            trendingReviews: reviews,
+            isAuth: req.session.isLoggedIn,
+          });
+        });
     })
     .catch((err) => {
       console.log(err);

@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
+const { csrfSync } = require("csrf-sync");
 
 require("dotenv").config();
 
@@ -33,6 +34,13 @@ const store = MongoStore.create({
 });
 
 // ======================
+// CSRF
+// ======================
+const { csrfSynchronisedProtection, generateToken } = csrfSync({
+  getTokenFromRequest: (req) => req.body._csrf,
+});
+
+// ======================
 // Global Middleware
 // ======================
 app.use(express.urlencoded({ extended: true }));
@@ -46,6 +54,11 @@ app.use(
     store,
   })
 );
+
+// CSRF Middleware
+app.use(csrfSynchronisedProtection);
+
+// Load Logged In User
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
@@ -53,10 +66,21 @@ app.use((req, res, next) => {
 
   User.findById(req.session.user._id)
     .then((user) => {
+      if (!user) {
+        return next();
+      }
+
       req.user = user;
       next();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err));
+});
+
+// Global View Variables
+app.use((req, res, next) => {
+  res.locals.isAuth = req.session.isLoggedIn;
+  res.locals.csrfToken = generateToken(req);
+  next();
 });
 
 // ======================
@@ -76,21 +100,9 @@ app.use(errorController.get404);
 // ======================
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => User.findOne())
-  .then((user) => {
-    if (user) return;
-
-    const newUser = new User({
-      name: "kage",
-      email: "test@gmail.com",
-      library: [],
-    });
-
-    return newUser.save();
-  })
   .then(() => {
-    app.listen(4000, () => {
-      console.log("Server running on http://localhost:4000");
+    app.listen(3000, () => {
+      console.log("Server running on http://localhost:3000");
     });
   })
   .catch((err) => {

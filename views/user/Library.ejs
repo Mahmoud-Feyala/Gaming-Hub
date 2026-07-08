@@ -50,6 +50,7 @@
 
             <% if (isAuth === true) { %>
             <form action="/delete-from-library" method="POST" style="margin: 0; display: flex;">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <input type="hidden" name="gameId" value="<%= game.id %>">
               <button type="submit" style="width: 46px; margin: 0; padding: 0; background: #ff6b6b; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #000; border-radius: 4px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" title="Remove from Library">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
