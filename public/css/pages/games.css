@@ -1,0 +1,130 @@
+/* =============================================
+   PAGE: GAMES
+   ============================================= */
+.page-hero { padding: 60px 0 48px; position: relative; }
+.page-hero-label { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(17,17,17,0.5); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+.page-hero-title { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; color: var(--black); line-height: 1; letter-spacing: -0.03em; margin-bottom: 16px; }
+.page-hero-title span { color: var(--white); }
+.page-hero-subtitle { font-family: var(--font-body); font-size: 1.05rem; color: var(--black); font-weight: 500; opacity: 0.7; margin-bottom: 0; }
+
+/* Toolbar */
+.games-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.games-count { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(17,17,17,0.6); text-transform: uppercase; font-weight: bold; letter-spacing: 0.08em; }
+.sort-control { display: flex; gap: 8px; align-items: center; }
+.sort-control-label { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(17,17,17,0.5); font-weight: bold; }
+.sort-control .form-select { width: auto; padding: 6px 32px 6px 12px; font-size: 0.8rem; cursor: pointer; }
+
+.games-grid { margin-bottom: 64px; position: relative; }
+.games-empty-state { text-align: center; padding: 60px 20px; border: 3px dashed rgba(17,17,17,0.3); border-radius: var(--radius-lg); }
+.games-empty-state-icon { font-size: 3rem; margin-bottom: 16px; }
+.games-empty-state-text { font-family: var(--font-display); font-size: 1.5rem; color: var(--black); margin: 0; }
+.load-more-wrap { text-align: center; padding-bottom: 80px; }
+
+/* Toolbar */
+.games-toolbar { background: var(--black); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 40px; border: 2px solid var(--black); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.search-box { flex: 1; min-width: 200px; position: relative; }
+.search-input { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: var(--white); background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 12px 18px 12px 48px; width: 100%; outline: none; transition: var(--transition); -webkit-appearance: none; appearance: none; }
+.search-input::placeholder { color: rgba(255,255,255,0.4); }
+.search-input:focus { border-color: var(--cyan); background: rgba(18,198,216,0.08); }
+.search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); font-size: 1rem; pointer-events: none; }
+.filter-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-tag { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; padding: 8px 16px; border-radius: var(--radius-pill); border: 2px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.6); cursor: pointer; transition: var(--transition); text-transform: uppercase; -webkit-tap-highlight-color: transparent; }
+.filter-tag:hover  { border-color: var(--cyan); color: var(--cyan); }
+.filter-tag.active { background: var(--cyan); color: var(--black); border-color: var(--cyan); box-shadow: var(--shadow-cyan); }
+
+/* =============================================
+   PAGE: GAME DETAILS
+   ============================================= */
+.game-details-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
+.game-banner { width: 100%; aspect-ratio: 21 / 9; border-radius: var(--radius-xl); overflow: hidden; border: 3px solid var(--black); box-shadow: var(--shadow-xl); margin-bottom: 32px; background: var(--black); display: flex; align-items: center; justify-content: center; font-size: 120px; position: relative; }
+.game-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(18,198,216,0.2), rgba(255,107,53,0.2)); pointer-events: none; }
+.game-banner--video { aspect-ratio: 16 / 9; }
+.game-banner--video::before { content: none; }
+.game-banner--video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.game-info-header  { margin-bottom: 32px; }
+.game-detail-genre { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--cyan-dark); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.game-detail-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; color: var(--black); line-height: 1; letter-spacing: -0.03em; margin-bottom: 16px; }
+.game-description  { font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8; color: #333; font-weight: 500; margin-bottom: 32px; }
+
+.rating-distribution { background: var(--bg-card); border: 2px solid var(--black); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 32px; box-shadow: var(--shadow-md); }
+.rating-big { font-family: var(--font-display); font-size: 4rem; font-weight: 900; color: var(--black); line-height: 1; }
+.rating-bars    { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.rating-bar-row { display: flex; align-items: center; gap: 12px; }
+.rating-bar-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--black); width: 12px; flex-shrink: 0; }
+.rating-bar-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray); width: 20px; text-align: right; flex-shrink: 0; }
+
+.game-sidebar-card { background: var(--bg-card); border: 2px solid var(--black); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; position: sticky; top: 100px; }
+.game-sidebar-cover { width: 100%; aspect-ratio: 3 / 4; background: var(--black); display: flex; align-items: center; justify-content: center; font-size: 80px; position: relative; overflow: hidden; }
+.game-sidebar-cover::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(18,198,216,0.3), rgba(255,107,53,0.2)); pointer-events: none; }
+.game-sidebar-body { padding: 24px; }
+.game-info-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(17,17,17,0.08); font-family: var(--font-body); font-size: 0.9rem; gap: 12px; }
+.game-info-row:last-child { border-bottom: none; }
+.game-info-key   { font-weight: 600; color: var(--gray); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.06em; font-family: var(--font-mono); flex-shrink: 0; }
+.game-info-value { font-weight: 700; color: var(--black); font-family: var(--font-display); font-size: 0.8rem; text-align: right; }
+
+/* =============================================
+   REVIEWS SECTION
+   ============================================= */
+.reviews-section { margin-top: 48px; }
+.add-review-card { background: var(--black); border: 2px solid var(--black); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 40px; box-shadow: var(--shadow-xl); }
+.add-review-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--white); margin-bottom: 24px; }
+.add-review-card .form-input, .add-review-card .form-textarea {
+  background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--white);
+}
+.add-review-card .form-select {
+  background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+.add-review-card .form-input:focus, .add-review-card .form-textarea:focus { border-color: var(--cyan); background: rgba(18,198,216,0.08); }
+.add-review-card .form-input::placeholder, .add-review-card .form-textarea::placeholder { color: rgba(255,255,255,0.35); }
+.add-review-card .form-label { color: rgba(255,255,255,0.7); }
+.interactive-stars { display: flex; gap: 6px; margin: 8px 0; }
+.interactive-stars .star { font-size: 1.6rem; cursor: pointer; transition: var(--transition-bounce); }
+.interactive-stars .star:hover { transform: scale(1.2); }
+.interactive-stars .star.filled { color: var(--yellow); }
+.interactive-stars .star:not(.filled) { color: rgba(255,255,255,0.2); }
+
+/* =============================================
+   GAME DETAILS — page chrome
+   ============================================= */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  padding: 24px 0;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: rgba(17,17,17,0.5); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.breadcrumb a { color: rgba(17,17,17,0.5); text-decoration: none; transition: var(--transition); }
+.breadcrumb a:hover { color: var(--black); }
+.breadcrumb .breadcrumb-current { color: var(--black); }
+
+.game-rating-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.game-rating-score { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; color: var(--black); }
+.game-rating-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gray); }
+
+.game-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+
+.rating-summary-row { display: flex; align-items: center; gap: 24px; margin-bottom: 8px; }
+.rating-out-of { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray); margin-top: 4px; }
+.rating-stars-wrap { margin-top: 8px; }
+.progress-fill.red { background: #FF4444; }
+
+.reviews-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.reviews-header-row .section-title-sm { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--black); margin: 0; }
+.reviews-header-row .form-select { width: auto; padding: 8px 32px 8px 14px; font-size: 0.8rem; }
+
+.review-login-cta { text-align: center; padding: 32px 20px; }
+.review-login-cta p { font-family: var(--font-mono); font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+
+.game-sidebar-cover img { width: 100%; height: 100%; object-fit: cover; }
+.game-sidebar-cover-icon { font-size: 72px; position: relative; z-index: 1; }
+.game-sidebar-actions { margin-bottom: 20px; }
+.game-sidebar-actions form { margin-bottom: 10px; }
+.game-info-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: rgba(17,17,17,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.game-info-value--rating { color: var(--yellow); }
+
+.reviews-list { display: flex; flex-direction: column; gap: 16px; }
+
+.game-not-found { text-align: center; padding: 50px; width: 100%; }

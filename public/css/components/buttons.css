@@ -1,0 +1,117 @@
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
+  transition: var(--transition-bounce);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.btn:hover::before { transform: translateX(0); }
+
+.btn-primary { background: var(--black); color: var(--white); border-color: var(--black); box-shadow: var(--shadow-md); }
+.btn-primary:hover  { transform: translate(-3px, -3px); box-shadow: var(--shadow-xl); }
+.btn-primary:active { transform: translate(2px, 2px);   box-shadow: var(--shadow-sm); }
+
+.btn-cyan { background: var(--cyan); color: var(--black); border-color: var(--cyan); box-shadow: var(--shadow-md); }
+.btn-cyan:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-xl), var(--shadow-cyan); background: var(--cyan-light); }
+
+.btn-outline { background: transparent; color: var(--black); border-color: var(--black); box-shadow: var(--shadow-sm); }
+.btn-outline:hover { background: var(--black); color: var(--white); transform: translate(-2px, -2px); box-shadow: var(--shadow-md); }
+
+.btn-outline-white { background: transparent; color: var(--white); border-color: var(--white); }
+.btn-outline-white:hover { background: var(--white); color: var(--black); transform: translate(-2px, -2px); }
+
+.btn-danger { background: var(--red); color: var(--white); border-color: var(--red); box-shadow: var(--shadow-sm); }
+.btn-danger:hover { background: #CC0000; transform: translate(-2px, -2px); box-shadow: var(--shadow-md); }
+
+.btn-pink { background: var(--pink); color: var(--black); border-color: var(--black); box-shadow: var(--shadow-md); }
+.btn-pink:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-xl); background: var(--pink-mid); }
+
+.btn-yellow { background: var(--yellow); color: var(--black); border-color: var(--black); box-shadow: var(--shadow-md); }
+.btn-yellow:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-xl), var(--shadow-yellow); }
+
+/* Sizes */
+.btn-sm { padding:  8px 16px; font-size: 0.75rem; }
+.btn-lg { padding: 16px 36px; font-size: 1rem; }
+.btn-block { width: 100%; text-align: center; }
+
+.admin-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.admin-action-buttons form {
+  margin: 0;
+}
+.admin-action-buttons .btn {
+  min-width: 90px;
+}
+.admin-action-buttons .btn-danger {
+  background: transparent;
+  color: var(--red);
+  border-color: var(--red);
+  box-shadow: none;
+}
+.admin-action-buttons .btn-danger:hover {
+  background: var(--red);
+  color: var(--white);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Social button */
+.btn-social {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; padding: 14px;
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+  background: var(--white); border: 2px solid var(--black);
+  border-radius: var(--radius-md); cursor: pointer;
+  transition: var(--transition); box-shadow: var(--shadow-sm);
+  text-decoration: none; color: var(--black); margin-bottom: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-social:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-md); }
+
+/* =============================================
+   TAGS / BADGES
+   ============================================= */
+.tag {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.06em; padding: 4px 12px;
+  border-radius: var(--radius-pill); border: 2px solid var(--black);
+  text-transform: uppercase; cursor: pointer; transition: var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.tag-cyan    { background: var(--cyan);   color: var(--black); }
+.tag-pink    { background: var(--pink);   color: var(--black); }
+.tag-yellow  { background: var(--yellow); color: var(--black); }
+.tag-orange  { background: var(--orange); color: var(--white); }
+.tag-black   { background: var(--black);  color: var(--white); }
+.tag-outline { background: transparent;   color: var(--black); }
+.tag:hover   { transform: translate(-2px, -2px); box-shadow: var(--shadow-sm); }
+.tag.active  { background: var(--black); color: var(--white); }

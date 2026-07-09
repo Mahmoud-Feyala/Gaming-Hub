@@ -1,0 +1,97 @@
+
+/* =============================================
+   PAGE: AUTH
+   ============================================= */
+.auth-layout { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 72px; }
+.auth-left { background: var(--black); padding: 64px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.auth-left::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 40% 40%, rgba(18,198,216,0.15) 0%, transparent 60%), radial-gradient(circle at 70% 80%, rgba(255,107,53,0.1) 0%, transparent 50%); pointer-events: none; }
+.auth-left-content { position: relative; z-index: 1; }
+.auth-headline { font-family: var(--font-display); font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; margin-bottom: 24px; }
+.auth-headline span { color: var(--cyan); }
+.auth-subtext { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.6); font-weight: 400; margin-bottom: 48px; max-width: 400px; }
+.auth-features { display: flex; flex-direction: column; gap: 20px; }
+.auth-feature  { display: flex; align-items: center; gap: 16px; }
+.auth-feature-icon { width: 44px; height: 44px; background: rgba(18,198,216,0.1); border: 2px solid rgba(18,198,216,0.3); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.auth-feature-text { font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.7); font-weight: 500; line-height: 1.5; }
+.auth-right { background: var(--bg-main); padding: 64px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.auth-form-card { background: var(--bg-card); border: 2px solid var(--black); border-radius: var(--radius-xl); padding: 48px; width: 100%; max-width: 480px; box-shadow: var(--shadow-xl); animation: bounce-in 0.5s ease; }
+.auth-form-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--black); margin-bottom: 6px; }
+.auth-form-subtitle { font-family: var(--font-body); font-size: 1rem; color: var(--text-muted); margin-bottom: 40px; font-weight: 500; }
+.auth-divider { display: flex; align-items: center; gap: 16px; margin: 28px 0; }
+.auth-divider-line { flex: 1; height: 2px; background: rgba(17,17,17,0.1); }
+.auth-divider-text { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; }
+.auth-switch-text { font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); text-align: center; margin-top: 24px; font-weight: 500; }
+.auth-switch-text a { color: var(--black); font-weight: 700; text-decoration: underline; }
+
+/* =============================================
+   AUTH BACKGROUND SHAPES (GAMER THEME)
+   ============================================= */
+.auth-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  /* إضافة تأثير النقط (Halftone) في الخلفية زي الصورة */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+  background-size: 24px 24px;
+  /* مسح النقط من النص عشان الكلام يكون واضح */
+  mask-image: radial-gradient(circle at center, transparent 20%, black 100%);
+  -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 100%);
+}
+
+.auth-shape {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Cross (X) */
+.shape-cross {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 1.5rem;
+  transform: rotate(45deg);
+  animation: float2 6s ease-in-out infinite;
+}
+
+/* Hollow Circles */
+.shape-hollow-circle {
+  width: 18px;
+  height: 18px;
+  border: 3px solid;
+  border-radius: 50%;
+  animation: float1 5s ease-in-out infinite;
+}
+.shape-hollow-circle.pink { border-color: var(--pink); }
+.shape-hollow-circle.yellow { border-color: var(--yellow); animation-delay: 1s; }
+
+/* Action Lines (الخطوط المايلة) */
+.shape-action-line {
+  width: 100px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  transform: rotate(-45deg);
+  animation: float2 8s ease-in-out infinite;
+}
+.shape-action-line.pink { background: var(--pink); }
+.shape-action-line.cyan { background: var(--cyan); animation-delay: 2s; }
+
+/* SVG Icons (Crown, Gamepad, Lightning) */
+.shape-svg {
+  animation: float1 7s ease-in-out infinite;
+}
+.shape-svg path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shape-svg.yellow path { stroke: var(--yellow); }
+.shape-svg.cyan path { stroke: var(--cyan); }
+.shape-svg.white path { stroke: rgba(255, 255, 255, 0.6); }
+
+/* إيقاف تأثير الـ Gradient الدائري القديم عشان الـ Shapes تبان أفضل */
+.auth-left::before {
+  opacity: 0.5; /* تقليل سطوع الإضاءة القديمة */
+}

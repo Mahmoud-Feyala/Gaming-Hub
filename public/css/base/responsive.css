@@ -1,0 +1,397 @@
+
+
+
+/* =============================================
+   RESPONSIVE — 1280px
+   ============================================= */
+@media (max-width: 1280px) {
+  .hero-float-cards {
+    right: -10px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — 1024px
+   ============================================= */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .game-details-layout {
+    grid-template-columns: 1fr;
+  }
+  .game-sidebar-card {
+    position: static;
+  }
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 3px solid var(--cyan);
+  }
+  .admin-content {
+    padding: 32px 24px;
+  }
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+  .auth-left {
+    display: none;
+  }
+  .auth-right {
+    padding: 48px 24px;
+  }
+  .hero-float-cards {
+    display: none;
+  }
+  .scoreboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .countdown-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — 900px
+   ============================================= */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-info-card {
+    position: static;
+  }
+  .contact-form-card,
+  .contact-info-card {
+    padding: 32px;
+  }
+  .contact-cta {
+    padding: 40px 24px;
+  }
+  .terms-layout {
+    grid-template-columns: 1fr;
+  }
+  .terms-toc {
+    position: static;
+    display: none;
+  }
+  .policy-layout {
+    grid-template-columns: 1fr;
+  }
+  .policy-toc {
+    position: static;
+    display: none;
+  }
+  .library-header-card {
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+  }
+  .library-quick-stats {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+  .score-card-body {
+    padding: 24px 20px;
+    gap: 16px;
+  }
+  .score-numbers {
+    font-size: 2.6rem;
+  }
+  .score-team-badge {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — 768px
+   ============================================= */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-visual {
+    display: none;
+  }
+  .hero-title {
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
+  }
+  .hero-stats {
+    gap: 20px;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .navbar-inner {
+    padding: 0 20px;
+  }
+  .navbar-nav {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .navbar-actions .btn {
+    display: none;
+  }
+  .section {
+    padding: 48px 0;
+  }
+  .page-hero {
+    padding: 40px 0 32px;
+  }
+  .library-header-card {
+    padding: 28px 20px;
+  }
+  .library-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 1.8rem;
+  }
+  .library-username {
+    font-size: 1.3rem;
+  }
+  .library-tabs {
+    width: 100%;
+  }
+  .stat-card {
+    padding: 20px;
+  }
+  .stat-value {
+    font-size: 1.8rem;
+  }
+  .add-review-card {
+    padding: 24px;
+  }
+  .faq-question {
+    padding: 16px 20px;
+  }
+  .faq-answer {
+    padding: 0 20px 16px;
+  }
+  .faq-category-header {
+    padding: 20px;
+  }
+  .footer {
+    margin-top: 48px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Sport responsive */
+  .score-card-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+  }
+  .score-team {
+    align-items: center;
+    text-align: center;
+  }
+  .score-team.home,
+  .score-team.away {
+    align-items: center;
+    text-align: center;
+  }
+  .scoreboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .sport-hero {
+    padding: 28px 20px;
+  }
+  .countdown-clock {
+    gap: 10px;
+  }
+  .countdown-num {
+    font-size: 2rem;
+    min-width: 56px;
+  }
+  .player-card-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =============================================
+   RESPONSIVE — 480px
+   ============================================= */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    padding: 5px 14px;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .games-toolbar {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .search-box {
+    min-width: 100%;
+  }
+  .game-banner {
+    aspect-ratio: 16 / 9;
+    font-size: 60px;
+  }
+  .rating-big {
+    font-size: 3rem;
+  }
+  .modal {
+    padding: 24px 20px;
+    border-radius: var(--radius-lg);
+  }
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  .auth-form-card {
+    padding: 28px 20px;
+  }
+  .add-game-form {
+    padding: 24px 16px;
+  }
+  .library-header-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 24px 16px;
+  }
+  .library-avatar {
+    margin: 0 auto;
+  }
+  .library-quick-stats {
+    justify-content: center;
+    gap: 16px;
+  }
+  .library-username {
+    white-space: normal;
+  }
+  .admin-content {
+    padding: 20px 16px;
+  }
+  .add-review-card,
+  .faq-question {
+    padding: 16px;
+  }
+  .help-search-wrap input {
+    padding: 14px 16px 14px 44px;
+    font-size: 0.95rem;
+  }
+  .contact-form-card,
+  .contact-info-card {
+    padding: 24px 16px;
+  }
+  .footer-grid {
+    gap: 20px;
+  }
+  .toast-container {
+    right: 12px;
+    top: 84px;
+  }
+  .toast {
+    font-size: 0.82rem;
+    padding: 12px 16px;
+  }
+  .legal-content-card {
+    padding: 24px;
+  }
+
+  /* Sport responsive */
+  .sport-hero-title {
+    font-size: 1.8rem;
+  }
+  .score-numbers {
+    font-size: 2.2rem;
+  }
+  .countdown-num {
+    font-size: 1.6rem;
+    min-width: 48px;
+    padding: 6px 10px;
+  }
+  .match-card-body {
+    gap: 8px;
+  }
+  .match-team-logo {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .match-score {
+    font-size: 1.1rem;
+  }
+  .sport-hero {
+    padding: 20px 16px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — 360px
+   ============================================= */
+@media (max-width: 360px) {
+  :root {
+    --shadow-md: 4px 4px 0px #111111;
+    --shadow-lg: 6px 6px 0px #111111;
+    --shadow-xl: 8px 8px 0px #111111;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+  .btn-lg {
+    padding: 12px 24px;
+  }
+  .game-card-title {
+    font-size: 0.9rem;
+  }
+  .stat-value {
+    font-size: 1.6rem;
+  }
+  .section {
+    padding: 32px 0;
+  }
+  .score-numbers {
+    font-size: 1.8rem;
+  }
+  .countdown-clock {
+    gap: 6px;
+  }
+}

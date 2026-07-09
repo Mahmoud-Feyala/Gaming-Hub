@@ -33,7 +33,7 @@
           </p>
           <div class="hero-actions">
             <% if (isAuth === true) { %>
-            <a href="/games" class="btn btn-primary btn-lg" style="width:100%;text-align:center">Browse Games →</a>
+            <a href="/games" class="btn btn-primary btn-lg btn-block">Browse Games →</a>
             <% } else { %>
             <a href="/games" class="btn btn-primary btn-lg">Browse Games →</a>
             <a href="/register" class="btn btn-outline btn-lg">Join Free</a>
@@ -126,7 +126,7 @@
         </a>
 
         <!-- Racing Card -->
-        <a href="/games" class="card genre-card" style="background: var(--pink);">
+        <a href="/games" class="card genre-card genre-card--pink">
           <div class="genre-icon">
             <i class="ph-bold ph-flag-checkered"></i>
           </div>
@@ -166,19 +166,19 @@
       <h2 class="section-title">Featured Games</h2>
       <div class="featured-games">
         <% featuredGames.forEach(game => { %>
-        <div class="game-card" data-title="<%= game.title %>" data-genre="<%= game.genre %>" data-developer="<%= game.developer %>" style="background: var(--black, #111); color: #fff; border: 2px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
-          <div class="card-image-container" style="border-bottom: 2px solid #000; position: relative; overflow: hidden;">
-            <img src="<%= game.imageUrl %>" alt="<%= game.title %>" style="width: 100%; display: block;" />
+        <div class="game-card" data-title="<%= game.title %>" data-genre="<%= game.genre %>" data-developer="<%= game.developer %>">
+          <div class="game-card-img">
+            <img src="<%= game.imageUrl %>" alt="<%= game.title %>" />
             <% if (game.badge) { %>
-            <span style="position: absolute; top: 8px; right: 8px; background: #ff6b6b; color: #fff; padding: 4px 8px; font-size: 0.7rem; font-family: var(--font-mono); border-radius: 4px; border: 1px solid #000; text-transform: uppercase; z-index: 2;"><%= game.badge %></span>
+            <span class="game-card-badge game-card-badge--default"><%= game.badge %></span>
             <% } %>
           </div>
-          <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px;"><%= game.platform %> • <%= game.year %></div>
-            <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 4px 0;"><%= game.title %></h3>
-            <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 12px;"><%= game.genre %> | <%= game.developer %></div>
-            <p style="font-size: 0.85rem; line-height: 1.4; color: #ddd; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1;"><%= game.description %></p>
-            <a href="/game-details/<%= game._id %>" class="btn btn-cyan" style="width: 100%; text-align: center; margin-top: auto;">View Game</a>
+          <div class="game-card-body">
+            <div class="game-card-meta"><%= game.platform %> • <%= game.year %></div>
+            <h3 class="game-card-title"><%= game.title %></h3>
+            <div class="game-card-sub"><%= game.genre %> | <%= game.developer %></div>
+            <p class="game-card-desc"><%= game.description %></p>
+            <a href="/game-details/<%= game._id %>" class="game-card-btn">View Game</a>
           </div>
         </div>
         <% }) %>
@@ -188,19 +188,17 @@
   <!-- Trending Reviews -->
   <section class="section">
     <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+      <div class="section-header">
         <div>
-          <div class="section-eyebrow" style="color: #000;">— COMMUNITY</div>
-          <h2 class="section-title" style="margin-bottom: 8px; color: #000;">Trending Reviews</h2>
-          <p style="color: #000; font-size: 1.1rem;">What the community is saying</p>
+          <div class="section-eyebrow">— COMMUNITY</div>
+          <h2 class="section-title">Trending Reviews</h2>
+          <p class="section-subtitle">What the community is saying</p>
         </div>
 
-        <a href="/games" class="btn" style="background: transparent; border: 2px solid #000; box-shadow: 4px 4px 0px #000; color: #000; font-weight: bold; padding: 12px 24px; text-decoration: none; border-radius: 8px; transition: transform 0.2s;">
-          More Reviews →
-        </a>
+        <a href="/games" class="btn btn-outline">More Reviews →</a>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+      <div class="grid-3">
 
         <% if (typeof trendingReviews !== 'undefined' && trendingReviews.length > 0) { %>
 
@@ -214,57 +212,45 @@
             const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
           %>
 
-        <div class="review-card" style="background: #ffe3e8; border: 3px solid #000; border-radius: 16px; padding: 24px; box-shadow: 8px 8px 0px #000; display: flex; flex-direction: column; gap: 16px;">
+        <div class="review-card">
+          <div class="review-card-header">
 
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
-
-            <div style="display: flex; gap: 12px; align-items: center; flex: 1; min-width: 0;">
-
-              <!-- Profile Image Avatar -->
-              <div style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid #000; overflow: hidden; flex-shrink: 0; background: #fff;">
-                <img src="/assets/images/<%= randomAvatar %>" alt="Gaming Hub Profile" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              </div>
-
-              <div style="flex: 1; min-width: 0;">
-                <div style="font-weight: 900; font-family: var(--font-display); font-size: 1.1rem; color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                  <%= review.user && review.user.name ? review.user.name : 'Unknown User' %>
-                </div>
-
-                <div style="font-size: 0.75rem; color: #555; font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                  <%= new Date(review.createdAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric'
-                    }) %>
-                  •
-                  <%= review.game && review.game.title ? review.game.title : 'Game' %>
-                </div>
-              </div>
-
+            <div class="review-avatar">
+              <img src="/assets/images/<%= randomAvatar %>" alt="Gaming Hub Profile" />
             </div>
 
-            <div style="color: #ffb800; font-size: 1rem; letter-spacing: 2px; flex-shrink: 0;">
+            <div class="review-user-info">
+              <div class="review-username">
+                <%= review.user && review.user.username ? review.user.username : 'Unknown User' %>
+              </div>
+              <div class="review-date">
+                <%= new Date(review.createdAt).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  }) %>
+                •
+                <%= review.game && review.game.title ? review.game.title : 'Game' %>
+              </div>
+            </div>
+
+            <div class="stars" style="flex-shrink: 0;">
               <% for (let i = 1; i <= 5; i++) { %>
-              <span style="color: <%= i <= review.rating ? '#ffb800' : '#ddd' %>">★</span>
+              <span class="star <%= i <= review.rating ? 'filled' : '' %>">★</span>
               <% } %>
             </div>
 
           </div>
 
-          <p style="color: #222; line-height: 1.6; font-size: 0.95rem; margin: 0; word-break: break-word;">
-            <%= review.review %>
-          </p>
-
+          <p class="review-text"><%= review.review %></p>
         </div>
 
         <% }) %>
 
         <% } else { %>
 
-        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed #000; border-radius: 16px; background: rgba(255,255,255,0.5);">
-          <p style="color: #000; font-size: 1.2rem; font-weight: bold; margin: 0;">
-            No reviews yet. Be the first to review a game!
-          </p>
+        <div class="reviews-empty grid-span-all">
+          No reviews yet. Be the first to review a game!
         </div>
 
         <% } %>
@@ -298,7 +284,7 @@
           </p>
           <div class="cta-actions">
             <% if (isAuth === true) { %>
-            <a href="/games" class="btn btn-cyan btn-lg" style="width:100%;text-align:center">Browse Games →</a>
+            <a href="/games" class="btn btn-cyan btn-lg btn-block">Browse Games →</a>
             <% } else { %>
             <a href="/register" class="btn btn-cyan btn-lg">Create Free Account →</a>
             <a href="/games" class="btn btn-outline-white btn-lg">Browse Games</a>
@@ -319,29 +305,5 @@
 <link rel="stylesheet" href="/css/style.css" />
 <script src="/js/app.js" defer></script>
 
-
-<style>
-  .genre-icon {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .genre-icon i {
-    font-size: 72px;
-    color: var(--black);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(3px 3px 0px rgba(17, 17, 17, 0.15));
-  }
-
-  .genre-card--dark .genre-icon i {
-    color: var(--cyan);
-  }
-
-  .card:hover .genre-icon i {
-    transform: scale(1.15) translateY(-6px);
-  }
-</style>
 
 <%- include('../includes/end.ejs') %>

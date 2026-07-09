@@ -33,7 +33,7 @@ exports.getGameDetailsPage = (req, res, next) => {
   Game.findById(gameId)
     .then((game) => {
       return Review.find({ game: gameId })
-        .populate("user", "name")
+        .populate("user", "username")
         .sort({ createdAt: -1 })
         .then((reviews) => {
           res.render("user/game-details", {
@@ -58,7 +58,7 @@ exports.getHomePage = (req, res, next) => {
         .slice(10, 14);
 
       Review.find()
-        .populate("user", "name")
+        .populate("user", "username")
         .populate("game", "title")
         .sort({ createdAt: -1 })
         .limit(3)

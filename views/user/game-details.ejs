@@ -1,325 +1,314 @@
 <%- include('../includes/head.ejs') %>
 
-<body>
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-5">★</div>
+</div>
 
-  <div class="bg-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-5">★</div>
-  </div>
+<%- include('../includes/navbar.ejs') %>
 
-  <%- include('../includes/navbar.ejs') %>
+<main class="page-wrapper">
+  <div class="container">
 
-  <main class="page-wrapper">
-    <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/games">Games</a>
+      <span>/</span>
+      <span id="game-title" class="breadcrumb-current"><%= game ? game.title : 'Game Not Found' %></span>
+    </div>
 
-      <div style="display:flex;align-items:center;gap:8px;padding:24px 0;font-family:var(--font-mono);font-size:0.72rem;color:rgba(17,17,17,0.5);text-transform:uppercase;letter-spacing:0.08em">
-        <a href="/" style="color:rgba(17,17,17,0.5);text-decoration:none;transition:var(--transition)" onmouseover="this.style.color='var(--black)'" onmouseout="this.style.color='rgba(17,17,17,0.5)'">Home</a>
-        <span>/</span>
-        <a href="/games" style="color:rgba(17,17,17,0.5);text-decoration:none;transition:var(--transition)" onmouseover="this.style.color='var(--black)'" onmouseout="this.style.color='rgba(17,17,17,0.5)'">Games</a>
-        <span>/</span>
-        <span id="game-title" style="color:var(--black)"><%= game ? game.title : 'Game Not Found' %></span>
-      </div>
+    <% if (game) { %>
+    <div class="game-details-layout">
+      <div>
 
-      <% if (game) { %>
-      <div class="game-details-layout">
-        <div>
+        <!-- Trailer / Banner Section -->
+        <% if (game.trailerUrl) {
+             // Normalize common YouTube formats into an embed URL
+             let trailer = game.trailerUrl.toString();
+             // Convert watch?v= URLs to /embed/VIDEOID
+             if (trailer.includes('watch?v=')) {
+               trailer = trailer.replace('watch?v=', 'embed/');
+             }
+             // Convert short youtu.be/VIDEOID to youtube embed path
+             if (trailer.includes('youtu.be/')) {
+               trailer = trailer.replace('youtu.be/', 'www.youtube.com/embed/');
+             }
+             // Strip any existing query string
+             trailer = trailer.split('?')[0];
+        %>
+        <!-- Video Trailer Container (16:9 Aspect Ratio) -->
+        <div class="game-banner game-banner--video">
+          <iframe src="<%= trailer %>?rel=0&controls=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen>
+          </iframe>
+        </div>
+        <% } else if (game.imageUrl) { %>
+        <!-- Fallback Image if no trailer exists -->
+        <div class="game-banner" style="background-image: url('<%= game.imageUrl %>'); background-size: cover; background-position: center;"></div>
+        <% } else { %>
+        <!-- Fallback Icon if no image or trailer -->
+        <div class="game-banner" style="background: var(--gray-light);">
+          <span class="game-sidebar-cover-icon">🎮</span>
+        </div>
+        <% } %>
 
-          <!-- Trailer / Banner Section -->
-          <% if (game.trailerUrl) {
-               // Normalize common YouTube formats into an embed URL
-               let trailer = game.trailerUrl.toString();
-               // Convert watch?v= URLs to /embed/VIDEOID
-               if (trailer.includes('watch?v=')) {
-                 trailer = trailer.replace('watch?v=', 'embed/');
-               }
-               // Convert short youtu.be/VIDEOID to youtube embed path
-               if (trailer.includes('youtu.be/')) {
-                 trailer = trailer.replace('youtu.be/', 'www.youtube.com/embed/');
-               }
-               // Strip any existing query string
-               trailer = trailer.split('?')[0];
-          %>
-          <!-- Video Trailer Container (16:9 Aspect Ratio) -->
-          <div class="game-banner video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 3px solid var(--black); background: var(--black); margin-bottom: 24px;">
-            <iframe src="<%= trailer %>?rel=0&controls=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen>
-            </iframe>
+        <div class="game-info-header">
+          <div class="game-detail-genre"><%= game.genre %></div>
+          <h1 class="game-detail-title"><%= game.title %></h1>
+
+          <div class="game-rating-row">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+            <span class="game-rating-score">4.9</span>
+            <span class="game-rating-count">389 reviews</span>
           </div>
-          <% } else if (game.imageUrl) { %>
-          <!-- Fallback Image if no trailer exists -->
-          <div class="game-banner" style="background-image: url('<%= game.imageUrl %>'); background-size: cover; background-position: center; margin-bottom: 24px;"></div>
+
+          <p class="game-description"><%= game.description %></p>
+
+          <div class="game-tags">
+            <span class="tag tag-cyan"><%= game.genre %></span>
+            <% if (game.tags) { %>
+            <span class="tag tag-outline"><%= game.tags %></span>
+            <% } %>
+            <% if (game.badge) { %>
+            <span class="tag tag-yellow"><%= game.badge %></span>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="rating-distribution">
+          <div class="rating-summary-row">
+            <div>
+              <div class="rating-big">4.9</div>
+              <div class="rating-out-of">OUT OF 5.0</div>
+              <div class="rating-stars-wrap">
+                <div class="stars">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="rating-bars">
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">5</div>
+                  <div class="progress-bar flex-1">
+                    <div class="progress-fill" style="width:72%"></div>
+                  </div>
+                  <div class="rating-bar-count">280</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">4</div>
+                  <div class="progress-bar flex-1">
+                    <div class="progress-fill yellow" style="width:18%"></div>
+                  </div>
+                  <div class="rating-bar-count">70</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">3</div>
+                  <div class="progress-bar flex-1">
+                    <div class="progress-fill orange" style="width:6%"></div>
+                  </div>
+                  <div class="rating-bar-count">24</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">2</div>
+                  <div class="progress-bar flex-1">
+                    <div class="progress-fill red" style="width:3%"></div>
+                  </div>
+                  <div class="rating-bar-count">10</div>
+                </div>
+                <div class="rating-bar-row">
+                  <div class="rating-bar-label">1</div>
+                  <div class="progress-bar flex-1">
+                    <div class="progress-fill red" style="width:1%"></div>
+                  </div>
+                  <div class="rating-bar-count">5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-section">
+
+          <% if (isAuth === true) { %>
+          <div class="add-review-card">
+            <div class="add-review-title">⌨️ Write Your Review</div>
+            <form id="add-review-form" action="/reviews" method="POST">
+              <input type="hidden" name="gameId" value="<%= game._id %>">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="rating" id="rating" value="5">
+              <div class="form-group">
+                <label class="form-label">Your Rating</label>
+                <div class="interactive-stars">
+                  <span class="star filled" data-val="1">★</span>
+                  <span class="star filled" data-val="2">★</span>
+                  <span class="star filled" data-val="3">★</span>
+                  <span class="star filled" data-val="4">★</span>
+                  <span class="star filled" data-val="5">★</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Your Review</label>
+                <textarea class="form-textarea" name="review" required placeholder="Share your experience with this game... What did you love? What could be better?" style="min-height:140px"></textarea>
+              </div>
+              <button type="submit" class="btn btn-cyan">Post Review →</button>
+            </form>
+          </div>
           <% } else { %>
-          <!-- Fallback Icon if no image or trailer -->
-          <div class="game-banner" style="background: var(--light-gray); display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 3px solid var(--black); margin-bottom: 24px;">
-            <span style="position:relative; z-index:1; font-size: 3rem;">🎮</span>
+          <div class="add-review-card review-login-cta">
+            <p>Sign in to write a review for this game</p>
+            <a href="/login?redirect=/games/<%= game._id %>" class="btn btn-cyan btn-lg">Login to Review</a>
           </div>
           <% } %>
 
-          <div class="game-info-header">
-            <div class="game-detail-genre"><%= game.genre %></div>
-            <h1 class="game-detail-title"><%= game.title %></h1>
+          <div class="reviews-header-row">
+            <h3 class="section-title-sm">Player Reviews</h3>
+            <select class="form-select">
+              <option>Most Recent</option>
+              <option>Highest Rated</option>
+              <option>Most Helpful</option>
+            </select>
+          </div>
+          <% if (reviews.length === 0) { %>
 
-            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
-              <div class="stars">
-                <span class="star filled">★</span>
-                <span class="star filled">★</span>
-                <span class="star filled">★</span>
-                <span class="star filled">★</span>
-                <span class="star filled">★</span>
-              </div>
-              <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--black)">4.9</span>
-              <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--gray)">389 reviews</span>
-            </div>
-
-            <p class="game-description"><%= game.description %></p>
-
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px">
-              <span class="tag tag-cyan"><%= game.genre %></span>
-              <% if (game.tags) { %>
-              <span class="tag tag-outline"><%= game.tags %></span>
-              <% } %>
-              <% if (game.badge) { %>
-              <span class="tag tag-yellow"><%= game.badge %></span>
-              <% } %>
-            </div>
+          <div class="review-card">
+            <h3>No Reviews Yet</h3>
+            <p>Be the first to review this game!</p>
           </div>
 
-          <div class="rating-distribution">
-            <div style="display:flex;align-items:center;gap:24px;margin-bottom:8px">
+          <% } else { %>
+
+          <% reviews.forEach(review => { %>
+
+          <div class="review-card">
+
+            <div class="review-header">
+
               <div>
-                <div class="rating-big">4.9</div>
-                <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray);margin-top:4px">OUT OF 5.0</div>
-                <div style="margin-top:8px">
-                  <div class="stars">
-                    <span class="star filled">★</span>
-                    <span class="star filled">★</span>
-                    <span class="star filled">★</span>
-                    <span class="star filled">★</span>
-                    <span class="star filled">★</span>
-                  </div>
+                <h3 class="review-user"><%= review.user.username %></h3>
+
+                <div class="review-stars">
+                  <% for(let i=1;i<=5;i++){ %>
+
+                  <% if(i<=review.rating){ %>
+                  ★
+                  <% } else { %>
+                  <span class="star-empty">★</span>
+                  <% } %>
+
+                  <% } %>
                 </div>
               </div>
-              <div style="flex:1">
-                <div class="rating-bars">
-                  <div class="rating-bar-row">
-                    <div class="rating-bar-label">5</div>
-                    <div class="progress-bar" style="flex:1">
-                      <div class="progress-fill" style="width:72%"></div>
-                    </div>
-                    <div class="rating-bar-count">280</div>
-                  </div>
-                  <div class="rating-bar-row">
-                    <div class="rating-bar-label">4</div>
-                    <div class="progress-bar" style="flex:1">
-                      <div class="progress-fill yellow" style="width:18%"></div>
-                    </div>
-                    <div class="rating-bar-count">70</div>
-                  </div>
-                  <div class="rating-bar-row">
-                    <div class="rating-bar-label">3</div>
-                    <div class="progress-bar" style="flex:1">
-                      <div class="progress-fill orange" style="width:6%"></div>
-                    </div>
-                    <div class="rating-bar-count">24</div>
-                  </div>
-                  <div class="rating-bar-row">
-                    <div class="rating-bar-label">2</div>
-                    <div class="progress-bar" style="flex:1">
-                      <div class="progress-fill" style="width:3%;background:#FF4444"></div>
-                    </div>
-                    <div class="rating-bar-count">10</div>
-                  </div>
-                  <div class="rating-bar-row">
-                    <div class="rating-bar-label">1</div>
-                    <div class="progress-bar" style="flex:1">
-                      <div class="progress-fill" style="width:1%;background:#FF4444"></div>
-                    </div>
-                    <div class="rating-bar-count">5</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="reviews-section">
-
-            <% if (isAuth === true) { %>
-            <div class="add-review-card">
-              <div class="add-review-title">⌨️ Write Your Review</div>
-              <form id="add-review-form" action="/reviews" method="POST">
-                <input type="hidden" name="gameId" value="<%= game._id %>">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <input type="hidden" name="rating" id="rating" value="5">
-                <div class="form-group">
-                  <label class="form-label">Your Rating</label>
-                  <div class="interactive-stars">
-                    <span class="star filled" data-val="1">★</span>
-                    <span class="star filled" data-val="2">★</span>
-                    <span class="star filled" data-val="3">★</span>
-                    <span class="star filled" data-val="4">★</span>
-                    <span class="star filled" data-val="5">★</span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Your Review</label>
-                  <textarea class="form-textarea" name="review" required placeholder="Share your experience with this game... What did you love? What could be better?" style="min-height:140px"></textarea>
-                </div>
-                <button type="submit" class="btn btn-cyan">Post Review →</button>
-              </form>
-            </div>
-            <% } else { %>
-            <div class="add-review-card" style="text-align:center;padding:32px 20px">
-              <p style="font-family:var(--font-mono);font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:20px">
-                Sign in to write a review for this game
-              </p>
-              <a href="/login?redirect=/games/<%= game._id %>" style="display:inline-block !important;background:#22D3EE !important;color:#000000 !important;font-family:monospace !important;font-weight:800 !important;font-size:0.9rem !important;padding:14px 32px !important;border-radius:8px !important;text-decoration:none !important;border:2px solid #000000 !important;min-width:180px;">Login to Review</a>
-            </div>
-            <% } %>
-
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
-              <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;color:var(--black);margin:0">Player Reviews</h3>
-              <select class="form-select" style="width:auto;padding:8px 32px 8px 14px;font-size:0.8rem">
-                <option>Most Recent</option>
-                <option>Highest Rated</option>
-                <option>Most Helpful</option>
-              </select>
-            </div>
-            <% if (reviews.length === 0) { %>
-
-            <div class="review-card">
-              <h3>No Reviews Yet</h3>
-              <p>Be the first to review this game!</p>
-            </div>
-
-            <% } else { %>
-
-            <% reviews.forEach(review => { %>
-
-            <div class="review-card">
-
-              <div class="review-header">
-
-                <div>
-                  <h3><%= review.user.name %></h3>
-
-                  <div class="review-stars">
-                    <% for(let i=1;i<=5;i++){ %>
-
-                    <% if(i<=review.rating){ %>
-                    ★
-                    <% } else { %>
-                    <span style="opacity:.25">★</span>
-                    <% } %>
-
-                    <% } %>
-                  </div>
-                </div>
-
-                <span>
-                  <%= review.createdAt.toLocaleDateString("en-GB", {
+              <span class="review-date">
+                <%= review.createdAt.toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",
     year: "numeric"
 }) %>
-                </span>
-
-              </div>
-
-              <p class="review-text">
-                <%= review.review %>
-              </p>
+              </span>
 
             </div>
 
-            <% }) %>
+            <p class="review-text">
+              <%= review.review %>
+            </p>
 
+          </div>
+
+          <% }) %>
+
+          <% } %>
+
+          <div id="reviews-list" class="reviews-list"></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="game-sidebar-card">
+          <div class="game-sidebar-cover">
+            <% if (game.imageUrl) { %>
+            <img src="<%= game.imageUrl %>" alt="<%= game.title %>">
+            <% } else { %>
+            <span class="game-sidebar-cover-icon">🎮</span>
             <% } %>
+          </div>
+          <div class="game-sidebar-body">
+            <div class="game-sidebar-actions">
+              <% if (isAuth === true) { %>
+              <form id="add-to-library-form" action="/add-to-library" method="POST" class="btn-block">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="gameId" value="<%= game.id %>">
+                <input type="hidden" name="imageUrl" value="<%= game.imageUrl %>">
 
-            <div id="reviews-list" style="display:flex;flex-direction:column;gap:16px"></div>
+                <button type="submit" class="btn btn-primary btn-block" onclick="handleAddToLibraryClick(event, '<%= game.id %>')">
+                  + Add to Library
+                </button>
+              </form>
+              <% } %>
+              <button class="btn btn-outline btn-block" onclick="View.showToast('Added to wishlist! ⭐','info')">♡ Wishlist</button>
+            </div>
+
+            <div class="game-info-label">Game Info</div>
+
+            <div class="game-info-row">
+              <span class="game-info-key">Developer</span>
+              <span class="game-info-value"><%= game.developer %></span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Platform</span>
+              <span class="game-info-value"><%= game.platform %></span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Release</span>
+              <span class="game-info-value"><%= game.year %></span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Rating</span>
+              <span class="game-info-value game-info-value--rating">⭐ 4.9</span>
+            </div>
+            <div class="game-info-row">
+              <span class="game-info-key">Reviews</span>
+              <span class="game-info-value">389</span>
+            </div>
           </div>
         </div>
-
-        <aside>
-          <div class="game-sidebar-card">
-            <div class="game-sidebar-cover" style="padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
-              <% if (game.imageUrl) { %>
-              <img src="<%= game.imageUrl %>" alt="<%= game.title %>" style="width: 100%; height: 100%; object-fit: cover;">
-              <% } else { %>
-              <span style="font-size:72px;position:relative;z-index:1">🎮</span>
-              <% } %>
-            </div>
-            <div class="game-sidebar-body">
-              <div style="margin-bottom:20px">
-                <% if (isAuth === true) { %>
-                <form id="add-to-library-form" action="/add-to-library" method="POST" style="width:100%;margin-bottom:10px">
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                  <input type="hidden" name="gameId" value="<%= game.id %>">
-                  <input type="hidden" name="imageUrl" value="<%= game.imageUrl %>">
-
-                  <button type="submit" class="btn btn-primary" style="width:100%" onclick="handleAddToLibraryClick(event, '<%= game.id %>')">
-                    + Add to Library
-                  </button>
-                </form>
-                <% } %>
-                <button class="btn btn-outline" style="width:100%" onclick="View.showToast('Added to wishlist! ⭐','info')">♡ Wishlist</button>
-              </div>
-
-              <div style="font-family:var(--font-display);font-size:0.7rem;font-weight:700;color:rgba(17,17,17,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px">Game Info</div>
-
-              <div class="game-info-row">
-                <span class="game-info-key">Developer</span>
-                <span class="game-info-value"><%= game.developer %></span>
-              </div>
-              <div class="game-info-row">
-                <span class="game-info-key">Platform</span>
-                <span class="game-info-value"><%= game.platform %></span>
-              </div>
-              <div class="game-info-row">
-                <span class="game-info-key">Release</span>
-                <span class="game-info-value"><%= game.year %></span>
-              </div>
-              <div class="game-info-row">
-                <span class="game-info-key">Rating</span>
-                <span class="game-info-value" style="color:var(--yellow)">⭐ 4.9</span>
-              </div>
-              <div class="game-info-row">
-                <span class="game-info-key">Reviews</span>
-                <span class="game-info-value">389</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-      <% } else { %>
-      <div style="text-align: center; padding: 50px; width: 100%;">
-        <h2>Game not found</h2>
-        <p>The game you are looking for does not exist.</p>
-      </div>
-      <% } %>
-
+      </aside>
     </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <div class="footer-bottom-text">© 2025 Gaming Hub. All rights reserved.</div>
-        <a href="/games" style="color:var(--cyan);font-family:var(--font-mono);font-size:0.75rem">← Back to Games</a>
-      </div>
+    <% } else { %>
+    <div class="game-not-found">
+      <h2>Game not found</h2>
+      <p>The game you are looking for does not exist.</p>
     </div>
-  </footer>
-  <script>
-    document.querySelectorAll('.interactive-stars .star').forEach(star => {
-      star.addEventListener('click', () => {
-        const val = parseInt(star.dataset.val, 10);
-        document.getElementById('rating').value = val;
-        document.querySelectorAll('.interactive-stars .star').forEach(s => {
-          s.classList.toggle('filled', parseInt(s.dataset.val, 10) <= val);
-        });
+    <% } %>
+
+  </div>
+</main>
+
+<%- include('../includes/footer.ejs') %>
+
+<script>
+  document.querySelectorAll('.interactive-stars .star').forEach(star => {
+    star.addEventListener('click', () => {
+      const val = parseInt(star.dataset.val, 10);
+      document.getElementById('rating').value = val;
+      document.querySelectorAll('.interactive-stars .star').forEach(s => {
+        s.classList.toggle('filled', parseInt(s.dataset.val, 10) <= val);
       });
     });
-  </script>
-  <script src="/js/app.js"></script>
-</body>
+  });
+</script>
+<script src="/js/app.js" defer></script>
 
-</html>
+<%- include('../includes/end.ejs') %>

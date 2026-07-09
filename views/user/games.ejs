@@ -15,7 +15,7 @@
     <div class="page-hero">
       <div class="page-hero-label">— Browse</div>
       <h1 class="page-hero-title">All <span>Games</span></h1>
-      <div style="font-family:var(--font-body);font-size:1.05rem;color:var(--black);font-weight:500;opacity:0.7;margin-bottom:0">Discover, rate, and review your favourites from our curated collection</div>
+      <div class="page-hero-subtitle">Discover, rate, and review your favourites from our curated collection</div>
     </div>
 
     <div class="games-toolbar">
@@ -36,11 +36,11 @@
       </div>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
-      <div id="games-count" style="font-family:var(--font-mono);font-size:0.75rem;color:rgba(17,17,17,0.6);text-transform:uppercase;font-weight:bold;letter-spacing:0.08em">Showing <%= game ? game.length : 0 %> games</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span style="font-family:var(--font-mono);font-size:0.7rem;color:rgba(17,17,17,0.5);font-weight:bold;">Sort:</span>
-        <select class="form-select" style="width:auto;padding:6px 32px 6px 12px;font-size:0.8rem;cursor:pointer;">
+    <div class="games-meta-row">
+      <div id="games-count" class="games-count">Showing <%= game ? game.length : 0 %> games</div>
+      <div class="sort-control">
+        <span class="sort-control-label">Sort:</span>
+        <select class="form-select">
           <option>Rating: High to Low</option>
           <option>Newest First</option>
           <option>Most Reviewed</option>
@@ -48,34 +48,30 @@
         </select>
       </div>
     </div>
-          
-    <div class="grid-4" id="games-grid" style="margin-bottom:64px; position:relative;">
+
+    <div class="grid-4 games-grid" id="games-grid">
       <% if (game && game.length > 0) { %>
       <% game.forEach(g => { %>
-      <div class="game-card" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>" style="background: var(--black, #111); color: #fff; border: 3px solid #000; border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0px rgba(0,0,0,0.3); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        
-        <div class="card-image-container" style="border-bottom: 3px solid #000; position: relative; overflow: hidden; aspect-ratio: 2/3;">
-          <img src="<%= g.imageUrl || 'https://via.placeholder.com/600x900' %>" alt="<%= g.title %>" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease;" />
+      <div class="game-card" data-title="<%= g.title %>" data-genre="<%= g.genre %>" data-developer="<%= g.developer %>">
+        <div class="game-card-img game-card-img--poster">
+          <img src="<%= g.imageUrl || 'https://via.placeholder.com/600x900' %>" alt="<%= g.title %>" />
           <% if (g.badge) { %>
-            <span style="position: absolute; top: 12px; right: 12px; background: var(--yellow); color: var(--black); padding: 4px 10px; font-size: 0.7rem; font-weight: bold; font-family: var(--font-mono); border-radius: 4px; border: 2px solid #000; text-transform: uppercase; z-index: 2;"><%= g.badge %></span>
+          <span class="game-card-badge game-card-badge--featured"><%= g.badge %></span>
           <% } %>
         </div>
-
-        <div style="padding: 16px; background: #1a1a1a; flex-grow: 1; display: flex; flex-direction: column;">
-          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px; font-weight:bold;"><%= g.platform %> • <%= g.year %></div>
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0 0 4px 0;"><%= g.title %></h3>
-          <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 12px;"><%= g.genre %> | <%= g.developer %></div>
-          
-          <p style="font-size: 0.85rem; line-height: 1.5; color: #ddd; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1;"><%= g.description %></p>
-          
-          <a href="/game-details/<%= g._id %>" class="btn btn-cyan" style="width: 100%; text-align: center; margin-top: auto; border: 2px solid #000;">View Game</a>
+        <div class="game-card-body">
+          <div class="game-card-meta"><%= g.platform %> • <%= g.year %></div>
+          <h3 class="game-card-title"><%= g.title %></h3>
+          <div class="game-card-sub"><%= g.genre %> | <%= g.developer %></div>
+          <p class="game-card-desc"><%= g.description %></p>
+          <a href="/game-details/<%= g._id %>" class="game-card-btn">View Game</a>
         </div>
       </div>
       <% }) %>
       <% } else { %>
-      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; border: 3px dashed rgba(17,17,17,0.3); border-radius: 8px;">
-        <div style="font-size: 3rem; margin-bottom: 16px;">👾</div>
-        <p style="font-family: var(--font-display); font-size: 1.5rem; color: var(--black); margin: 0;">No games found. Check back later!</p>
+      <div class="games-empty-state grid-span-all">
+        <div class="games-empty-state-icon">👾</div>
+        <p class="games-empty-state-text">No games found. Check back later!</p>
       </div>
       <% } %>
     </div>
@@ -83,7 +79,7 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
     <% if (game && game.length > 0) { %>
-    <div style="text-align:center;padding-bottom:80px">
+    <div class="load-more-wrap">
       <button class="btn btn-outline btn-lg" onclick="this.textContent='Loading...';setTimeout(()=>this.textContent='Load More Games →',1500)">Load More Games →</button>
     </div>
     <% } %>

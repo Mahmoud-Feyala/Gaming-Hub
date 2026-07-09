@@ -1,0 +1,121 @@
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =============================================
+   LAYOUT UTILITIES
+   ============================================= */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+  min-height: 100vh;
+}
+.section         { padding: 80px 0; }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--black-soft);
+  margin-bottom: 48px;
+  font-weight: 500;
+}
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.section-header .section-title    { margin-bottom: 8px; }
+.section-header .section-subtitle { margin-bottom: 0; }
+
+/* Grid helpers */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.grid-span-all { grid-column: 1 / -1; }
+
+/* Flex helpers */
+.flex         { display: flex; }
+.flex-center  { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col     { display: flex; flex-direction: column; }
+
+/* Gap helpers */
+.gap-8  { gap:  8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.gap-32 { gap: 32px; }
+.flex-1 { flex: 1; }
+
+/* ── Section eyebrow ── */
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(17, 17, 17, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.section-title { margin-bottom: 40px; }
+
+/* ==========================================================================
+   Neo-brutalism UI/UX Polish Enhancements
+   ========================================================================== */
+
+/* 1. توحيد سُمك الحدود لـ 3px لشكل أشرس وأكثر تناسقاً */
+.game-card, .card, .form-input, .btn, .admin-table-card, .form-textarea, .form-select {
+    border-width: 3px !important;
+}
+
+/* 2. تأثير الضغط الحقيقي (Active State) للأزرار والـ Tags */
+.btn:active, .filter-tag:active, .category-btn:active, .social-btn:active {
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+    transition: all 0.1s ease;
+}
+
+/* 3. تحسين أداء الأنيميشن في الأشكال الخلفية لمنع الـ Lag */
+.shape, .auth-shape, .bubble {
+    will-change: transform;
+}
+
+/* 4. كلاسات الفلترة السلسة (Smooth Filtering) لصفحة الألعاب */
+.game-card {
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    transform-origin: center;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.2) !important;
+}
+
+.game-card.hide-card {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute; /* لمنع ترك مساحة فارغة في الـ Grid */
+    pointer-events: none;
+    visibility: hidden;
+}
