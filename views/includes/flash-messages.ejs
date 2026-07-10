@@ -1,0 +1,20 @@
+<% 
+  const hasError = typeof error !== 'undefined' && error && ((Array.isArray(error) && error.length > 0) || (!Array.isArray(error) && error.toString().trim() !== ""));
+  const hasSuccess = typeof success !== 'undefined' && success && ((Array.isArray(success) && success.length > 0) || (!Array.isArray(success) && success.toString().trim() !== ""));
+%>
+
+<% if (hasError) { %>
+<div class="flash-alert flash-alert-error">
+  <div class="flash-alert-text">
+    <%= Array.isArray(error) ? error[0] : error %>
+  </div>
+</div>
+<% } %>
+
+<% if (hasSuccess) { %>
+<div class="flash-alert flash-alert-success">
+  <div class="flash-alert-text">
+    <%= Array.isArray(success) ? success[0] : success %>
+  </div>
+</div>
+<% } %>

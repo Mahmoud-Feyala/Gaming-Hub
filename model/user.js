@@ -22,7 +22,8 @@ const UserSchema = new Schema(
       trim: true,
       lowercase: true,
     },
-
+    resetToken: String,
+    resetTokenExpiration: Date,
     email: {
       type: String,
       required: true,

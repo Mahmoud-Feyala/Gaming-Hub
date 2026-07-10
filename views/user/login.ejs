@@ -81,6 +81,8 @@
       <div class="auth-form-title">Log In</div>
       <div class="auth-form-subtitle">Enter your credentials to continue</div>
 
+      <%- include('../includes/flash-messages.ejs') %>
+
       <!-- Social Login -->
       <a href="#" class="btn-social" onclick="View.showToast('Connecting with Google...','info');return false">
         <span style="font-size:1.1rem">G</span> Continue with Google
@@ -105,7 +107,7 @@
         <div class="form-group">
           <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
             Password
-            <a href="#" style="font-family:var(--font-mono);font-size:0.65rem;color:var(--black);font-weight:400;text-decoration:underline">Forgot password?</a>
+            <a href="/forgot-password" style="font-family:var(--font-mono);font-size:0.65rem;color:var(--black);font-weight:400;text-decoration:underline">Forgot password?</a>
           </label>
           <div style="position:relative">
             <input class="form-input" type="password" name="password" id="password-field" placeholder="••••••••" required autocomplete="current-password" />

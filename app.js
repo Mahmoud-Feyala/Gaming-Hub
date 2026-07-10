@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const { csrfSync } = require("csrf-sync");
-
+const flash = require('connect-flash');
 require("dotenv").config();
 
 // Routes
@@ -57,7 +57,7 @@ app.use(
 
 // CSRF Middleware
 app.use(csrfSynchronisedProtection);
-
+app.use(flash());
 // Load Logged In User
 app.use((req, res, next) => {
   if (!req.session.user) {
