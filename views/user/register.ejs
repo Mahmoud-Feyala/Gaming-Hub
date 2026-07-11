@@ -108,18 +108,18 @@
         <div class="auth-divider-text">or fill in the form</div>
         <div class="auth-divider-line"></div>
       </div>
-      <form id="register-form" action="/signup" method="POST">
+      <form id="register-form" action="/signup" method="POST" novalidate>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
         <div class="form-row">
           <div class="form-group" style="margin-bottom: 0">
             <label class="form-label">First Name</label>
-            <input class="form-input" type="text" name="firstName" placeholder="Alex" />
+            <input class="form-input" type="text" name="firstName" placeholder="Alex" value="<%= oldInput.firstName || '' %>" />
           </div>
 
           <div class="form-group" style="margin-bottom: 0">
             <label class="form-label">Last Name</label>
-            <input class="form-input" type="text" name="lastName" placeholder="Gamer" />
+            <input class="form-input" type="text" name="lastName" placeholder="Gamer" value="<%= oldInput.lastName || '' %>" />
           </div>
         </div>
 
@@ -136,13 +136,13 @@
           color: var(--gray);
         ">@</span>
 
-            <input class="form-input" type="text" name="username" placeholder="pixelwarrior99" style="padding-left: 36px" />
+            <input class="form-input" type="text" name="username" placeholder="pixelwarrior99" style="padding-left: 36px" value="<%= oldInput.username || '' %>" />
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" name="email" placeholder="gamer@example.com" />
+          <input class="form-input" type="email" name="email" placeholder="gamer@example.com" value="<%= oldInput.email || '' %>" />
         </div>
 
         <div class="form-group">
@@ -214,14 +214,14 @@
 
           <select class="form-select" name="favoriteGenre">
             <option value="">Select your main genre...</option>
-            <option value="Action">Action</option>
-            <option value="RPG">RPG</option>
-            <option value="Racing">Racing</option>
-            <option value="Strategy">Strategy</option>
-            <option value="Horror">Horror</option>
-            <option value="Fighting">Fighting</option>
-            <option value="Sports">Sports</option>
-            <option value="Puzzle">Puzzle</option>
+            <option value="Action" <%= oldInput.favoriteGenre === 'Action' ? 'selected' : '' %>>Action</option>
+            <option value="RPG" <%= oldInput.favoriteGenre === 'RPG' ? 'selected' : '' %>>RPG</option>
+            <option value="Racing" <%= oldInput.favoriteGenre === 'Racing' ? 'selected' : '' %>>Racing</option>
+            <option value="Strategy" <%= oldInput.favoriteGenre === 'Strategy' ? 'selected' : '' %>>Strategy</option>
+            <option value="Horror" <%= oldInput.favoriteGenre === 'Horror' ? 'selected' : '' %>>Horror</option>
+            <option value="Fighting" <%= oldInput.favoriteGenre === 'Fighting' ? 'selected' : '' %>>Fighting</option>
+            <option value="Sports" <%= oldInput.favoriteGenre === 'Sports' ? 'selected' : '' %>>Sports</option>
+            <option value="Puzzle" <%= oldInput.favoriteGenre === 'Puzzle' ? 'selected' : '' %>>Puzzle</option>
           </select>
         </div>
 

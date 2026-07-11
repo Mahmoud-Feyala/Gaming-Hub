@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const sgMail = require("@sendgrid/mail");
+const { validationResult } = require("express-validator");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -56,6 +57,8 @@ exports.getSignup = (req, res, next) => {
     isAuth: false,
     error: req.flash("error"),
     success: req.flash("success"),
+    oldInput: {},
+    validationErrors: [],
   });
 };
 
@@ -70,9 +73,22 @@ exports.postSignup = (req, res, next) => {
     favoriteGenre,
   } = req.body;
 
-  if (password !== confirmPassword) {
-    req.flash("error", "Passwords do not match.");
-    return res.redirect("/signup");
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).render("user/register.ejs", {
+      pageTitle: "Signup",
+      path: "/signup",
+      error: errors.array()[0].msg,
+      oldInput: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        email: req.body.email,
+        favoriteGenre: req.body.favoriteGenre,
+      },
+      validationErrors: errors.array(),
+    });
   }
 
   User.findOne({ email })
@@ -120,7 +136,6 @@ exports.postSignup = (req, res, next) => {
           `,
         })
         .catch((err) => {
-
           console.log(err);
         });
     })
