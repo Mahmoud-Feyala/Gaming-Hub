@@ -49,33 +49,35 @@
       </div>
 
       <div class="add-game-form">
-        <form id="add-game-form" action="/admin/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>" method="POST">
+        <%- include('../includes/flash-messages.ejs') %>
+
+        <form id="add-game-form" action="/admin/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>" method="POST" novalidate>
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <div class="form-divider">Basic Info</div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Game Title * </label>
-              <input class="form-input" type="text" name="title" value="<% if (editing) { %><%= game.title %><% } %>" placeholder="e.g. Neon Drift 2" required />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'title') ? 'input-error' : '' %>" type="text" name="title" value="<%= game.title %>" placeholder="e.g. Neon Drift 2" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Genre * </label>
-              <select class="form-select" name="genre" required>
+              <select class="form-select <%= validationErrors.find(e => e.path === 'genre') ? 'input-error' : '' %>" name="genre" required>
                 <option value="">Select genre...</option>
-                <option value="Action" <% if (editing && game.genre === 'Action') { %>selected<% } %>>Action</option>
-                <option value="Adventure" <% if (editing && game.genre === 'Adventure') { %>selected<% } %>>Adventure</option>
-                <option value="Shooter" <% if (editing && game.genre === 'Shooter') { %>selected<% } %>>Shooter</option>
-                <option value="RPG" <% if (editing && game.genre === 'RPG') { %>selected<% } %>>RPG</option>
-                <option value="Racing" <% if (editing && game.genre === 'Racing') { %>selected<% } %>>Racing</option>
-                <option value="Sports" <% if (editing && game.genre === 'Sports') { %>selected<% } %>>Sports</option>
-                <option value="Strategy" <% if (editing && game.genre === 'Strategy') { %>selected<% } %>>Strategy</option>
-                <option value="Simulation" <% if (editing && game.genre === 'Simulation') { %>selected<% } %>>Simulation</option>
-                <option value="Fighting" <% if (editing && game.genre === 'Fighting') { %>selected<% } %>>Fighting</option>
-                <option value="Horror" <% if (editing && game.genre === 'Horror') { %>selected<% } %>>Horror</option>
-                <option value="Survival" <% if (editing && game.genre === 'Survival') { %>selected<% } %>>Survival</option>
-                <option value="Indie" <% if (editing && game.genre === 'Indie') { %>selected<% } %>>Indie</option>
-                <option value="Puzzle" <% if (editing && game.genre === 'Puzzle') { %>selected<% } %>>Puzzle</option>
+                <option value="Action" <%= game.genre === 'Action' ? 'selected' : '' %>>Action</option>
+                <option value="Adventure" <%= game.genre === 'Adventure' ? 'selected' : '' %>>Adventure</option>
+                <option value="Shooter" <%= game.genre === 'Shooter' ? 'selected' : '' %>>Shooter</option>
+                <option value="RPG" <%= game.genre === 'RPG' ? 'selected' : '' %>>RPG</option>
+                <option value="Racing" <%= game.genre === 'Racing' ? 'selected' : '' %>>Racing</option>
+                <option value="Sports" <%= game.genre === 'Sports' ? 'selected' : '' %>>Sports</option>
+                <option value="Strategy" <%= game.genre === 'Strategy' ? 'selected' : '' %>>Strategy</option>
+                <option value="Simulation" <%= game.genre === 'Simulation' ? 'selected' : '' %>>Simulation</option>
+                <option value="Fighting" <%= game.genre === 'Fighting' ? 'selected' : '' %>>Fighting</option>
+                <option value="Horror" <%= game.genre === 'Horror' ? 'selected' : '' %>>Horror</option>
+                <option value="Survival" <%= game.genre === 'Survival' ? 'selected' : '' %>>Survival</option>
+                <option value="Indie" <%= game.genre === 'Indie' ? 'selected' : '' %>>Indie</option>
+                <option value="Puzzle" <%= game.genre === 'Puzzle' ? 'selected' : '' %>>Puzzle</option>
               </select>
             </div>
           </div>
@@ -83,17 +85,17 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Developer * </label>
-              <input class="form-input" type="text" name="developer" value="<% if (editing) { %><%= game.developer %><% } %>" placeholder="e.g. VoltStudios" required />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'developer') ? 'input-error' : '' %>" type="text" name="developer" value="<%= game.developer %>" placeholder="e.g. VoltStudios" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Platform * </label>
-              <select class="form-select" name="platform" required>
-                <option value="PC" <% if (editing && game.platform === 'PC') { %>selected<% } %>>PC</option>
-                <option value="PS5" <% if (editing && game.platform === 'PS5') { %>selected<% } %>>PS5</option>
-                <option value="Xbox" <% if (editing && game.platform === 'Xbox') { %>selected<% } %>>Xbox</option>
-                <option value="Switch" <% if (editing && game.platform === 'Switch') { %>selected<% } %>>Nintendo Switch</option>
-                <option value="Mobile" <% if (editing && game.platform === 'Mobile') { %>selected<% } %>>Mobile</option>
+              <select class="form-select <%= validationErrors.find(e => e.path === 'platform') ? 'input-error' : '' %>" name="platform" required>
+                <option value="PC" <%= game.platform === 'PC' ? 'selected' : '' %>>PC</option>
+                <option value="PS5" <%= game.platform === 'PS5' ? 'selected' : '' %>>PS5</option>
+                <option value="Xbox" <%= game.platform === 'Xbox' ? 'selected' : '' %>>Xbox</option>
+                <option value="Switch" <%= game.platform === 'Switch' ? 'selected' : '' %>>Nintendo Switch</option>
+                <option value="Mobile" <%= game.platform === 'Mobile' ? 'selected' : '' %>>Mobile</option>
               </select>
             </div>
           </div>
@@ -101,21 +103,21 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Release Year * </label>
-              <input class="form-input" type="number" name="year" value="<% if (editing) { %><%= game.year %><% } %>" placeholder="2024" min="1980" max="2030" required />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'year') ? 'input-error' : '' %>" type="number" name="year" value="<%= game.year %>" placeholder="2024" min="1980" max="2030" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Badge </label>
-              <select class="form-select" name="badge">
-                <option value="" <% if (editing && (!game.badge || game.badge === '')) { %>selected<% } %>>None</option>
-                <option value="new" <% if (editing && game.badge === 'new') { %>selected<% } %>>New</option>
-                <option value="featured" <% if (editing && game.badge === 'featured') { %>selected<% } %>>Featured</option>
-                <option value="trending" <% if (editing && game.badge === 'trending') { %>selected<% } %>>Trending</option>
-                <option value="early-access" <% if (editing && game.badge === 'early-access') { %>selected<% } %>>Early Access</option>
-                <option value="top-rated" <% if (editing && game.badge === 'top-rated') { %>selected<% } %>>Top Rated</option>
-                <option value="sale" <% if (editing && game.badge === 'sale') { %>selected<% } %>>On Sale</option>
-                <option value="staff-pick" <% if (editing && game.badge === 'staff-pick') { %>selected<% } %>>Staff Pick</option>
-                <option value="coming-soon" <% if (editing && game.badge === 'coming-soon') { %>selected<% } %>>Coming Soon</option>
+              <select class="form-select <%= validationErrors.find(e => e.path === 'badge') ? 'input-error' : '' %>" name="badge">
+                <option value="" <%= (!game.badge || game.badge === '') ? 'selected' : '' %>>None</option>
+                <option value="new" <%= game.badge === 'new' ? 'selected' : '' %>>New</option>
+                <option value="featured" <%= game.badge === 'featured' ? 'selected' : '' %>>Featured</option>
+                <option value="trending" <%= game.badge === 'trending' ? 'selected' : '' %>>Trending</option>
+                <option value="early-access" <%= game.badge === 'early-access' ? 'selected' : '' %>>Early Access</option>
+                <option value="top-rated" <%= game.badge === 'top-rated' ? 'selected' : '' %>>Top Rated</option>
+                <option value="sale" <%= game.badge === 'sale' ? 'selected' : '' %>>On Sale</option>
+                <option value="staff-pick" <%= game.badge === 'staff-pick' ? 'selected' : '' %>>Staff Pick</option>
+                <option value="coming-soon" <%= game.badge === 'coming-soon' ? 'selected' : '' %>>Coming Soon</option>
               </select>
             </div>
           </div>
@@ -125,28 +127,28 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label"> Image URL * </label>
-              <input class="form-input" type="text" name="imageUrl" value="<% if (editing) { %><%= game.imageUrl %><% } %>" placeholder="e.g. /images/neon.jpg" required />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'imageUrl') ? 'input-error' : '' %>" type="text" name="imageUrl" value="<%= game.imageUrl %>" placeholder="e.g. /images/neon.jpg" required />
             </div>
 
             <div class="form-group">
               <label class="form-label"> Trailer URL (YouTube Embed) </label>
-              <input class="form-input" type="text" name="trailerUrl" value="<% if (editing) { %><%= game.trailerUrl %><% } %>" placeholder="e.g. https://www.youtube.com/embed/VIDEO_ID" />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'trailerUrl') ? 'input-error' : '' %>" type="text" name="trailerUrl" value="<%= game.trailerUrl %>" placeholder="e.g. https://www.youtube.com/embed/VIDEO_ID" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group" style="flex: 1">
               <label class="form-label"> Tags (Comma Separated) * </label>
-              <input class="form-input" type="text" name="tags" value="<% if (editing) { %><%= game.tags %><% } %>" placeholder="e.g. Multiplayer, Fast-Paced" required />
+              <input class="form-input <%= validationErrors.find(e => e.path === 'tags') ? 'input-error' : '' %>" type="text" name="tags" value="<%= game.tags %>" placeholder="e.g. Multiplayer, Fast-Paced" required />
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label"> Description * </label>
-            <textarea class="form-textarea" name="description" placeholder="Write a compelling game description..." style="min-height: 140px" required><% if (editing) { %><%= game.description %><% } %></textarea>
+            <textarea class="form-textarea <%= validationErrors.find(e => e.path === 'description') ? 'input-error' : '' %>" name="description" placeholder="Write a compelling game description..." style="min-height: 140px" required><%= game.description %></textarea>
           </div>
 
-          <% if (editing) { %>
+          <% if (editing || hasError && game._id) { %>
           <input type="hidden" value="<%= game._id %>" name="gameId">
           <% } %>
 
