@@ -2,7 +2,17 @@ const router = require("express").Router();
 const authController = require("../controller/auth");
 const { body, check } = require("express-validator");
 router.get("/login", authController.getLogin);
-router.post("/login", authController.postLogin);
+router.post(
+  "/login",
+  check("email")
+    .isEmail()
+    .withMessage("Please enter a valid email."),
+  body("password")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters."),
+  authController.postLogin
+);
 
 router.get("/logout", authController.postLogout);
 router.post("/logout", authController.postLogout);
@@ -23,15 +33,14 @@ router.post(
 
   body(
     "username",
-    "Username must contain only letters and numbers and 3 characters"
+    "Username must contain only letters and numbers. and 3 characters"
   )
     .trim()
     .isLength({ min: 3 })
     .isAlphanumeric(),
   body("email")
     .isEmail()
-    .withMessage("Please enter a valid email.")
-    .normalizeEmail(),
+    .withMessage("Please enter a valid email."),
 
   body("password")
     .trim()
@@ -44,11 +53,6 @@ router.post(
     }
     return true;
   }),
-
-  body("favoriteGenre")
-    .notEmpty()
-    .withMessage("Please select your favourite genre."),
-
   body("terms")
     .equals("on")
     .withMessage("You must accept the Terms of Service."),

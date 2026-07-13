@@ -13,23 +13,52 @@ exports.getLogin = (req, res, next) => {
     isAuth: false,
     error: req.flash("error"),
     success: req.flash("success"),
+    oldInput: { email: "", password: "" },
+    validationErrors: [],
   });
 };
 
 exports.postLogin = (req, res, next) => {
   const { email, password } = req.body;
 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render("user/login", {
+      path: "/login",
+      pageTitle: "Login",
+      isAuth: false,
+      error: errors.array()[0].msg,
+      success: req.flash("success"),
+      oldInput: { email: email, password: password },
+      validationErrors: errors.array(),
+    });
+  }
+
   User.findOne({ email })
     .then((user) => {
       if (!user) {
-        req.flash("error", "Invalid email or password.");
-        return res.redirect("/login");
+        return res.status(422).render("user/login", {
+          path: "/login",
+          pageTitle: "Login",
+          isAuth: false,
+          error: "Invalid email or password.",
+          success: req.flash("success"),
+          oldInput: { email: email, password: password },
+          validationErrors: [{ path: "email" }, { path: "password" }],
+        });
       }
 
       return bcrypt.compare(password, user.password).then((doMatch) => {
         if (!doMatch) {
-          req.flash("error", "Invalid email or password.");
-          return res.redirect("/login");
+          return res.status(422).render("user/login", {
+            path: "/login",
+            pageTitle: "Login",
+            isAuth: false,
+            error: "Invalid email or password.",
+            success: req.flash("success"),
+            oldInput: { email: email, password: password },
+            validationErrors: [{ path: "email" }, { path: "password" }],
+          });
         }
 
         req.session.isLoggedIn = true;

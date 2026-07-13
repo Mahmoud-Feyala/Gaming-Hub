@@ -98,19 +98,21 @@
       </div>
 
       <!-- Login Form -->
-      <form id="login-form" action="/login" method="POST">
+      <form id="login-form" action="/login" method="POST" novalidate>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" name="email" placeholder="gamer@example.com" required autocomplete="email" />
+          <input class="form-input <%= validationErrors.find(e => e.path === 'email') ? 'input-error' : '' %>" type="email" name="email" value="<%= oldInput.email %>" placeholder="gamer@example.com" required autocomplete="email" />
         </div>
+
         <div class="form-group">
           <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
             Password
             <a href="/forgot-password" style="font-family:var(--font-mono);font-size:0.65rem;color:var(--black);font-weight:400;text-decoration:underline">Forgot password?</a>
           </label>
           <div style="position:relative">
-            <input class="form-input" type="password" name="password" id="password-field" placeholder="••••••••" required autocomplete="current-password" />
+            <input class="form-input <%= validationErrors.find(e => e.path === 'password') ? 'input-error' : '' %>" type="password" name="password" id="password-field" value="<%= oldInput.password %>" placeholder="••••••••" required autocomplete="current-password" />
             <button type="button" onclick="togglePw()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gray)">👁</button>
           </div>
         </div>
