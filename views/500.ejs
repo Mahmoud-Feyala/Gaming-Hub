@@ -1,0 +1,21 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body class="error-body">
+
+  <%- include('includes/navbar.ejs') %>
+
+  <main class="error-page">
+    <div class="error-shapes">
+      <div class="shape shape-dot shape-dot-1" style="top: 20%; left: 15%;"></div>
+      <div class="shape shape-dot shape-dot-2" style="bottom: 30%; right: 20%;"></div>
+    </div>
+
+    <img src="/assets/images/error.png" alt="Error 500 Glitch" class="error-image">
+
+    <h1 class="error-code">500</h1>
+    <p class="error-message">SYSTEM_ERR: Internal vault malfunction.</p>
+    <a href="/" class="btn-home">Return to Home</a>
+  </main>
+
+  <%- include('includes/end.ejs') %>

@@ -2,7 +2,6 @@ const path = require("path");
 const Game = require("../model/games");
 const Review = require("../model/reviews");
 const { validationResult } = require("express-validator");
-
 exports.getAdminDash = (req, res, next) => {
   res.render("admin/admin-dashboard", {
     pageTitle: "Admin Dashboard — Gaming Hub",
@@ -28,7 +27,7 @@ exports.postDeleteReview = (req, res, next) => {
   Review.findByIdAndDelete(req.body.reviewId)
     .then(() => res.redirect("/admin/reviews"))
     .catch((err) => {
-      console.log(err);
+      next(new Error(err));
     });
 };
 
@@ -42,7 +41,7 @@ exports.getAdminGames = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      next(new Error(err));
     });
 };
 
@@ -90,7 +89,9 @@ exports.getAdminEditGames = (req, res, next) => {
         isAuth: req.session.isLoggedIn,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      next(new Error(err));
+    });
 };
 
 exports.postAdminAddGames = (req, res, next) => {
@@ -149,7 +150,7 @@ exports.postAdminAddGames = (req, res, next) => {
   game
     .save()
     .then(() => res.redirect("/admin/admin-games"))
-    .catch((err) => console.log(err));
+    .catch((err) => next(new Error(err)));
 };
 
 exports.postAdminEditGames = (req, res, next) => {

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const { csrfSync } = require("csrf-sync");
-const flash = require('connect-flash');
+const flash = require("connect-flash");
 require("dotenv").config();
 
 // Routes
@@ -73,7 +73,9 @@ app.use((req, res, next) => {
       req.user = user;
       next();
     })
-    .catch((err) => next(err));
+    .catch((err) => {
+      next(new Error(err));
+    });
 });
 
 // Global View Variables
@@ -89,12 +91,16 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 app.use(userRouter);
 app.use("/admin", adminRouter);
-
 // ======================
 // 404
 // ======================
+app.get("/500", errorController.get500);
 app.use(errorController.get404);
+// error
 
+app.use((error, req, res, next) => {
+  res.redirect("/500");
+});
 // ======================
 // Database Connection
 // ======================
