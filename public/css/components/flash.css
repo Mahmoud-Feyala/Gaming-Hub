@@ -1,12 +1,8 @@
-/* =============================================
-   FLASH MESSAGES (Neo-Brutalism Component)
-   ============================================= */
-
 .flash-alert {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   margin-bottom: 24px;
   background-color: var(--white);
   border: 3px solid var(--black);
@@ -14,11 +10,13 @@
   box-shadow: var(--shadow-md);
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-primary);
   animation: flashPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition: var(--transition);
+  transition: var(--transition-bounce);
   width: 100%;
+  line-height: 1.5;
+  min-height: 52px;
 }
 
 .flash-alert:hover {
@@ -28,9 +26,7 @@
 
 /* Modifiers */
 .flash-alert-error {
-  background-color: var(
-    --pink-dark
-  ); /* يمكنك تغييره لـ var(--red) لو تفضل الأحمر الصريح */
+  background-color: var(--pink-dark);
 }
 
 .flash-alert-success {
@@ -44,66 +40,9 @@
   justify-content: center;
   background-color: var(--black);
   color: var(--white);
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  font-size: 1.1rem;
-}
-
-/* Text Container */
-.flash-alert-text {
-  flex-grow: 1;
-  line-height: 1.4;
-} /* =============================================
-   FLASH MESSAGES (Neo-Brutalism Component)
-   ============================================= */
-
-.flash-alert {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 16px;
-  margin-bottom: 24px;
-  background-color: var(--white);
-  border: 3px solid var(--black);
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--text-primary);
-  animation: flashPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition: var(--transition);
-  width: 100%;
-}
-
-.flash-alert:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Modifiers */
-.flash-alert-error {
-  background-color: var(
-    --pink-dark
-  ); /* يمكنك تغييره لـ var(--red) لو تفضل الأحمر الصريح */
-}
-
-.flash-alert-success {
-  background-color: var(--cyan);
-}
-
-/* Icon Container */
-.flash-alert-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--black);
-  color: var(--white);
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
   flex-shrink: 0;
   font-size: 1.1rem;
 }
@@ -111,19 +50,7 @@
 /* Text Container */
 .flash-alert-text {
   flex-grow: 1;
-  line-height: 1.4;
-}
-
-/* Animation */
-@keyframes flashPopIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  line-height: 1.5;
 }
 
 /* Animation */

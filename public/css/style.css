@@ -1,6 +1,6 @@
 /* =============================================
    PIXEL VAULT — GAMING REVIEW PLATFORM
-   Master Stylesheet  v2.0 
+   Master Stylesheet  v3.0 - POLISHED
    ============================================= */
 
 /* 1. Fonts */
@@ -28,5 +28,14 @@
 @import url("pages/auth.css");
 @import url("pages/misc.css");
 
-/* 5. Responsive Styles */
+/* 5. Advanced (NEW - optional but recommended) */
+@import url("../effects.css");
+@import url("../utilities.css");
+@import url("../components-advanced.css");
+@import url("../interactions.css");
+@import url("../layout.css");
+@import url("../dark-mode.css");
+@import url("../print.css");
+
+/* 6. Responsive Styles (always last) */
 @import url("base/responsive.css");

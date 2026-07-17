@@ -1,26 +1,23 @@
 "use strict";
 
 // ============================================
-// VIEW — UI Components & Helpers
+// VIEW - UI Components & Helpers
 // ============================================
 const View = {
   // Render Stars
   renderStars(rating, interactive = false) {
     const full = Math.floor(rating);
     const half = rating % 1 >= 0.5;
-
     let html = `<div class="stars${interactive ? " interactive-stars" : ""}">`;
-
     for (let i = 1; i <= 5; i++) {
       if (i <= full) {
         html += `<span class="star filled" data-val="${i}">★</span>`;
       } else if (i === full + 1 && half) {
         html += `<span class="star half" data-val="${i}">★</span>`;
       } else {
-        html += `<span class="star" data-val="${i}">★</span>`;
+        html += `<span class="star" data-val="${i}">☆</span>`;
       }
     }
-
     html += `</div>`;
     return html;
   },
@@ -35,13 +32,10 @@ const View = {
         document.body.appendChild(c);
         return c;
       })();
-
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
-
     container.appendChild(toast);
-
     setTimeout(() => toast.remove(), 3200);
   },
 
@@ -55,11 +49,11 @@ const View = {
     });
     document.body.appendChild(overlay);
     return overlay;
-  },
+  }
 };
 
 // ============================================
-// APP — Frontend Routing & Event Listeners
+// APP - Frontend Routing & Event Listeners
 // ============================================
 const App = {
   init() {
@@ -99,10 +93,7 @@ const App = {
     document.querySelectorAll(".nav-link").forEach((link) => {
       const linkPath = link.getAttribute("href").toLowerCase();
       link.classList.remove("active");
-      if (
-        (currentPath === "/" || currentPath === "/index.html") &&
-        linkPath === "/"
-      ) {
+      if ((currentPath === "/" || currentPath === "/index.html") && linkPath === "/") {
         link.classList.add("active");
       } else if (currentPath.startsWith(linkPath) && linkPath !== "/") {
         link.classList.add("active");
@@ -114,26 +105,20 @@ const App = {
     const themeButton = document.querySelector(".theme-toggle");
     const savedTheme = localStorage.getItem("site-theme");
     const theme = savedTheme || "dark";
-
+    
     const applyTheme = (value) => {
       document.documentElement.dataset.theme = value;
       if (themeButton) {
         themeButton.textContent = value === "dark" ? "Light Mode" : "Dark Mode";
-        themeButton.setAttribute(
-          "aria-label",
-          value === "dark" ? "Switch to light theme" : "Switch to dark theme"
-        );
+        themeButton.setAttribute("aria-label", value === "dark" ? "Switch to light theme" : "Switch to dark theme");
       }
       localStorage.setItem("site-theme", value);
     };
-
+    
     applyTheme(theme);
-
     if (themeButton) {
       themeButton.addEventListener("click", () => {
-        applyTheme(
-          document.documentElement.dataset.theme === "dark" ? "light" : "dark"
-        );
+        applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
       });
     }
   },
@@ -153,6 +138,7 @@ const App = {
     const filterButtons = Array.from(document.querySelectorAll(".filter-tag"));
     const gamesGrid = document.getElementById("games-grid");
     const gamesCount = document.getElementById("games-count");
+    
     let activeFilter = "all";
     let activeQuery = "";
     const batchSize = 20;
@@ -175,12 +161,8 @@ const App = {
         const title = (card.dataset.title || "").toLowerCase();
         const genre = (card.dataset.genre || "").toLowerCase();
         const developer = (card.dataset.developer || "").toLowerCase();
-
-        const matchesQuery =
-          !query ||
-          title.includes(query) ||
-          genre.includes(query) ||
-          developer.includes(query);
+        
+        const matchesQuery = !query || title.includes(query) || genre.includes(query) || developer.includes(query);
         const matchesFilter = activeFilter === "all" || genre === activeFilter;
         const shouldShow = matchesQuery && matchesFilter;
 
@@ -209,10 +191,8 @@ const App = {
           if (!emptyMessage) {
             const message = document.createElement("div");
             message.className = "no-results-message";
-            message.style.cssText =
-              "grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px; font-family: var(--font-mono); color: rgba(17,17,17,0.6);";
-            message.textContent =
-              "No games found. Try a different search or filter.";
+            message.style.cssText = "grid-column: 1 / -1; text-align: center; padding: 40px; border: 2px dashed rgba(17,17,17,0.3); border-radius: 8px; font-family: var(--font-mono); color: rgba(17,17,17,0.6);";
+            message.textContent = "No games found. Try a different search or filter.";
             gamesGrid.appendChild(message);
           }
         } else if (emptyMessage) {
@@ -237,7 +217,8 @@ const App = {
       });
     });
 
-    applySearchFilter();
+    // Initial Apply
+    if(searchInput || filterButtons.length > 0) applySearchFilter();
 
     App.gamesPagination = {
       increase() {
@@ -255,21 +236,16 @@ const App = {
     document.querySelectorAll(".interactive-stars").forEach((container) => {
       const stars = container.querySelectorAll(".star");
       let selectedRating = 0;
-
       stars.forEach((star, index) => {
         star.addEventListener("mouseover", () => {
           stars.forEach((s, i) => s.classList.toggle("filled", i <= index));
         });
         star.addEventListener("mouseout", () => {
-          stars.forEach((s, i) =>
-            s.classList.toggle("filled", i < selectedRating)
-          );
+          stars.forEach((s, i) => s.classList.toggle("filled", i < selectedRating));
         });
         star.addEventListener("click", () => {
           selectedRating = index + 1;
-          const input = container
-            .closest("form")
-            ?.querySelector('input[name="rating"]');
+          const input = container.closest("form")?.querySelector('input[name="rating"]');
           if (input) input.value = selectedRating;
         });
       });
@@ -326,9 +302,7 @@ const App = {
   initLibrary() {
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
       });
     });
@@ -367,7 +341,6 @@ const App = {
   initLogin() {
     const form = document.getElementById("login-form");
     if (!form) return;
-
     form.addEventListener("submit", () => {
       const btn = form.querySelector('[type="submit"]');
       btn.textContent = "Logging in...";
@@ -378,20 +351,25 @@ const App = {
   initRegister() {
     const form = document.getElementById("register-form");
     if (!form) return;
+    
     form.addEventListener("submit", async (e) => {
+      e.preventDefault(); // Prevent default for demo purposes
       const pass = form.querySelector('[name="password"]')?.value;
       const confirm = form.querySelector('[name="confirm"]')?.value;
+      
       if (pass !== confirm) {
         View.showToast("Passwords do not match!", "error");
         return;
       }
+      
       const btn = form.querySelector('[type="submit"]');
       btn.textContent = "Creating account...";
       btn.disabled = true;
+      
       setTimeout(() => {
         View.showToast("Backend connection required", "info");
         btn.disabled = false;
-        btn.textContent = "Create Free Account →";
+        btn.textContent = "Create Free Account";
       }, 1000);
     });
 
@@ -410,20 +388,22 @@ const App = {
         strengthBar.style.background = colors[strength - 1] || "#ddd";
       });
     }
-  },
-};
+  }
+}; // <-- App Object Closed properly here
 
 // ============================================
-// HOME PAGE: SLIDER + BACK TO TOP
+// BOOT, SLIDER + BACK TO TOP
 // ============================================
 document.addEventListener("DOMContentLoaded", () => {
-  /* ── Hero Slider ── */
+  // Initialize standard App scripts
+  App.init();
+
+  // Hero Slider Initialization
   const slides = document.querySelectorAll(".slider-image");
   const dotsContainer = document.getElementById("sliderDots");
   const titleEl = document.getElementById("sliderGameTitle");
-
+  
   if (slides.length && dotsContainer) {
-    // Create dots
     slides.forEach((_, i) => {
       const dot = document.createElement("button");
       dot.className = "slider-dot" + (i === 0 ? " active" : "");
@@ -431,29 +411,27 @@ document.addEventListener("DOMContentLoaded", () => {
       dot.addEventListener("click", () => goTo(i));
       dotsContainer.appendChild(dot);
     });
-
+    
     const dots = dotsContainer.querySelectorAll(".slider-dot");
     let current = 0;
-
+    
     function goTo(index) {
       slides[current].classList.remove("active");
       dots[current].classList.remove("active");
       current = index;
       slides[current].classList.add("active");
       dots[current].classList.add("active");
-      // Update title if element exists
       if (titleEl && slides[current].alt) {
         titleEl.textContent = slides[current].alt;
       }
     }
-
-    // Auto slide every 4 seconds
+    
     setInterval(() => {
       goTo((current + 1) % slides.length);
     }, 4000);
   }
 
-  /* ── Back to Top ── */
+  // Back to Top Initialization
   const backBtn = document.getElementById("backToTop");
   if (backBtn) {
     window.addEventListener("scroll", () => {
@@ -463,11 +441,4 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
-});
-
-// ============================================
-// BOOT
-// ============================================
-document.addEventListener("DOMContentLoaded", () => {
-  App.init();
 });
